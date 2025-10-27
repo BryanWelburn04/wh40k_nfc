@@ -1,0 +1,71 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: NtagNDEFSampleCode - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP77.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/NtagNDEFSampleCode.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Documents and Settings\XPMUser\Desktop\NDEF SDK\NTAG203\C++\NtagNDEFSampleCode\NdefSmartPosterDlg.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\NDEF SDK\NTAG203\C++\NtagNDEFSampleCode\NdefTextDlg.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\NDEF SDK\NTAG203\C++\NtagNDEFSampleCode\NdefUriDlg.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\NDEF SDK\NTAG203\C++\NtagNDEFSampleCode\NdefVCardDlg.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\NDEF SDK\NTAG203\C++\NtagNDEFSampleCode\NtagNDEFSampleCode.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\NDEF SDK\NTAG203\C++\NtagNDEFSampleCode\NtagNDEFSampleCodeDlg.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\NDEF SDK\NTAG203\C++\NtagNDEFSampleCode\TabControl.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP77.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP78.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/NTAG203 NDEF Sample Code.pdb" /debug /machine:I386 /out:"Debug/NTAG203 NDEF Sample Code.exe" /pdbtype:sept 
+".\Debug\AcsReader.obj"
+".\Debug\Apdu.obj"
+".\Debug\CardException.obj"
+".\Debug\CardSelector.obj"
+".\Debug\Helper.obj"
+".\Debug\HelperClass.obj"
+".\Debug\Ndef.obj"
+".\Debug\NdefException.obj"
+".\Debug\NdefMessage.obj"
+".\Debug\NdefRecord.obj"
+".\Debug\NdefRecordType.obj"
+".\Debug\NdefSmartPosterDlg.obj"
+".\Debug\NdefTextDlg.obj"
+".\Debug\NdefUriDlg.obj"
+".\Debug\NdefVCardDlg.obj"
+".\Debug\Ntag203.obj"
+".\Debug\NtagNDEFSampleCode.obj"
+".\Debug\NtagNDEFSampleCodeDlg.obj"
+".\Debug\PcscException.obj"
+".\Debug\PcscProvider.obj"
+".\Debug\PcscReader.obj"
+".\Debug\StdAfx.obj"
+".\Debug\TabControl.obj"
+".\Debug\VCardIdentificationType.obj"
+".\Debug\NtagNDEFSampleCode.res"
+".\Winscard.LIB"
+]
+Creating command line "link.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP78.tmp"
+<h3>Output Window</h3>
+Compiling...
+NtagNDEFSampleCodeDlg.cpp
+Generating Code...
+Skipping... (no relevant changes detected)
+NdefSmartPosterDlg.cpp
+NdefTextDlg.cpp
+NdefUriDlg.cpp
+NdefVCardDlg.cpp
+NtagNDEFSampleCode.cpp
+TabControl.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+NTAG203 NDEF Sample Code.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

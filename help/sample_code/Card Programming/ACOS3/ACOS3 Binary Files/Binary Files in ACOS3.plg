@@ -1,0 +1,97 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Binary Files in ACOS3 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Debug/Binary Files in ACOS3.res" /d "_DEBUG" /d "_AFXDLL" "\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\Binary Files in ACOS3.rc"" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPA3A.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/Binary Files in ACOS3.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\Acos3Account.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\Acos3BinaryFiles.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\Acos3MutualAuthentication.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\Acos3ReadWrite.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\Acos3SecureMessaging.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\AcsReader.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\Binary Files in ACOS3.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\Binary Files in ACOS3Dlg.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\CardSelector.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\DES.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\Acos3.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\Apdu.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\CardException.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\Helper.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\HelperClass.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\PcscException.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\PcscProvider.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\PcscReader.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPA3A.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPA3B.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/Binary Files in ACOS3.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Binary Files\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPA3B.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPA3C.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/ACOS3 Binary Files.pdb" /debug /machine:I386 /out:"Debug/ACOS3 Binary Files.exe" /pdbtype:sept 
+".\Debug\Acos3Account.obj"
+".\Debug\Acos3BinaryFiles.obj"
+".\Debug\Acos3MutualAuthentication.obj"
+".\Debug\Acos3ReadWrite.obj"
+".\Debug\Acos3SecureMessaging.obj"
+".\Debug\AcsReader.obj"
+".\Debug\Binary Files in ACOS3.obj"
+".\Debug\Binary Files in ACOS3Dlg.obj"
+".\Debug\CardSelector.obj"
+".\Debug\DES.obj"
+".\Debug\StdAfx.obj"
+".\Debug\Acos3.obj"
+".\Debug\Apdu.obj"
+".\Debug\CardException.obj"
+".\Debug\Helper.obj"
+".\Debug\HelperClass.obj"
+".\Debug\PcscException.obj"
+".\Debug\PcscProvider.obj"
+".\Debug\PcscReader.obj"
+".\Debug\Binary Files in ACOS3.res"
+".\Winscard.lib"
+]
+Creating command line "link.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPA3C.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+Acos3Account.cpp
+Acos3BinaryFiles.cpp
+Acos3MutualAuthentication.cpp
+Acos3ReadWrite.cpp
+Acos3SecureMessaging.cpp
+AcsReader.cpp
+Binary Files in ACOS3.cpp
+Binary Files in ACOS3Dlg.cpp
+CardSelector.cpp
+DES.cpp
+Acos3.cpp
+Apdu.cpp
+CardException.cpp
+Helper.cpp
+HelperClass.cpp
+PcscException.cpp
+PcscProvider.cpp
+PcscReader.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+ACOS3 Binary Files.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

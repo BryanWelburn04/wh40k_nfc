@@ -1,0 +1,231 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\ACOS3 Secure Messaging.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\ACOS Sample Codes.ico"
+IDI_ICON1               ICON    DISCARDABLE     "res\\ACS_Small.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ACOS3SECUREMESSAGING_DIALOG DIALOGEX 0, 0, 368, 389
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "ACOS3 Secure Messaging"
+FONT 9, "Verdana"
+BEGIN
+    DEFPUSHBUTTON   "Clear",ButtonClear,164,362,62,14
+    PUSHBUTTON      "Quit",ButtonQuit,300,363,60,14
+    LTEXT           "Select Reader",IDC_STATIC,7,7,71,8
+    COMBOBOX        ComboBoxReaderNames,7,19,146,50,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Security Option",IDC_STATIC,7,38,67,45
+    CONTROL         "DES",RadioButtonDes,"Button",BS_AUTORADIOBUTTON | 
+                    WS_DISABLED | WS_GROUP,13,52,29,10
+    CONTROL         "3DES",RadioButton3Des,"Button",BS_AUTORADIOBUTTON | 
+                    WS_DISABLED | WS_GROUP,13,66,33,10
+    PUSHBUTTON      "Initialize",ButtonInitialize,81,45,70,14
+    PUSHBUTTON      "Connect",ButtonConnect,81,65,70,14,WS_DISABLED
+    GROUPBOX        "Card Format Routine",IDC_STATIC,7,88,149,146
+    LTEXT           "Card Key",IDC_STATIC,14,111,30,8
+    EDITTEXT        EditBoxCardKey,59,108,92,14,ES_AUTOHSCROLL | ES_NUMBER | 
+                    WS_DISABLED
+    EDITTEXT        EditBoxTerminalKey,59,127,92,14,ES_AUTOHSCROLL | 
+                    ES_NUMBER | WS_DISABLED
+    LTEXT           "Terminal Key",IDC_STATIC,14,129,41,8
+    CONTROL         "Secure Message",CheckBoxSecureMessage,"Button",
+                    BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,83,145,68,10
+    LTEXT           "File ID",IDC_STATIC,14,163,21,8
+    LTEXT           "Length",IDC_STATIC,13,182,23,8
+    EDITTEXT        EditBoxCardFormatFileId1,39,163,25,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    EDITTEXT        EditBoxCardFormatFileId2,67,163,28,15,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    EDITTEXT        EditBoxLength1,39,181,25,14,ES_AUTOHSCROLL | WS_DISABLED
+    EDITTEXT        EditBoxLength2,67,181,28,14,ES_AUTOHSCROLL | WS_DISABLED
+    PUSHBUTTON      "Format Card",ButtonFormatCard,80,199,70,14,WS_DISABLED
+    PUSHBUTTON      "Authenticate",ButtonAuthenticate,80,216,70,14,
+                    WS_DISABLED
+    GROUPBOX        "Read and Write Binary File",IDC_STATIC,7,237,149,145
+    LTEXT           "File ID",IDC_STATIC,15,253,21,8
+    LTEXT           "Offset",IDC_STATIC,14,272,20,8
+    EDITTEXT        EditBoxReadWriteFileId1,39,249,25,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    EDITTEXT        EditBoxReadWriteFileId2,67,249,28,15,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    EDITTEXT        EditBoxOffset1,39,267,25,14,ES_AUTOHSCROLL | WS_DISABLED
+    EDITTEXT        EditBoxOffset2,67,267,28,14,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Length",IDC_STATIC,99,272,23,8
+    EDITTEXT        EditBoxReadWriteLength,125,269,25,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    LTEXT           "Data",IDC_STATIC,13,291,16,8
+    EDITTEXT        EditBoxData,13,303,137,34,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_AUTOHSCROLL | WS_DISABLED
+    PUSHBUTTON      "Write Binary",ButtonWriteBinary,79,342,70,14,
+                    WS_DISABLED
+    PUSHBUTTON      "Read Binary",ButtonReadBinary,79,361,70,14,WS_DISABLED
+    LTEXT           "APDU Logs",IDC_STATIC,164,7,35,8
+    EDITTEXT        EditBoxApduLogs,164,19,197,337,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
+    PUSHBUTTON      "Reset",ButtonReset,233,363,61,14
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "ACOS3 Secure Messaging\0"
+            VALUE "FileVersion", "1.0.0.0\0"
+            VALUE "InternalName", "ACOS3 Secure Messaging\0"
+            VALUE "LegalCopyright", "Copyright (C) Advanced Card Systems Ltd. All rights reserved.\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "ACOS3 Secure Messaging\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "ACOS3 Secure Messaging\0"
+            VALUE "ProductVersion", "1.0.0.0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ACOS3SECUREMESSAGING_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 361
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 382
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\ACOS3 Secure Messaging.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

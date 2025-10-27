@@ -1,0 +1,126 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: ACOS3MutualAuthentication - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Debug/ACOS3MutualAuthentication.res" /d "_DEBUG" /d "_AFXDLL" "\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\ACOS3MutualAuthentication.rc"" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP1293.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/ACOS3MutualAuthentication.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\Acos3.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\Acos3Account.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\Acos3BinaryFiles.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\Acos3MutualAuth.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\ACOS3MutualAuthentication.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\ACOS3MutualAuthenticationDlg.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\Acos3ReadWrite.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\Acos3SecureMessaging.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\AcsReader.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\Apdu.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\CardException.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\CardSelector.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\DES.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\Helper.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\HelperClass.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\NoPasteEdit.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\PcscException.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\PcscProvider.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\PcscReader.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP1293.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP1294.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/ACOS3MutualAuthentication.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Mutual Authentication\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP1294.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP1295.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/ACOS3 Mutual Authentication.pdb" /debug /machine:I386 /out:"Debug/ACOS3 Mutual Authentication.exe" /pdbtype:sept 
+".\Debug\Acos3.obj"
+".\Debug\Acos3Account.obj"
+".\Debug\Acos3BinaryFiles.obj"
+".\Debug\Acos3MutualAuth.obj"
+".\Debug\ACOS3MutualAuthentication.obj"
+".\Debug\ACOS3MutualAuthenticationDlg.obj"
+".\Debug\Acos3ReadWrite.obj"
+".\Debug\Acos3SecureMessaging.obj"
+".\Debug\AcsReader.obj"
+".\Debug\Apdu.obj"
+".\Debug\CardException.obj"
+".\Debug\CardSelector.obj"
+".\Debug\DES.obj"
+".\Debug\Helper.obj"
+".\Debug\HelperClass.obj"
+".\Debug\NoPasteEdit.obj"
+".\Debug\PcscException.obj"
+".\Debug\PcscProvider.obj"
+".\Debug\PcscReader.obj"
+".\Debug\StdAfx.obj"
+".\Debug\ACOS3MutualAuthentication.res"
+".\WINSCARD.LIB"
+]
+Creating command line "link.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP1295.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+Acos3.cpp
+Acos3Account.cpp
+Acos3BinaryFiles.cpp
+Acos3MutualAuth.cpp
+ACOS3MutualAuthentication.cpp
+ACOS3MutualAuthenticationDlg.cpp
+Acos3ReadWrite.cpp
+Acos3SecureMessaging.cpp
+AcsReader.cpp
+Apdu.cpp
+CardException.cpp
+CardSelector.cpp
+DES.cpp
+Helper.cpp
+HelperClass.cpp
+NoPasteEdit.cpp
+PcscException.cpp
+PcscProvider.cpp
+PcscReader.cpp
+Generating Code...
+Linking...
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP1297.tmp" with contents
+[
+/nologo /o"Debug/ACOS3MutualAuthentication.bsc" 
+".\Debug\StdAfx.sbr"
+".\Debug\Acos3.sbr"
+".\Debug\Acos3Account.sbr"
+".\Debug\Acos3BinaryFiles.sbr"
+".\Debug\Acos3MutualAuth.sbr"
+".\Debug\ACOS3MutualAuthentication.sbr"
+".\Debug\ACOS3MutualAuthenticationDlg.sbr"
+".\Debug\Acos3ReadWrite.sbr"
+".\Debug\Acos3SecureMessaging.sbr"
+".\Debug\AcsReader.sbr"
+".\Debug\Apdu.sbr"
+".\Debug\CardException.sbr"
+".\Debug\CardSelector.sbr"
+".\Debug\DES.sbr"
+".\Debug\Helper.sbr"
+".\Debug\HelperClass.sbr"
+".\Debug\NoPasteEdit.sbr"
+".\Debug\PcscException.sbr"
+".\Debug\PcscProvider.sbr"
+".\Debug\PcscReader.sbr"]
+Creating command line "bscmake.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP1297.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+ACOS3 Mutual Authentication.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

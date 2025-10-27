@@ -1,0 +1,212 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\Mifare Change Key.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\Mifare Change Key.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MIFARECHANGEKEY_DIALOG DIALOGEX 0, 0, 415, 312
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Mifare Classic Change Key"
+FONT 10, "Verdana", 0, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_COMBO1,61,7,144,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Initialize",IDC_ButtonInitialize,141,22,63,13
+    PUSHBUTTON      "Connect",IDC_ButtonConnect,141,39,63,13
+    GROUPBOX        "Store Authentication Keys to Device",IDC_STATIC,7,58,199,59
+    EDITTEXT        IDC_EditBoxKeyStoreNo,101,68,23,12,ES_UPPERCASE | ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EditBoxKeyStore1,101,83,15,12,ES_UPPERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EditBoxKeyStore2,118,83,15,12,ES_UPPERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EditBoxKeyStore3,135,83,15,12,ES_UPPERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EditBoxKeyStore4,152,83,15,12,ES_UPPERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EditBoxKeyStore5,169,83,15,12,ES_UPPERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EditBoxKeyStore6,186,83,15,12,ES_UPPERCASE | ES_AUTOHSCROLL
+    PUSHBUTTON      "Load Key",IDC_ButtonLoadKey,138,99,63,13
+    GROUPBOX        "Authentication Function",IDC_STATIC,7,121,199,104
+    GROUPBOX        "",IDC_STATIC,13,130,87,43
+    CONTROL         "Key A",IDC_RadioButtonKeyA,"Button",BS_AUTORADIOBUTTON | WS_GROUP,20,148,50,10
+    CONTROL         "Key B",IDC_RadioButtonKeyB,"Button",BS_AUTORADIOBUTTON,20,159,50,10
+    EDITTEXT        IDC_EditBoxSectorNo,101,177,24,13,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EditBoxKeyStoreNoAuth,101,193,24,13,ES_AUTOHSCROLL | ES_NUMBER
+    PUSHBUTTON      "Authenticate",IDC_ButtonAuthenticate,138,208,63,13
+    GROUPBOX        "Change Sector Keys",IDC_STATIC,7,230,200,75
+    EDITTEXT        IDC_EditBoxCurrentSector,86,241,24,13,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EditBoxSectorTrailerBlock,180,241,24,13,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EditBoxKeyA,15,259,62,12,ES_UPPERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EditBoxAccessBits,81,259,55,12,ES_UPPERCASE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EditBoxKeyB,139,259,62,12,ES_UPPERCASE | ES_AUTOHSCROLL
+    PUSHBUTTON      "Read",IDC_ButtonRead,38,286,63,13
+    PUSHBUTTON      "Update",IDC_ButtonUpdate,106,286,63,13
+    EDITTEXT        IDC_EditboxApduLogs,210,19,198,268,ES_MULTILINE | ES_READONLY | WS_VSCROLL
+    PUSHBUTTON      "Clear",IDC_ButtonClear,210,291,62,13
+    PUSHBUTTON      "Reset",IDC_ButtonReset,278,291,63,13
+    PUSHBUTTON      "Quit",IDC_ButtonQuit,345,291,63,13
+    LTEXT           "Select Reader",IDC_STATIC,7,7,49,10
+    LTEXT           "Key Store Number (Dec)",IDC_STATIC,14,71,85,11
+    LTEXT           "Key Value Input",IDC_STATIC,14,86,66,10
+    LTEXT           "Key Type:",IDC_STATIC,17,137,40,10
+    LTEXT           "Sector Number (Dec)",IDC_STATIC,12,179,79,10
+    LTEXT           "00 - 39",IDC_LabelValidSectors,130,179,26,11
+    LTEXT           "Key Store Number (Dec)",IDC_STATIC,12,195,86,10
+    LTEXT           "00 - 01",IDC_STATIC,130,195,26,11
+    LTEXT           "Current Sector (Dec)",IDC_STATIC,12,243,74,10
+    LTEXT           "Sector Trailer Block",IDC_STATIC,113,242,67,10
+    LTEXT           "Key A",IDC_STATIC,34,273,39,10
+    LTEXT           "Access Bits",IDC_STATIC,88,272,51,10
+    LTEXT           "Key B",IDC_STATIC,159,272,39,10
+    LTEXT           "APDU Logs",IDC_STATIC,212,7,49,9
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "FileDescription", " Mifare Classic Change Key"
+            VALUE "FileVersion", "1.0.0.0"
+            VALUE "InternalName", " Mifare Classic Change Key"
+            VALUE "LegalCopyright", "Copyright © Advanced Card Systems Ltd. All rights reserved."
+            VALUE "OriginalFilename", " Mifare Classic Change Key.EXE"
+            VALUE "ProductName", " Mifare Classic Change Key"
+            VALUE "ProductVersion", "1.0.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_MIFARECHANGEKEY_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 408
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 305
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\Mifare Change Key.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

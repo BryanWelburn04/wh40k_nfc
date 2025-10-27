@@ -1,0 +1,122 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: PersoACOS - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Debug/PersoACOS.res" /d "_DEBUG" /d "_AFXDLL" "\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\PersoACOS.rc"" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPA7D.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/PersoACOS.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\Acos3.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\Acos3Account.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\Acos3BinaryFiles.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\Acos3MutualAuthentication.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\Acos3ReadWrite.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\Acos3SecureMessaging.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\AcsReader.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\Apdu.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\CardException.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\CardSelector.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\DES.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\Helper.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\HelperClass.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\PcscException.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\PcscProvider.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\PcscReader.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\PersoACOS.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\PersoACOSDlg.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPA7D.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPA7E.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/PersoACOS.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Create Files\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPA7E.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPA7F.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/ACOS3 Create Files.pdb" /debug /machine:I386 /out:"Debug/ACOS3 Create Files.exe" /pdbtype:sept 
+".\Debug\Acos3.obj"
+".\Debug\Acos3Account.obj"
+".\Debug\Acos3BinaryFiles.obj"
+".\Debug\Acos3MutualAuthentication.obj"
+".\Debug\Acos3ReadWrite.obj"
+".\Debug\Acos3SecureMessaging.obj"
+".\Debug\AcsReader.obj"
+".\Debug\Apdu.obj"
+".\Debug\CardException.obj"
+".\Debug\CardSelector.obj"
+".\Debug\DES.obj"
+".\Debug\Helper.obj"
+".\Debug\HelperClass.obj"
+".\Debug\PcscException.obj"
+".\Debug\PcscProvider.obj"
+".\Debug\PcscReader.obj"
+".\Debug\PersoACOS.obj"
+".\Debug\PersoACOSDlg.obj"
+".\Debug\StdAfx.obj"
+".\Debug\PersoACOS.res"
+".\Winscard.lib"
+]
+Creating command line "link.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPA7F.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+Acos3.cpp
+Acos3Account.cpp
+Acos3BinaryFiles.cpp
+Acos3MutualAuthentication.cpp
+Acos3ReadWrite.cpp
+Acos3SecureMessaging.cpp
+AcsReader.cpp
+Apdu.cpp
+CardException.cpp
+CardSelector.cpp
+DES.cpp
+Helper.cpp
+HelperClass.cpp
+PcscException.cpp
+PcscProvider.cpp
+PcscReader.cpp
+PersoACOS.cpp
+PersoACOSDlg.cpp
+Generating Code...
+Linking...
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPA81.tmp" with contents
+[
+/nologo /o"Debug/PersoACOS.bsc" 
+".\Debug\StdAfx.sbr"
+".\Debug\Acos3.sbr"
+".\Debug\Acos3Account.sbr"
+".\Debug\Acos3BinaryFiles.sbr"
+".\Debug\Acos3MutualAuthentication.sbr"
+".\Debug\Acos3ReadWrite.sbr"
+".\Debug\Acos3SecureMessaging.sbr"
+".\Debug\AcsReader.sbr"
+".\Debug\Apdu.sbr"
+".\Debug\CardException.sbr"
+".\Debug\CardSelector.sbr"
+".\Debug\DES.sbr"
+".\Debug\Helper.sbr"
+".\Debug\HelperClass.sbr"
+".\Debug\PcscException.sbr"
+".\Debug\PcscProvider.sbr"
+".\Debug\PcscReader.sbr"
+".\Debug\PersoACOS.sbr"
+".\Debug\PersoACOSDlg.sbr"]
+Creating command line "bscmake.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPA81.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+ACOS3 Create Files.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

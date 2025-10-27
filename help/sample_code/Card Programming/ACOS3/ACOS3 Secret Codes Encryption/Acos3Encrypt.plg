@@ -1,0 +1,128 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Acos3Encrypt - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Debug/Acos3Encrypt.res" /d "_DEBUG" /d "_AFXDLL" "\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\Acos3Encrypt.rc"" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPAF4.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/Acos3Encrypt.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\Acos3.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\Acos3Account.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\Acos3BinaryFiles.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\Acos3Encrypt.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\Acos3EncryptDlg.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\Acos3MutualAuth.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\Acos3ReadWrite.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\Acos3SecureMessaging.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\AcsReader.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\Apdu.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\CardException.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\CardSelector.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\DES.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\Helper.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\HelperClass.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\NoPasteEdit.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\PcscException.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\PcscProvider.cpp"
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\PcscReader.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPAF4.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPAF5.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/Acos3Encrypt.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPAF5.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPAF6.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/ACOS3 Encrypt.pdb" /debug /machine:I386 /out:"Debug/ACOS3 Encrypt.exe" /pdbtype:sept 
+".\Debug\Acos3.obj"
+".\Debug\Acos3Account.obj"
+".\Debug\Acos3BinaryFiles.obj"
+".\Debug\Acos3Encrypt.obj"
+".\Debug\Acos3EncryptDlg.obj"
+".\Debug\Acos3MutualAuth.obj"
+".\Debug\Acos3ReadWrite.obj"
+".\Debug\Acos3SecureMessaging.obj"
+".\Debug\AcsReader.obj"
+".\Debug\Apdu.obj"
+".\Debug\CardException.obj"
+".\Debug\CardSelector.obj"
+".\Debug\DES.obj"
+".\Debug\Helper.obj"
+".\Debug\HelperClass.obj"
+".\Debug\NoPasteEdit.obj"
+".\Debug\PcscException.obj"
+".\Debug\PcscProvider.obj"
+".\Debug\PcscReader.obj"
+".\Debug\StdAfx.obj"
+".\Debug\Acos3Encrypt.res"
+".\WINSCARD.LIB"
+]
+Creating command line "link.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPAF6.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+Acos3.cpp
+Acos3Account.cpp
+Acos3BinaryFiles.cpp
+Acos3Encrypt.cpp
+Acos3EncryptDlg.cpp
+\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\Acos3EncryptDlg.cpp(814) : warning C4101: 'aCardKey' : unreferenced local variable
+\\tsclient\F\SDK Projects\Common\Sample Codes\ACOS3\PCSC\MS Visual C++\x86\ACOS3 Encrypt\Acos3EncryptDlg.cpp(814) : warning C4101: 'aTerminalKey' : unreferenced local variable
+Acos3MutualAuth.cpp
+Acos3ReadWrite.cpp
+Acos3SecureMessaging.cpp
+AcsReader.cpp
+Apdu.cpp
+CardException.cpp
+CardSelector.cpp
+DES.cpp
+Helper.cpp
+HelperClass.cpp
+NoPasteEdit.cpp
+PcscException.cpp
+PcscProvider.cpp
+PcscReader.cpp
+Generating Code...
+Linking...
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPAF8.tmp" with contents
+[
+/nologo /o"Debug/Acos3Encrypt.bsc" 
+".\Debug\StdAfx.sbr"
+".\Debug\Acos3.sbr"
+".\Debug\Acos3Account.sbr"
+".\Debug\Acos3BinaryFiles.sbr"
+".\Debug\Acos3Encrypt.sbr"
+".\Debug\Acos3EncryptDlg.sbr"
+".\Debug\Acos3MutualAuth.sbr"
+".\Debug\Acos3ReadWrite.sbr"
+".\Debug\Acos3SecureMessaging.sbr"
+".\Debug\AcsReader.sbr"
+".\Debug\Apdu.sbr"
+".\Debug\CardException.sbr"
+".\Debug\CardSelector.sbr"
+".\Debug\DES.sbr"
+".\Debug\Helper.sbr"
+".\Debug\HelperClass.sbr"
+".\Debug\NoPasteEdit.sbr"
+".\Debug\PcscException.sbr"
+".\Debug\PcscProvider.sbr"
+".\Debug\PcscReader.sbr"]
+Creating command line "bscmake.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPAF8.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+ACOS3 Encrypt.exe - 0 error(s), 2 warning(s)
+</pre>
+</body>
+</html>

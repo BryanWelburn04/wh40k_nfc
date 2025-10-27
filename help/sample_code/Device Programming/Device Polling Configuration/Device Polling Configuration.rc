@@ -1,0 +1,212 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\Device Polling Configuration.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_ACSLOGO             ICON    DISCARDABLE     "ACSlogo.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DEVICEPOLLINGCONFIGURATION_DIALOG DIALOGEX 0, 0, 377, 253
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "ACR122U Device Polling Configuration"
+FONT 9, "Verdana"
+BEGIN
+    LTEXT           "Select Reader:",IDC_LabelSelectReader,7,7,48,8
+    COMBOBOX        IDC_ComboBoxReaderList,7,17,151,31,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Initialize",IDC_ButtonInitialize,74,36,83,16
+    PUSHBUTTON      "Connect",IDC_ButtonConnect,73,56,84,16
+    GROUPBOX        "PICC Operating Parameter",
+                    IDC_GroupBoxOperatingParameters,7,84,150,162
+    CONTROL         "Automatic PICC Polling",IDC_CheckBoxAutoPiccPolling,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,22,97,88,10
+    CONTROL         "Automatic ATS Generation",IDC_CheckBoxAutoAtsGeneration,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,22,110,100,10
+    CONTROL         "Detect ISO14443 Type A Cards",
+                    IDC_CheckBoxDetectIso14443TypeA,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,22,124,116,10
+    CONTROL         "Detect ISO14443 Type B Cards",
+                    IDC_CheckBoxDetectIso14443TypeB,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,22,137,116,10
+    CONTROL         "Detect Topaz Cards",IDC_CheckBoxDetectTopaz,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,22,150,79,10
+    CONTROL         "Detect FeliCa 212K Cards",IDC_CheckBoxDetectFelica212,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,22,164,97,10
+    CONTROL         "Detect FeliCa 424K Cards",IDC_CheckBoxDetectFelica424,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,22,177,97,10
+    GROUPBOX        "Polling Interval",IDC_GroupBoxPollingInterval,11,193,
+                    142,30
+    CONTROL         "250 ms",IDC_RadioButton250ms,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,31,207,39,10
+    CONTROL         "500 ms",IDC_RadioButton500ms,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,91,207,39,10
+    PUSHBUTTON      "Get Parameter",IDC_ButtonGetParameters,11,227,69,16
+    PUSHBUTTON      "Set Parameter",IDC_ButtonSetParameters,84,227,69,16
+    LTEXT           "APDU Logs:",IDC_LabelApduLogs,165,7,40,8
+    EDITTEXT        IDC_EditBoxApduLogs,164,17,206,206,ES_MULTILINE | 
+                    ES_READONLY | WS_VSCROLL
+    PUSHBUTTON      "Clear",IDC_ButtonClear,164,227,65,16
+    PUSHBUTTON      "Quit",IDC_ButtonQuit,305,227,65,16
+    PUSHBUTTON      "Reset",IDC_ButtonReset,235,227,65,16
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "ACR122U Basic Device Programming\0"
+            VALUE "FileVersion", "1.0.0.0\0"
+            VALUE "InternalName", "ACR122U Device Polling Configuration\0"
+            VALUE "LegalCopyright", "Copyright (C) Advanced Card Systems Ltd. All rights reserved.\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "ACR122U Device Polling Configuration.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "ACR122U Device Polling Configuration\0"
+            VALUE "ProductVersion", "1.0.0.0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DEVICEPOLLINGCONFIGURATION_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 370
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 246
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\Device Polling Configuration.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

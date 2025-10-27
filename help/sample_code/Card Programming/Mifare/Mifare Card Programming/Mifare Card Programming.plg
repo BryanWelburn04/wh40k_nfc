@@ -1,0 +1,48 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Mifare Card Programming - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP230.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /I "." /I ".\Card" /I ".\Card\MifareClassic" /I ".\ProprietaryReader" /I ".\ProprietaryReader\Acr1281SC1" /I ".\Utilities" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/Mifare Card Programming.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Documents and Settings\XPMUser\Desktop\Mifare Card Programming\Mifare Card ProgrammingDlg.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP230.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP231.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/Mifare Classic Card Programming.pdb" /debug /machine:I386 /out:"Debug/Mifare Classic Card Programming.exe" /pdbtype:sept 
+".\Debug\AcsReader.obj"
+".\Debug\Apdu.obj"
+".\Debug\CardException.obj"
+".\Debug\CardSelector.obj"
+".\Debug\Helper.obj"
+".\Debug\HelperClass.obj"
+".\Debug\Mifare Card Programming.obj"
+".\Debug\Mifare Card ProgrammingDlg.obj"
+".\Debug\MifareClassic.obj"
+".\Debug\PcscException.obj"
+".\Debug\PcscProvider.obj"
+".\Debug\PcscReader.obj"
+".\Debug\StdAfx.obj"
+".\Debug\Mifare Card Programming.res"
+".\acr.lib"
+".\WINSCARD.LIB"
+]
+Creating command line "link.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP231.tmp"
+<h3>Output Window</h3>
+Compiling...
+Mifare Card ProgrammingDlg.cpp
+C:\Documents and Settings\XPMUser\Desktop\Mifare Card Programming\Mifare Card ProgrammingDlg.cpp(501) : warning C4129: 'S' : unrecognized character escape sequence
+Linking...
+
+
+
+<h3>Results</h3>
+Mifare Classic Card Programming.exe - 0 error(s), 1 warning(s)
+</pre>
+</body>
+</html>

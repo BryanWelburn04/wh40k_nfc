@@ -1,0 +1,140 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: MifareNDEFSampleCode - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Debug/MifareNDEFSampleCode.res" /d "_DEBUG" /d "_AFXDLL" "C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\MifareNDEFSampleCode.rc"" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP72.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/MifareNDEFSampleCode.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\AcsReader.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\Apdu.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\CardException.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\CardSelector.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\Helper.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\MifareClassic.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\MifareNDEFSampleCode.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\MifareNDEFSampleCodeDlg.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\MyTabCtrl.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\Ndef.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\NdefException.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\NdefMessage.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\NdefRecord.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\NdefRecordType.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\NdefSmartPoster.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\NdefText.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\NdefUri.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\NdefVCard.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\PcscException.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\PcscProvider.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\PcscReader.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\VCardIdentificationType.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP72.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP73.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/MifareNDEFSampleCode.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Documents and Settings\XPMUser\Desktop\MifareNDEFSampleCode\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP73.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP74.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/Mifare NDEF Sample Code.pdb" /debug /machine:I386 /out:"Debug/Mifare NDEF Sample Code.exe" /pdbtype:sept 
+".\Debug\AcsReader.obj"
+".\Debug\Apdu.obj"
+".\Debug\CardException.obj"
+".\Debug\CardSelector.obj"
+".\Debug\Helper.obj"
+".\Debug\MifareClassic.obj"
+".\Debug\MifareNDEFSampleCode.obj"
+".\Debug\MifareNDEFSampleCodeDlg.obj"
+".\Debug\MyTabCtrl.obj"
+".\Debug\Ndef.obj"
+".\Debug\NdefException.obj"
+".\Debug\NdefMessage.obj"
+".\Debug\NdefRecord.obj"
+".\Debug\NdefRecordType.obj"
+".\Debug\NdefSmartPoster.obj"
+".\Debug\NdefText.obj"
+".\Debug\NdefUri.obj"
+".\Debug\NdefVCard.obj"
+".\Debug\PcscException.obj"
+".\Debug\PcscProvider.obj"
+".\Debug\PcscReader.obj"
+".\Debug\StdAfx.obj"
+".\Debug\VCardIdentificationType.obj"
+".\Debug\MifareNDEFSampleCode.res"
+".\WINSCARD.LIB"
+]
+Creating command line "link.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP74.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+AcsReader.cpp
+Apdu.cpp
+CardException.cpp
+CardSelector.cpp
+Helper.cpp
+MifareClassic.cpp
+MifareNDEFSampleCode.cpp
+MifareNDEFSampleCodeDlg.cpp
+MyTabCtrl.cpp
+Ndef.cpp
+NdefException.cpp
+NdefMessage.cpp
+NdefRecord.cpp
+NdefRecordType.cpp
+NdefSmartPoster.cpp
+NdefText.cpp
+NdefUri.cpp
+NdefVCard.cpp
+PcscException.cpp
+PcscProvider.cpp
+Generating Code...
+Compiling...
+PcscReader.cpp
+VCardIdentificationType.cpp
+Generating Code...
+Linking...
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP76.tmp" with contents
+[
+/nologo /o"Debug/MifareNDEFSampleCode.bsc" 
+".\Debug\StdAfx.sbr"
+".\Debug\AcsReader.sbr"
+".\Debug\Apdu.sbr"
+".\Debug\CardException.sbr"
+".\Debug\CardSelector.sbr"
+".\Debug\Helper.sbr"
+".\Debug\MifareClassic.sbr"
+".\Debug\MifareNDEFSampleCode.sbr"
+".\Debug\MifareNDEFSampleCodeDlg.sbr"
+".\Debug\MyTabCtrl.sbr"
+".\Debug\Ndef.sbr"
+".\Debug\NdefException.sbr"
+".\Debug\NdefMessage.sbr"
+".\Debug\NdefRecord.sbr"
+".\Debug\NdefRecordType.sbr"
+".\Debug\NdefSmartPoster.sbr"
+".\Debug\NdefText.sbr"
+".\Debug\NdefUri.sbr"
+".\Debug\NdefVCard.sbr"
+".\Debug\PcscException.sbr"
+".\Debug\PcscProvider.sbr"
+".\Debug\PcscReader.sbr"
+".\Debug\VCardIdentificationType.sbr"]
+Creating command line "bscmake.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP76.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+Mifare NDEF Sample Code.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,234 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\ACR122UBasicDeviceProgramming.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_ACSLOGO             ICON                    "res\\Advanced Device Programming.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ACR122UBASICDEVICEPROGRAMMING_DIALOG DIALOGEX 0, 0, 537, 312
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "ACR122U Basic Device Programming"
+FONT 9, "Verdana", 0, 0, 0x1
+BEGIN
+    LTEXT           "Select Reader :",IDC_STATIC,7,7,50,8
+    COMBOBOX        IDC_ComboBoxReaderList,7,22,148,27,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Initialize",IDC_ButtonInitialize,74,43,80,16
+    PUSHBUTTON      "Connect",IDC_ButtonConnect,74,67,80,16
+    GROUPBOX        "Firmware",IDC_GroupBoxFirmware,7,87,152,65
+    CTEXT           "",IDC_LabelFirmware,11,104,142,14,SS_CENTERIMAGE | WS_BORDER
+    PUSHBUTTON      "Get Firmware",IDC_ButtonGetFirmware,73,126,80,16
+    PUSHBUTTON      "Get Status",IDC_ButtonGetStatus,73,160,80,16
+    GROUPBOX        "Timeout Parameter",IDC_GroupBoxTimeoutParameter,7,184,151,62
+    LTEXT           "Timeout Parameter",IDC_LabelTimeoutParameter,10,202,63,8
+    EDITTEXT        IDC_EditBoxTimeoutParameter,74,200,40,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Set Timeout Parameter",IDC_ButtonSetTimeout,74,223,80,16
+    GROUPBOX        "Buzzer Output",IDC_GroupBoxBuzzerOutput,7,251,152,33
+    CONTROL         "On",IDC_RadioButtonBuzzerOutputOn,"Button",BS_AUTORADIOBUTTON | WS_GROUP,13,267,25,10
+    CONTROL         "Off",IDC_RadioButtonBuzzerOutputOff,"Button",BS_AUTORADIOBUTTON | WS_GROUP,38,267,25,10
+    PUSHBUTTON      "Set Buzzer Output",IDC_ButtonSetBuzzerOutput,74,262,80,16
+    GROUPBOX        "LED and Buzzer Control",IDC_GroupBoxLedAndBuzzerControl,161,7,178,277
+    GROUPBOX        "LED State Control",IDC_GroupBoxLedStateControl,165,17,170,141
+    GROUPBOX        "Red LED",IDC_GroupBoxRedLed,169,27,162,63
+    GROUPBOX        "Final LED State",IDC_GroupBoxFinalLedState,173,36,76,24
+    CONTROL         "On",IDC_RadioButtonRedFinalOn,"Button",BS_AUTORADIOBUTTON | WS_GROUP,183,48,25,10
+    CONTROL         "Off",IDC_RadioButtonRedFinalOff,"Button",BS_AUTORADIOBUTTON | WS_GROUP,209,48,25,10
+    GROUPBOX        "LED State Mask",IDC_GroupBoxRedStateMask,252,36,75,24
+    CONTROL         "On",IDC_RadioButtonRedStateMaskOn,"Button",BS_AUTORADIOBUTTON | WS_GROUP,260,48,25,10
+    CONTROL         "Off",IDC_RadioButtonRedStateMaskOff,"Button",BS_AUTORADIOBUTTON | WS_GROUP,285,48,25,10
+    GROUPBOX        "Initial Blinking State",IDC_GroupBoxInitialBlinkingState,173,62,76,24
+    CONTROL         "On",IDC_RadioButtonRedInitBlinkingStateOn,"Button",BS_AUTORADIOBUTTON | WS_GROUP,183,74,25,10
+    CONTROL         "Off",IDC_RadioButtonRedInitBlinkingStateOff,"Button",BS_AUTORADIOBUTTON | WS_GROUP,209,74,25,10
+    GROUPBOX        "LED Blinking Mask",IDC_GroupBoxRedLedBlinkingMask,252,62,75,24
+    CONTROL         "On",IDC_RadioButtonRedBlinkingMaskOn,"Button",BS_AUTORADIOBUTTON | WS_GROUP,260,74,25,10
+    CONTROL         "Off",IDC_RadioButtonRedBlinkingMaskOff,"Button",BS_AUTORADIOBUTTON | WS_GROUP,285,74,25,10
+    GROUPBOX        "Green LED",IDC_GroupBoxGreenLed,169,92,162,63
+    GROUPBOX        "Final LED State",IDC_GroupBoxGreenFinalLedState,173,102,76,24
+    CONTROL         "On",IDC_RadioButtonGreenFinalStateOn,"Button",BS_AUTORADIOBUTTON | WS_GROUP,183,113,25,10
+    CONTROL         "Off",IDC_RadioButtonGreenFinalStateOff,"Button",BS_AUTORADIOBUTTON | WS_GROUP,209,113,25,10
+    GROUPBOX        "LED State Mask",IDC_GroupBoxGreenStateMask,252,102,75,24
+    CONTROL         "On",IDC_RadioButtonGreenStateMaskOn,"Button",BS_AUTORADIOBUTTON | WS_GROUP,260,113,25,10
+    CONTROL         "Off",IDC_RadioButtonGreenStateMaskOff,"Button",BS_AUTORADIOBUTTON | WS_GROUP,285,113,25,10
+    GROUPBOX        "Initial Blinking State",IDC_GroupBoxGreenInitialBlinkingState,173,127,76,24
+    CONTROL         "On",IDC_RadioButtonGreenInitBlinkingStateOn,"Button",BS_AUTORADIOBUTTON | WS_GROUP,183,139,25,10
+    CONTROL         "Off",IDC_RadioButtonGreenInitBlinkingStateOff,"Button",BS_AUTORADIOBUTTON | WS_GROUP,209,139,25,10
+    GROUPBOX        "LED Blinking Mask",IDC_GroupBoxGreenLedBlinkingMask,252,127,75,24
+    CONTROL         "On",IDC_RadioButtonGreenBlinkingMaskOn,"Button",BS_AUTORADIOBUTTON | WS_GROUP,260,139,25,10
+    CONTROL         "Off",IDC_RadioButtonGreenBlinkingMaskOff,"Button",BS_AUTORADIOBUTTON | WS_GROUP,285,139,25,10
+    GROUPBOX        "Blinking Duration Control",IDC_GroupBoxBlinkingDurationControl,165,160,169,77
+    LTEXT           "T1 Duration Initial",IDC_LabelT1DurationInitial,170,174,56,8
+    LTEXT           "Blinking State",IDC_LabelBlinkingState,171,186,44,8
+    LTEXT           "T2 Duration Initial",IDC_LabelT2DurationToggle,170,198,56,8
+    LTEXT           "Blinking State",IDC_LabelBlinkingState2,171,210,44,8
+    LTEXT           "Number Of Repetition",IDC_LabelNumberOfRepetition,171,222,69,8
+    EDITTEXT        IDC_EditBoxT1Duration,249,177,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EditBoxT2Duration,249,198,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EditBoxNumberOfRepetitions,249,219,40,14,ES_AUTOHSCROLL
+    LTEXT           "x100 ms",IDC_Labelx100ms,291,180,27,8
+    LTEXT           "x100 ms",IDC_Labelx100ms2,291,202,27,8
+    PUSHBUTTON      "Set LED and Buzzer Control",IDC_ButtonSetLedAndBuzzerControl,210,289,129,16
+    PUSHBUTTON      "Clear",IDC_ButtonClear,343,289,59,16
+    PUSHBUTTON      "Reset",IDC_ButtonReset,407,289,59,16
+    PUSHBUTTON      "Quit",IDC_ButtonQuit,471,289,59,16
+    LTEXT           "APDU Logs:",IDC_LabelApduLogs,343,7,40,8
+    EDITTEXT        IDC_EditBoxApduLogs,343,19,187,261,ES_MULTILINE | ES_READONLY | WS_VSCROLL
+    GROUPBOX        "Link to Buzzer",IDC_GroupBoxLinkToBuzzer,165,238,169,38
+    CONTROL         "Buzzer Off",IDC_RadioButtonLinkToBuzzerOff,"Button",BS_AUTORADIOBUTTON | WS_GROUP,186,250,49,10
+    CONTROL         "T1 Duration",IDC_RadioButtonT1Duration,"Button",BS_AUTORADIOBUTTON | WS_GROUP,186,263,53,10
+    CONTROL         "T2 Duration",IDC_RadioButtonT2Duration,"Button",BS_AUTORADIOBUTTON | WS_GROUP,247,250,53,10
+    CONTROL         "T1 and T2 Duration",IDC_RadioButtonT1AndT2Duration,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP,247,263,78,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "ACR122U Basic Device Programming"
+            VALUE "FileVersion", "1.0.0.0"
+            VALUE "InternalName", "ACR122U Basic Device Programming"
+            VALUE "LegalCopyright", "Copyright (C) Advanced Card Systems Ltd. All rights reserved."
+            VALUE "OriginalFilename", "ACR122U Basic Device Programming.EXE"
+            VALUE "ProductName", "ACR122U Basic Device Programming"
+            VALUE "ProductVersion", "1.0.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ACR122UBASICDEVICEPROGRAMMING_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 530
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 305
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\ACR122UBasicDeviceProgramming.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,90 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Device Polling Configuration - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Debug/Device Polling Configuration.res" /d "_DEBUG" /d "_AFXDLL" "\\tsclient\E\SDK_Acr122u\Device Polling Configuration\Device Polling Configuration.rc"" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPB6A.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/Device Polling Configuration.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"\\tsclient\E\SDK_Acr122u\Device Polling Configuration\Acr122u.cpp"
+"\\tsclient\E\SDK_Acr122u\Device Polling Configuration\AcsReader.cpp"
+"\\tsclient\E\SDK_Acr122u\Device Polling Configuration\Apdu.cpp"
+"\\tsclient\E\SDK_Acr122u\Device Polling Configuration\Device Polling Configuration.cpp"
+"\\tsclient\E\SDK_Acr122u\Device Polling Configuration\Device Polling ConfigurationDlg.cpp"
+"\\tsclient\E\SDK_Acr122u\Device Polling Configuration\Helper.cpp"
+"\\tsclient\E\SDK_Acr122u\Device Polling Configuration\HelperClass.cpp"
+"\\tsclient\E\SDK_Acr122u\Device Polling Configuration\PcscException.cpp"
+"\\tsclient\E\SDK_Acr122u\Device Polling Configuration\PcscProvider.cpp"
+"\\tsclient\E\SDK_Acr122u\Device Polling Configuration\PcscReader.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPB6A.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPB6B.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/Device Polling Configuration.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"\\tsclient\E\SDK_Acr122u\Device Polling Configuration\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPB6B.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPB6C.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/Device Polling Configuration.pdb" /debug /machine:I386 /out:"Debug/Device Polling Configuration.exe" /pdbtype:sept 
+".\Debug\Acr122u.obj"
+".\Debug\AcsReader.obj"
+".\Debug\Apdu.obj"
+".\Debug\Device Polling Configuration.obj"
+".\Debug\Device Polling ConfigurationDlg.obj"
+".\Debug\Helper.obj"
+".\Debug\HelperClass.obj"
+".\Debug\PcscException.obj"
+".\Debug\PcscProvider.obj"
+".\Debug\PcscReader.obj"
+".\Debug\StdAfx.obj"
+".\Debug\Device Polling Configuration.res"
+".\Winscard.LIB"
+]
+Creating command line "link.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPB6C.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+Acr122u.cpp
+AcsReader.cpp
+Apdu.cpp
+Device Polling Configuration.cpp
+Device Polling ConfigurationDlg.cpp
+Helper.cpp
+HelperClass.cpp
+PcscException.cpp
+PcscProvider.cpp
+PcscReader.cpp
+Generating Code...
+Linking...
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPB6E.tmp" with contents
+[
+/nologo /o"Debug/Device Polling Configuration.bsc" 
+".\Debug\StdAfx.sbr"
+".\Debug\Acr122u.sbr"
+".\Debug\AcsReader.sbr"
+".\Debug\Apdu.sbr"
+".\Debug\Device Polling Configuration.sbr"
+".\Debug\Device Polling ConfigurationDlg.sbr"
+".\Debug\Helper.sbr"
+".\Debug\HelperClass.sbr"
+".\Debug\PcscException.sbr"
+".\Debug\PcscProvider.sbr"
+".\Debug\PcscReader.sbr"]
+Creating command line "bscmake.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSPB6E.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+Device Polling Configuration.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

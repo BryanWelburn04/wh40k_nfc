@@ -1,0 +1,61 @@
+; CLW file contains information for the MFC ClassWizard
+
+[General Info]
+Version=1
+LastClass=CDevicePollingConfigurationDlg
+LastTemplate=CDialog
+NewFileInclude1=#include "stdafx.h"
+NewFileInclude2=#include "Device Polling Configuration.h"
+
+ClassCount=2
+Class1=CDevicePollingConfigurationApp
+Class2=CDevicePollingConfigurationDlg
+
+ResourceCount=3
+Resource2=IDR_MAINFRAME
+Resource3=IDD_DEVICEPOLLINGCONFIGURATION_DIALOG
+
+[CLS:CDevicePollingConfigurationApp]
+Type=0
+HeaderFile=Device Polling Configuration.h
+ImplementationFile=Device Polling Configuration.cpp
+Filter=N
+
+[CLS:CDevicePollingConfigurationDlg]
+Type=0
+HeaderFile=Device Polling ConfigurationDlg.h
+ImplementationFile=Device Polling ConfigurationDlg.cpp
+Filter=D
+BaseClass=CDialog
+VirtualFilter=dWC
+LastObject=IDC_ButtonConnect
+
+
+
+[DLG:IDD_DEVICEPOLLINGCONFIGURATION_DIALOG]
+Type=1
+Class=CDevicePollingConfigurationDlg
+ControlCount=22
+Control1=IDC_LabelSelectReader,static,1342308352
+Control2=IDC_ComboBoxReaderList,combobox,1344340227
+Control3=IDC_ButtonInitialize,button,1342242816
+Control4=IDC_ButtonConnect,button,1342242816
+Control5=IDC_GroupBoxOperatingParameters,button,1342177287
+Control6=IDC_CheckBoxAutoPiccPolling,button,1342242819
+Control7=IDC_CheckBoxAutoAtsGeneration,button,1342242819
+Control8=IDC_CheckBoxDetectIso14443TypeA,button,1342242819
+Control9=IDC_CheckBoxDetectIso14443TypeB,button,1342242819
+Control10=IDC_CheckBoxDetectTopaz,button,1342242819
+Control11=IDC_CheckBoxDetectFelica212,button,1342242819
+Control12=IDC_CheckBoxDetectFelica424,button,1342242819
+Control13=IDC_GroupBoxPollingInterval,button,1342177287
+Control14=IDC_RadioButton250ms,button,1342308361
+Control15=IDC_RadioButton500ms,button,1342308361
+Control16=IDC_ButtonGetParameters,button,1342242816
+Control17=IDC_ButtonSetParameters,button,1342242816
+Control18=IDC_LabelApduLogs,static,1342308352
+Control19=IDC_EditBoxApduLogs,edit,1352730628
+Control20=IDC_ButtonClear,button,1342242816
+Control21=IDC_ButtonQuit,button,1342242816
+Control22=IDC_ButtonReset,button,1342242816
+

@@ -1,0 +1,80 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Mifare Change Key - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Debug/Mifare Change Key.res" /d "_DEBUG" /d "_AFXDLL" "C:\Documents and Settings\XPMUser\Desktop\Mifare Change Key\Mifare Change Key.rc"" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP287.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /I "." /I ".\Card" /I ".\Card\MifareClassic" /I ".\ProprietaryReader" /I ".\ProprietaryReader\Acr1281SC1" /I ".\Utilities" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/Mifare Change Key.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Documents and Settings\XPMUser\Desktop\Mifare Change Key\AcsReader.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\Mifare Change Key\Apdu.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\Mifare Change Key\CardException.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\Mifare Change Key\CardSelector.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\Mifare Change Key\Helper.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\Mifare Change Key\HelperClass.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\Mifare Change Key\Mifare Change Key.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\Mifare Change Key\Mifare Change KeyDlg.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\Mifare Change Key\MifareClassic.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\Mifare Change Key\PcscException.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\Mifare Change Key\PcscProvider.cpp"
+"C:\Documents and Settings\XPMUser\Desktop\Mifare Change Key\PcscReader.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP287.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP288.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /I "." /I ".\Card" /I ".\Card\MifareClassic" /I ".\ProprietaryReader" /I ".\ProprietaryReader\Acr1281SC1" /I ".\Utilities" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/Mifare Change Key.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Documents and Settings\XPMUser\Desktop\Mifare Change Key\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP288.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP289.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/Mifare Classic Change Key.pdb" /debug /machine:I386 /out:"Debug/Mifare Classic Change Key.exe" /pdbtype:sept 
+".\Debug\AcsReader.obj"
+".\Debug\Apdu.obj"
+".\Debug\CardException.obj"
+".\Debug\CardSelector.obj"
+".\Debug\Helper.obj"
+".\Debug\HelperClass.obj"
+".\Debug\Mifare Change Key.obj"
+".\Debug\Mifare Change KeyDlg.obj"
+".\Debug\MifareClassic.obj"
+".\Debug\PcscException.obj"
+".\Debug\PcscProvider.obj"
+".\Debug\PcscReader.obj"
+".\Debug\StdAfx.obj"
+".\Debug\Mifare Change Key.res"
+".\acr.lib"
+".\WINSCARD.LIB"
+]
+Creating command line "link.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP289.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+AcsReader.cpp
+Apdu.cpp
+CardException.cpp
+CardSelector.cpp
+Helper.cpp
+HelperClass.cpp
+Mifare Change Key.cpp
+Mifare Change KeyDlg.cpp
+MifareClassic.cpp
+PcscException.cpp
+PcscProvider.cpp
+PcscReader.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+Mifare Classic Change Key.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

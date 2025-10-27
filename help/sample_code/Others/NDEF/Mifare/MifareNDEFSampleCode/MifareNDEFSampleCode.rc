@@ -1,0 +1,296 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\MifareNDEFSampleCode.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\MifareNDEFSampleCode.ico"
+IDI_IconAcs             ICON                    "res\\ACOS Sample Codes.ico"
+IDI_IconAcs2            ICON                    "res\\ACS_Small.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_AboutBox DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About MifareNDEFSampleCode"
+FONT 9, "Verdana", 0, 0, 0x0
+BEGIN
+    ICON            IDI_IconAcs,IDC_STATIC,11,17,20,20
+    LTEXT           "MifareNDEFSampleCode Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright © Advanced Card Systems Ltd. All rights reserved.",IDC_STATIC,40,25,188,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_DialogMifareNdefSampleCode DIALOGEX 0, 0, 435, 372
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Mifare NDEF Sample Code"
+FONT 9, "Verdana", 0, 0, 0x1
+BEGIN
+    LTEXT           "Select Reader:",IDC_STATIC_SELECTREADER,7,7,48,8
+    COMBOBOX        IDC_COMBO_READERS,7,18,213,64,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "APDU Logs:",IDC_STATIC_APDULOGS,224,7,40,8
+    PUSHBUTTON      "Initialize",IDC_BUTTON_INITIALIZE,7,34,61,14
+    PUSHBUTTON      "Connect",IDC_BUTTON_CONNECT,161,33,59,14
+    EDITTEXT        IDC_EDIT_APDULOGS,224,18,204,326,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
+    CONTROL         "Tab1",IDC_MY_TAB,"SysTabControl32",0x0,7,58,213,108
+    LTEXT           "NDEF Message:",IDC_STATIC_NDEFMESSAGE,7,174,53,8
+    EDITTEXT        IDC_EDIT_NDEFMESSAGE,7,183,213,69,ES_MULTILINE | ES_READONLY | WS_VSCROLL
+    GROUPBOX        "",IDC_STATIC_GROUPBOX,7,259,213,109
+    LTEXT           "Mifare Application Directory (MAD) Sector Trailer",IDC_STATIC_MAD,13,267,153,8
+    EDITTEXT        IDC_EDIT_MADKEYA,13,279,72,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_MADACCESSBITS,87,279,54,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_MADKEYB,143,279,72,14,ES_CENTER | ES_UPPERCASE | ES_AUTOHSCROLL
+    LTEXT           "Key A",IDC_STATIC_MADKEYA,37,295,20,8
+    LTEXT           "Access Bits",IDC_STATIC_MADACCESSBITS,95,295,38,8
+    LTEXT           "Key B",IDC_STATIC_MADKEYB,168,295,20,8
+    LTEXT           "NFC Forum Sector Trailer",IDC_STATIC_NFC,14,307,80,8
+    EDITTEXT        IDC_EDIT_NFCKEYA,14,320,72,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_NFCACCESSBITS,87,320,54,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_NFCKEYB,142,320,72,14,ES_CENTER | ES_UPPERCASE | ES_AUTOHSCROLL
+    LTEXT           "Key A",IDC_STATIC_NFCKEYA,38,336,20,8
+    LTEXT           "Access Bits",IDC_STATIC_NFCACCESSBITS,95,336,38,8
+    LTEXT           "Key B",IDC_STATIC_NFCKEYB,169,336,20,8
+    PUSHBUTTON      "Write to Card",IDC_BUTTON_WRITETOCARD,14,349,64,14
+    PUSHBUTTON      "Read from Card",IDC_BUTTON_READFROMCARD,82,349,64,14
+    PUSHBUTTON      "Reset Card",IDC_BUTTON_RESETCARD,150,349,64,14
+    PUSHBUTTON      "Clear",IDC_BUTTON_CLEARLOGS,224,350,66,14
+    PUSHBUTTON      "Reset",IDC_BUTTON_RESET,293,350,66,14
+    PUSHBUTTON      "Quit",IDC_BUTTON_QUIT,362,350,66,14
+END
+
+IDD_DialogSmartPoster DIALOGEX 0, 0, 213, 95
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "Verdana", 0, 0, 0x0
+BEGIN
+    LTEXT           "Title",IDC_STATICSMARTPOSTERTITLE,6,13,14,8
+    COMBOBOX        IDC_COMBOSMARTPOSTERTITLELANGUAGE,31,10,60,67,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDITSMARTPOSTERTITLE,95,9,111,14,ES_AUTOHSCROLL
+    LTEXT           "*URI",IDC_STATICSMARTPOSTERURI,6,33,16,8
+    COMBOBOX        IDC_COMBOSMARTPOSTERPREFIXURI,31,30,60,73,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDITSMARTPOSTERURI,95,29,111,14,ES_AUTOHSCROLL
+    LTEXT           "Action",IDC_STATICSMARTPOSTERACTION,6,51,21,8
+    COMBOBOX        IDC_COMBOSMARTPOSTERACTION,31,50,175,55,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "*Required fields",IDC_STATICSMARTPOSTERREQUIRED,15,78,50,8
+    DEFPUSHBUTTON   "Encode Smart Poster",IDC_BUTTONENCODESMARTPOSTER,114,74,92,14
+END
+
+IDD_DialogText DIALOG  0, 0, 211, 95
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "Verdana"
+BEGIN
+    LTEXT           "Language",IDC_STATICTEXTLANGUAGE,6,9,33,8
+    COMBOBOX        IDC_COMBOTEXTLANGUAGE,41,6,75,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "UTF 8",IDC_RADIOTEXTUTF8,"Button",BS_AUTORADIOBUTTON,121,8,36,10
+    CONTROL         "UTF 16",IDC_RADIOTEXTUTF16,"Button",BS_AUTORADIOBUTTON,162,8,40,10
+    LTEXT           "*Message",IDC_STATICTEXTMESSAGE,6,24,32,8
+    EDITTEXT        IDC_EDITTEXTMESSAGE,41,22,164,46,ES_MULTILINE | WS_VSCROLL
+    LTEXT           "*Required fields",IDC_STATIC_REQUIRED,15,78,50,8
+    DEFPUSHBUTTON   "Encode Text",IDC_BUTTONENCODETEXT,114,74,92,14
+END
+
+IDD_DialogUri DIALOG  0, 0, 214, 95
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "Verdana"
+BEGIN
+    LTEXT           "*Uniform Resource Identifier (URI)",IDC_STATICURLURI,9,12,108,8
+    COMBOBOX        IDC_COMBOURLURI,8,28,68,73,CBS_DROPDOWNLIST | WS_VSCROLL
+    EDITTEXT        IDC_EDITURLURI,81,27,125,14,ES_AUTOHSCROLL
+    LTEXT           "*Required fields",IDC_STATIC_REQUIRED,15,78,50,8
+    DEFPUSHBUTTON   "Encode URI",IDC_BUTTONENCODEURL,114,74,92,14
+END
+
+IDD_DialogVCard DIALOG  0, 0, 214, 94
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "Verdana"
+BEGIN
+    LTEXT           "*Given Name",IDC_STATICVCARDGIVEN,5,13,43,8
+    EDITTEXT        IDC_EDITVCARDGIVEN,51,10,156,14,ES_AUTOHSCROLL
+    LTEXT           "Middle Name",IDC_STATICVCARDMIDDLE,5,29,42,8
+    EDITTEXT        IDC_EDITVCARDMIDDLE,51,27,156,14,ES_AUTOHSCROLL
+    LTEXT           "*Surname",IDC_STATICVCARDSUR,5,46,32,8
+    EDITTEXT        IDC_EDITVCARDSUR,51,43,156,14,ES_AUTOHSCROLL
+    LTEXT           "*Required fields",IDC_STATIC_REQUIRED,15,78,50,8
+    DEFPUSHBUTTON   "Encode vCard",IDC_BUTTONENCODEVCARD,114,74,92,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1.0.0.0
+ PRODUCTVERSION 1.0.0.0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "FileDescription", "Mifare NDEF Sample Code"
+            VALUE "FileVersion", "1.0.0.0"
+            VALUE "InternalName", "Mifare NDEF Sample Code"
+            VALUE "LegalCopyright", "Copyright © Advanced Card Systems Ltd. All rights reserved."
+            VALUE "OriginalFilename", "Mifare NDEF Sample Code.EXE"
+            VALUE "ProductName", "Mifare NDEF Sample Code"
+            VALUE "ProductVersion", "1.0.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_AboutBox, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_DialogMifareNdefSampleCode, DIALOG
+    BEGIN
+        RIGHTMARGIN, 428
+        VERTGUIDE, 7
+        VERTGUIDE, 220
+        HORZGUIDE, 71
+        HORZGUIDE, 166
+    END
+
+    IDD_DialogUri, DIALOG
+    BEGIN
+        VERTGUIDE, 213
+        BOTTOMMARGIN, 94
+    END
+
+    IDD_DialogVCard, DIALOG
+    BEGIN
+        VERTGUIDE, 213
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About MifareNDEFSampleCode..."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\MifareNDEFSampleCode.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

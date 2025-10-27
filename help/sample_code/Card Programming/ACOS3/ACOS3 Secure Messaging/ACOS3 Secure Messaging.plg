@@ -1,0 +1,103 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: ACOS3 Secure Messaging - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Debug/ACOS3 Secure Messaging.res" /d "_DEBUG" /d "_AFXDLL" "\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\ACOS3 Secure Messaging.rc"" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP1277.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Debug/ACOS3 Secure Messaging.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\ACOS3 Secure Messaging.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\ACOS3 Secure MessagingDlg.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\Acos3.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\Acos3Account.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\Acos3BinaryFiles.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\Acos3MutualAuthentication.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\Acos3ReadWrite.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\Acos3SecureMessaging.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\AcsReader.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\Apdu.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\CardException.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\CardSelector.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\DES.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\Helper.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\HelperClass.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\NoPasteEdit.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\PcscException.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\PcscProvider.cpp"
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\PcscReader.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP1277.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP1278.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Debug/ACOS3 Secure Messaging.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP1278.tmp" 
+Creating temporary file "C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP1279.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/ACOS3 Secure Messaging.pdb" /debug /machine:I386 /out:"Debug/ACOS3 Secure Messaging.exe" /pdbtype:sept 
+".\Debug\ACOS3 Secure Messaging.obj"
+".\Debug\ACOS3 Secure MessagingDlg.obj"
+".\Debug\Acos3.obj"
+".\Debug\Acos3Account.obj"
+".\Debug\Acos3BinaryFiles.obj"
+".\Debug\Acos3MutualAuthentication.obj"
+".\Debug\Acos3ReadWrite.obj"
+".\Debug\Acos3SecureMessaging.obj"
+".\Debug\AcsReader.obj"
+".\Debug\Apdu.obj"
+".\Debug\CardException.obj"
+".\Debug\CardSelector.obj"
+".\Debug\DES.obj"
+".\Debug\Helper.obj"
+".\Debug\HelperClass.obj"
+".\Debug\NoPasteEdit.obj"
+".\Debug\PcscException.obj"
+".\Debug\PcscProvider.obj"
+".\Debug\PcscReader.obj"
+".\Debug\StdAfx.obj"
+".\Debug\ACOS3 Secure Messaging.res"
+".\WINSCARD.LIB"
+]
+Creating command line "link.exe @C:\DOCUME~1\XPMUser\LOCALS~1\Temp\RSP1279.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+ACOS3 Secure Messaging.cpp
+ACOS3 Secure MessagingDlg.cpp
+\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\ACOS3 Secure MessagingDlg.cpp(467) : warning C4101: 'tempstr' : unreferenced local variable
+\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\ACOS3 Secure MessagingDlg.cpp(467) : warning C4101: 'tempstr2' : unreferenced local variable
+\\tsclient\E\SDK_Acr122u\ACOS3 Card Programming\x32\ACOS3 Secure Messaging\ACOS3 Secure MessagingDlg.cpp(467) : warning C4101: 'holder' : unreferenced local variable
+Acos3.cpp
+Acos3Account.cpp
+Acos3BinaryFiles.cpp
+Acos3MutualAuthentication.cpp
+Acos3ReadWrite.cpp
+Acos3SecureMessaging.cpp
+AcsReader.cpp
+Apdu.cpp
+CardException.cpp
+CardSelector.cpp
+DES.cpp
+Helper.cpp
+HelperClass.cpp
+NoPasteEdit.cpp
+PcscException.cpp
+PcscProvider.cpp
+PcscReader.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+ACOS3 Secure Messaging.exe - 0 error(s), 3 warning(s)
+</pre>
+</body>
+</html>
