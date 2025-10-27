@@ -1,0 +1,16 @@
+# TODO style guide
+# - Dash indicates item heading
+# \> This symbol indicates sub information for task
+
+# GETTING STARTED
+
+	- READ libnfc.
+	\> pretty confusing so far
+	
+	- Bring libnfc into project.
+	\> Conan or vcpkg managers to bring libnfc into our repo/project
+	
+	- Fork and contribute minor editing to libnfc.
+	\> repo as we will be reading it anyway. Good way to build
+	\> github commits and community presence.
+
