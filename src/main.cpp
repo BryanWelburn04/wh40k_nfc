@@ -12,6 +12,8 @@ int main() {
     SCARDCONTEXT allReaders;
     bool status = establishContext(allReaders);
     if(status){
+        //next step is get a list of all current readers
+        //getReaderList(allReaders)... something like this?
         SCardReleaseContext(allReaders);
     }
 
@@ -19,7 +21,4 @@ int main() {
     return 0;   
 }
 
-//    int iResult = SCardListReaders(all_readers,NULL,
-//							   (LPTSTR)&pReaderString, &cch );
-//	if (iResult != SCARD_S_SUCCESS)
-//	{    printf("testing\n");
+

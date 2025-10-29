@@ -18,3 +18,13 @@ bool establishContext(SCARDCONTEXT& readerList) {
     }
     return false;
 }
+
+/*
+getReaderList(...)
+
+//code found in one of the sameple files, might be what we need? No idea what the parameters are
+
+    int iResult = SCardListReaders(all_readers,NULL,(LPTSTR)&pReaderString, &cch );
+	if (iResult != SCARD_S_SUCCESS){
+
+*/
