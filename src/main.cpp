@@ -45,13 +45,17 @@ int main() {
 
 void waitForCard (string selectedReaderName, SCARDCONTEXT smartCardContext){
     bool readerConnectionStatus = false;
+    SCARDHANDLE			hCardHandle;
+	DWORD				uActiveProtocol;	
+
     while(1) {
-        readerConnectionStatus = connectToReader(selectedReaderName, smartCardContext);
+        readerConnectionStatus = connectToReader(selectedReaderName, smartCardContext, hCardHandle, uActiveProtocol);
         if (readerConnectionStatus){
-            getCardDetails(smartCardContext, selectedReaderName);
+            getCardDetails(smartCardContext, selectedReaderName, hCardHandle, uActiveProtocol);
             while (readerConnectionStatus) {
-                readerConnectionStatus = connectToReader(selectedReaderName, smartCardContext);
+                readerConnectionStatus = connectToReader(selectedReaderName, smartCardContext, hCardHandle, uActiveProtocol);
             }
+            SCardDisconnect(hCardHandle, SCARD_LEAVE_CARD);
             cout << "Waiting for card..." << endl;
         }
     }

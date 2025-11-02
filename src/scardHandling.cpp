@@ -36,10 +36,8 @@ void getReaderList(SCARDCONTEXT smartCardContext, char* &pReaderString){
     return;
 }
 
-bool connectToReader(string readerName, SCARDCONTEXT smartCardContext){
+bool connectToReader(string readerName, SCARDCONTEXT smartCardContext, SCARDHANDLE &hCardHandle_, DWORD &uActiveProtocol_){
 
-    SCARDHANDLE			hCardHandle_;
-	DWORD				uActiveProtocol_;	
 
         int32_t readerConnection = SCardConnect(smartCardContext,readerName.data(),
                                                 SCARD_SHARE_SHARED,SCARD_PROTOCOL_T1,
@@ -58,6 +56,49 @@ bool connectToReader(string readerName, SCARDCONTEXT smartCardContext){
     return false;
 }
 
-void getCardDetails(SCARDCONTEXT smartCardContext, string selectedReaderName){
-    cout << "/* placeholder for card details */" << endl;
+void getCardDetails(SCARDCONTEXT smartCardContext, string selectedReaderName, SCARDHANDLE &hCardHandle, DWORD &uActiveProtocol){
+    BYTE uid[] = { 0xFF, 0xCA, 0x00, 0x00, 0x00 }; // get uid command? found this online and it seems to work
+    BYTE cardData[540];
+    DWORD cardDataSize = sizeof(cardData);
+    
+    SCARD_IO_REQUEST ioRequest;
+	    ioRequest.dwProtocol = uActiveProtocol;
+	    ioRequest.cbPciLength = 8;
+
+	uint64_t uActualResponseLength = cardDataSize;
+
+    int32_t status = SCardTransmit(hCardHandle, &ioRequest,
+							    uid, sizeof(uid),
+							    NULL,cardData, 
+							    &cardDataSize);
+
+	if (status != SCARD_S_SUCCESS){
+        cout << "Failed to read card data" << endl;
+        return;
+    } else {
+        cout << "Card UID:" << endl;
+        for (int i = 0; i < cardDataSize-2; i++){
+            printf("%02X ", cardData[i]);
+        }
+        cout << "\nStatus Bytes:" << endl;
+
+
+        int statusBytesindexs[2]; //this garbage is to make it work for cards with shorter uids. porbalbly unnessecary but i didnt want to hard code it
+        int counter = 0;
+        for(int i = cardDataSize-2; i<cardDataSize; i++){
+            printf("%02X ", cardData[i]);
+            statusBytesindexs[counter] = i;
+            counter++;
+        }
+        cout << endl;
+
+
+        if(cardData[statusBytesindexs[0]] == 0x90 && cardData[statusBytesindexs[1]] == 0x00){ //0x90 0x00 means successful, anything else is error codes
+            cout << "Success" << endl;
+        } else {
+            cout << "Error" << endl;
+        }
+
+    return;
+    }
 }
