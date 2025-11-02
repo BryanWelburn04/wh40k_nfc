@@ -2,5 +2,6 @@
 #define MAIN_H
 
 int main();
+void waitForCard (std::string selectedReaderName, SCARDCONTEXT smartCardContext);
 
 #endif
