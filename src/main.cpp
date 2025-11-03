@@ -91,6 +91,12 @@ void waitForCardImproved(string selectedReaderName, SCARDCONTEXT smartCardContex
     setStateForGetStatusChange(smartCardContext, readerState0); // initialize the state
     readerState0.dwCurrentState = readerState0.dwEventState;
 
+    /* Why do we initialize with custom function setStateForGetStatusChange, then immediately call ScardGetStatusChange?
+        They both use SCardGetStatuschange() so they do the same thing twice as far as I can tell.
+        There must be a way to manually set the state, I see that the struct is given all 0's for member values.
+            I can see that we have manually set dwCurrentstate and dwEventState to different things.
+                WHy not initilaize them to begin equally, that way when we first enter into SCardGetStatusChange, they are equal so it blocks until changed. */
+
     LONG cardStatus = SCardGetStatusChange(smartCardContext, INFINITE, &readerState0, 1); // infinite = timeout time (ms), 1 = length of readerStates
     
      // Now check if there is a card present in the reader
