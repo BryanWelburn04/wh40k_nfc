@@ -72,23 +72,44 @@ void waitForCardImproved(char *selectedReaderName, SCARDCONTEXT smartCardContext
      // Please see SCARD_READERSTATEA structure (winscard.h) Not sure how to intialize these
     
     // IN C this would have to be dynamically allocated, in C++ dont need to.
-    // IM not sure if this needs to be initilized or just create struct and pass to statueChange() function
-    SCARD_READERSTATE readerState1;
-    readerState1.szReader = selectedReaderName.
-    readerState1.pvUserData = NULL; // not sure what goes here maybe 0?
-    readerState1.dwCurrentState = SCARD_STATE_EMPTY;
-    readerState1.dwEventState = NULL; // this is state as known by smart card resource manager.
+    // IM not sure if this needs to be initialized or just create struct and pass to stateChange() function
+    // There is a few members to this struct, i think these ones need to be set beforehand?
+    SCARD_READERSTATE readerState0;
+    readerState0.szReader = selectedReaderName.
+    readerState0.dwCurrentState = SCARD_STATE_EMPTY;
 
     SCARD_READERSTATE readerStates[1]; // This must be an array of readerstate structs
-    long cardStatus = SCardGetStatusChange(smartCardContext, INFINITE, readerStates, 1) // infinite = timeout time (ms), 1 = length of readerStates
+    readerStates[0] = readerState0;
+    long cardStatus = SCardGetStatusChange(smartCardContext, INFINITE, readerStates, 1); // infinite = timeout time (ms), 1 = length of readerStates
     
     if (cardStatus != SCARD_S_SUCCESS) {
         cout << "failed to wait for card." << endl;
         exit(1);
     }
 
-    // NOW we can connect to SCard
-    readerConnectionStatus = connectToReader(selectedReaderName, smartCardContext, hCardHandle, uActiveProtocol);
+    if (readerState0.dwEventState == SCARD_STATE_PRESENT) {
+        // NOW we can connect to SCard, since there is one in the reader
+        readerConnectionStatus = connectToReader(selectedReaderName, smartCardContext, hCardHandle, uActiveProtocol);
+        readerState0.dwCurrentState = readerState0.dwEventState; // copy new reader state to applications understanding of the state
+    } else {
+        cout << "not reading as SCARD_STATE_PRESENT." << endl;
+    }
+
+
+    // NOW we must wait for card to be removed.
+    cardStatus = SCardGetStatusChange(smartCardContext, INFINITE, readerStates, 1);
+    if (cardStatus != SCARD_S_SUCCESS) {
+        cout << "failed to wait for card." << endl;
+        exit(1);
+    }
+    
+    if (readerState0.dwEventState == SCARD_STATE_EMPTY) {
+        cout << "card removed." << endl;
+        SCardDisconnect(hCardHandle, SCARD_LEAVE_CARD);
+        readerState0.dwCurrentState = readerState0.dwEventState;
+    } else {
+        cout << "something went wrong. not SCARD_STATE_EMPTY" << endl;
+    }
 
 
     UNFINISHED!!!! CONTINUE FROM HERE.
