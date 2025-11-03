@@ -30,7 +30,7 @@ int main() {
 
             if(selectedReaderName != "" && selectedReaderName != "Windows Hello for Business 1"){
                 cout << "Connection to reader " << selectedReaderName << " was established" << endl;
-                //cout << "Waiting for card..." << endl;
+                cout << "Waiting for card..." << endl;
                 waitForCardImproved(selectedReaderName, smartCardContext);
                 //waitForCard(selectedReaderName, smartCardContext);
             } else {
