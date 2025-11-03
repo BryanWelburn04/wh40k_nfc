@@ -57,6 +57,10 @@ bool connectToReader(string readerName, SCARDCONTEXT smartCardContext, SCARDHAND
 }
 
 void getCardDetails(SCARDCONTEXT smartCardContext, string selectedReaderName, SCARDHANDLE &hCardHandle, DWORD &uActiveProtocol){
+    /* MM : Since this function is hardcoded to get card uid, it may be suitable to name it as such. My idea is that we can
+        have a function for each "command" that we can use. This would be "getCardUID" command function.
+            I imagine there is lots of commands but we may only want a handful of them so this could be suitable. */
+    
     BYTE uid[] = { 0xFF, 0xCA, 0x00, 0x00, 0x00 }; // get uid command? found this online and it seems to work
     BYTE cardData[540];
     DWORD cardDataSize = sizeof(cardData);
@@ -83,7 +87,7 @@ void getCardDetails(SCARDCONTEXT smartCardContext, string selectedReaderName, SC
         cout << "\nStatus Bytes:" << endl;
 
 
-        int statusBytesindexs[2]; //this garbage is to make it work for cards with shorter uids. porbalbly unnessecary but i didnt want to hard code it
+        int statusBytesindexs[2]; //this garbage is to make it work for cards with shorter uids. probably unnessecary but i didnt want to hard code it
         int counter = 0;
         for(int i = cardDataSize-2; i<cardDataSize; i++){
             printf("%02X ", cardData[i]);

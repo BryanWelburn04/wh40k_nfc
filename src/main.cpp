@@ -11,7 +11,7 @@ int main() {
     cout << "---------------START---------------\n\n";
 
     SCARDCONTEXT smartCardContext; // Winscard context
-    string selectedReaderName;     //currently selected reader name
+    string selectedReaderName;
 
     bool contextStatus = establishContext(smartCardContext); 
 
@@ -20,14 +20,12 @@ int main() {
         char *pReaderString  = NULL;
 
         // MAYBE: we might want to make this function has a return code so we can check its success?
-        getReaderList(smartCardContext, pReaderString); // Establish reader list
+        getReaderList(smartCardContext, pReaderString);
 
         if(pReaderString != NULL){
             printf("List of readers: %s\n", pReaderString);
 
             string selectedReaderName = string(pReaderString);
-            // could maybe make this cast then do cout << list of readers: << selectedReaderName << endl; instead of doing printf, then casting.
-
             if(selectedReaderName != "" && selectedReaderName != "Windows Hello for Business 1"){
                 cout << "Connection to reader " << selectedReaderName << " was established" << endl;
                 cout << "Waiting for card..." << endl;
@@ -65,18 +63,35 @@ void waitForCard (string selectedReaderName, SCARDCONTEXT smartCardContext){
 }
 */
 
+/*
+void readerStateInit(SCARD_READERSTATE &readerstate, char *readerName) {
+    // MM : this could be the way we initialize readers, could add extra parameters to control initialization.
+    //  for now we can just hardcode the basic init.
+
+    // CONCEPTUAL USE:
+    //  SCARD_READERSTATE readerState0;
+    //  readerStatInit(readerState, selectedReaderName);
+    //  printf("selected reader name: %s\n", readerState0.szReader);
+    // OUTPUT: selected reader name: ACR122U
+
+    readerState = {0};
+    readerState.szReader = readerName;
+    readerState0.dwEventState = SCARD_STATE_EMPTY; 
+    readerState0.dwCurrentState = SCARD_STATE_EMPTY; // SCARD_STATE_UNAWARE will result in an immediate return from SCardGetStatusChange()
+    // Maybe we try using state_empty as the initial value? if its assumes its empty and it is then it waits, if it is not empty, then it detects and updates EventStatus.
+} */
+
+
+
 void waitForCardImproved(string selectedReaderName, SCARDCONTEXT smartCardContext) {
 
     /* potentially improved card wait function. Aimed to removed card polling
      * and instead, wait to connect, connect, wait for disconnect. 
      * Uses SCardGetStatusChange winscard.h function 
-     * NEEDS the reader name passed as a pointer.
+     * NEEDS the reader name passed as a pointer (c type string).
     */
-     // Please see SCARD_READERSTATEA structure (winscard.h) Not sure how to intialize these
-    
-    // IN C this would have to be dynamically allocated, in C++ dont need to.
-    // IM not sure if this needs to be initialized or just create struct and pass to stateChange() function
-    // There is a few members to this struct, i think these ones need to be set beforehand?
+
+    /* MM : This function does too much, we should split intialization and waiting functionalities. */
     
     bool readerConnectionStatus = false;
     SCARDHANDLE			hCardHandle = 0;
@@ -85,13 +100,18 @@ void waitForCardImproved(string selectedReaderName, SCARDCONTEXT smartCardContex
 
     SCARD_READERSTATE readerState0 = {0}; // initalize struct to 0 otherwises throws error
     readerState0.szReader = selectedReaderName.c_str(); // Have to type cast this to LPCSTR (same as char*) from string
-    readerState0.dwEventState = 0; //initialize to 0
-    readerState0.dwCurrentState = SCARD_STATE_UNAWARE; //initialize state to unaware
+    
+    // MM : In this program we go from C_string -> string -> C_string, since this function wants a c type string, and we only ever casted to c++ string 
+    //  to use cout for printing to screen, seems redundant. Maybe we should just leave it as a c type string and use printf().
+    //      sidenote: I think the typecast to c++ string was just so the string could be easily compared to another string. 
+
+    readerState0.dwEventState = 0; 
+    readerState0.dwCurrentState = SCARD_STATE_UNAWARE;
 
     setStateForGetStatusChange(smartCardContext, readerState0); // initialize the state
     readerState0.dwCurrentState = readerState0.dwEventState;
 
-    /* Why do we initialize with custom function setStateForGetStatusChange, then immediately call ScardGetStatusChange?
+    /* MM : Why do we initialize with custom function setStateForGetStatusChange, then immediately call ScardGetStatusChange?
         They both use SCardGetStatuschange() so they do the same thing twice as far as I can tell.
         There must be a way to manually set the state, I see that the struct is given all 0's for member values.
             I can see that we have manually set dwCurrentstate and dwEventState to different things.
@@ -99,7 +119,6 @@ void waitForCardImproved(string selectedReaderName, SCARDCONTEXT smartCardContex
 
     LONG cardStatus = SCardGetStatusChange(smartCardContext, INFINITE, &readerState0, 1); // infinite = timeout time (ms), 1 = length of readerStates
     
-     // Now check if there is a card present in the reader
     if (cardStatus != SCARD_S_SUCCESS) {
         cout << "failed to wait for card." << endl;
         exit(1);
@@ -112,7 +131,7 @@ void waitForCardImproved(string selectedReaderName, SCARDCONTEXT smartCardContex
     took me an hour to figure this out -_-.
     */
     if (readerState0.dwEventState & SCARD_STATE_PRESENT) { 
-        // NOW we can connect to SCard, since there is one in the reader
+        // Connect to SCard, since there is one in the reader
         readerConnectionStatus = connectToReader(selectedReaderName, smartCardContext, hCardHandle, uActiveProtocol);
         if(readerConnectionStatus){
             getCardDetails(smartCardContext, selectedReaderName, hCardHandle, uActiveProtocol);
@@ -124,10 +143,10 @@ void waitForCardImproved(string selectedReaderName, SCARDCONTEXT smartCardContex
         cout << "not reading as SCARD_STATE_PRESENT." << endl;
     }
 
-    setStateForGetStatusChange(smartCardContext, readerState0);
+    setStateForGetStatusChange(smartCardContext, readerState0); // MM : again this feels strange as we just set card states to match.
     readerState0.dwCurrentState = readerState0.dwEventState;
 
-    // NOW we must wait for card to be removed.
+    // wait for card to be removed.
     cardStatus = SCardGetStatusChange(smartCardContext, INFINITE, &readerState0, 1);
     if (cardStatus != SCARD_S_SUCCESS) {
         cout << "failed to wait for card." << endl;
@@ -141,10 +160,7 @@ void waitForCardImproved(string selectedReaderName, SCARDCONTEXT smartCardContex
     } else {
         cout << "something went wrong. not SCARD_STATE_EMPTY" << endl;
     }
-    
-    //UNFINISHED!!!! CONTINUE FROM HERE.
-    //NEED TO TEST THIS SO FAR BUT CANT.
-
+    return;
 } 
 
 void setStateForGetStatusChange(SCARDCONTEXT smartCardContext, SCARD_READERSTATE &readerState0) {
@@ -152,6 +168,9 @@ void setStateForGetStatusChange(SCARDCONTEXT smartCardContext, SCARD_READERSTATE
     // otherwise it will always think theres a change and not wait at the SCardGetStatusChange.
     // So everytime we want to check for a status change we need to run this first.
     // probably a better way of doing this but this is all i got for now.
+
+    // MM : Why dont we just initialize the states to be equal, I notice you set dwEventState = 0,
+    //  why not make it start in the same state as dwCurrentState?
     LONG status = SCardGetStatusChange(smartCardContext, 0, &readerState0, 1);
     if (status != SCARD_S_SUCCESS) {
         cout << "setting state failed" << status << endl;
