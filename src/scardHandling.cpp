@@ -24,39 +24,41 @@ bool establishContext(SCARDCONTEXT& readerList) {
 }
 
 
-void getReaderList(SCARDCONTEXT smartCardContext, char* &pReaderString){
+bool getReaderList(SCARDCONTEXT smartCardContext, char* &pReaderString){
 
-//code found in one of the sameple files, might be what we need?
     DWORD cch = SCARD_AUTOALLOCATE;
 
     int32_t readerList = SCardListReaders(smartCardContext,NULL,(LPTSTR)&pReaderString, &cch);
 	if (readerList != SCARD_S_SUCCESS){
-        std::cout << "Failed to get reader list" << std::endl;
+        cout << "Failed to get reader list" << endl;
     }
-    return;
+    string reader = pReaderString;
+    if(reader != "" && reader != "Windows Hello for Business 1"){
+        return true;
+    } else {
+        return false;
+    }
+    return false;
 }
 
 bool connectToReader(string readerName, SCARDCONTEXT smartCardContext, SCARDHANDLE &hCardHandle_, DWORD &uActiveProtocol_){
 
-
-        int32_t readerConnection = SCardConnect(smartCardContext,readerName.data(),
+    int32_t readerConnection = SCardConnect(smartCardContext,readerName.data(),
                                                 SCARD_SHARE_SHARED,SCARD_PROTOCOL_T1,
                                                 &hCardHandle_,
                                                 &uActiveProtocol_);
 
-        if(readerConnection != SCARD_S_SUCCESS){
-            // cout << "Failed to connect to reader: " << readerName << endl;
-            // cout << "Handle: " << hCardHandle_ << " Protocol: " << uActiveProtocol_ << endl;
-            return false;
-        } else {
-            //cout << "Handle: " << hCardHandle_ << " Protocol: " << uActiveProtocol_ << endl;
-            return true;
-        }
-
+    if(readerConnection != SCARD_S_SUCCESS){
+        cout << "Failed to connect to reader: " << readerName << endl;
+        cout << "Handle: " << hCardHandle_ << " Protocol: " << uActiveProtocol_ << endl;
+        return false;
+    } else {
+        return true;
+    }
     return false;
 }
 
-void getCardDetails(SCARDCONTEXT smartCardContext, string selectedReaderName, SCARDHANDLE &hCardHandle, DWORD &uActiveProtocol){
+void getCardUID(SCARDCONTEXT smartCardContext, string selectedReaderName, SCARDHANDLE &hCardHandle, DWORD &uActiveProtocol){
     /* MM : Since this function is hardcoded to get card uid, it may be suitable to name it as such. My idea is that we can
         have a function for each "command" that we can use. This would be "getCardUID" command function.
             I imagine there is lots of commands but we may only want a handful of them so this could be suitable. */
@@ -87,7 +89,7 @@ void getCardDetails(SCARDCONTEXT smartCardContext, string selectedReaderName, SC
         cout << "\nStatus Bytes:" << endl;
 
 
-        int statusBytesindexs[2]; //this garbage is to make it work for cards with shorter uids. probably unnessecary but i didnt want to hard code it
+        BYTE statusBytesindexs[2]; //this garbage is to make it work for cards with shorter uids. probably unnessecary but i didnt want to hard code it
         int counter = 0;
         for(int i = cardDataSize-2; i<cardDataSize; i++){
             printf("%02X ", cardData[i]);
@@ -95,7 +97,6 @@ void getCardDetails(SCARDCONTEXT smartCardContext, string selectedReaderName, SC
             counter++;
         }
         cout << endl;
-
 
         if(cardData[statusBytesindexs[0]] == 0x90 && cardData[statusBytesindexs[1]] == 0x00){ //0x90 0x00 means successful, anything else is error codes
             cout << "Success" << endl;
