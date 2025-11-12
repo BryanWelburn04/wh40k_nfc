@@ -1,0 +1,54 @@
+Using NTAG215 data sheet to find these.
+
+GET_VERSION:
+    Retrieve information on NTAG family, version, storage size, etc.
+
+    RESPONSE for NTAG 215 will be 8 bytes.
+    byte 0-7:
+    header, vendor ID, product type, subtype, major version, minor version, storage size, protocol type.
+
+    CMD code: 60h
+    Arguments: NONE
+
+
+READ:
+    Requires start page address, returns 16 bytes of four NTAG215 pages.
+    Example: address is 03h then pages 03h, 04h, 05h, 06h are returned.
+        Special conditions apply if address is near the end of memory.
+        Also apply if at least part of the address is within password protected area.
+
+    In initial state, all memory pages are allowed as Addr parameter.
+    (00h to 86h for NTAG215).
+    Addressing beyond limits results in NAK response. 
+    Also roll-over will occur,
+    i.e. 85h, 86h, 00h, 01h
+    
+    CMD code: 30h
+    Arguments: Addr (1 byte)
+
+
+FAST_READ:
+    Requires start page address and end page address.
+    Returns all n*4 bytes of the addressed pages.
+    Example: start address 03h and end address 07h then pages
+    03h, 04h, 05h, 06h, and 07h are returned.
+
+    CMD code: 3Ah
+    Arguments: StartAddr (1 byte), EndAddr (1 byte)
+
+    NOTE: Receive buffer of NFC device must be able to handle the requested amount of data. This command CAN read out whole memory.
+
+
+WRITE:
+    Requires a block address, and writes 4 bytes of data into the addressed page.
+
+    In initial state valid Addr prameters are as follows:
+    (02h to 86h)
+    Pages which are locked against writing cannot be reprogrammed.
+
+    CMD code: A2h
+    Arguments: Addr (1 byte), Data to write (4 bytes)
+    ex: { 0xA2, 0x14, 0x73, 0x65, 0x6e, 0x67}
+    --> { write, addr, 's', 'e', 'n', 'g' }
+
+
