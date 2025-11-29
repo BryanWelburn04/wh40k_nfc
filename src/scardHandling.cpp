@@ -13,7 +13,7 @@ bool establishContext(SCARDCONTEXT& readerList) {
     printf("SCARD_S_SUCCESS = %ld\n",SCARD_S_SUCCESS);
     
     if (test != SCARD_S_SUCCESS) {
-        //probalbly good idea to implement actuall error handling
+        //probably good idea to implement actually error handling
         printf("Failed\n");
         return false;
     } else {
