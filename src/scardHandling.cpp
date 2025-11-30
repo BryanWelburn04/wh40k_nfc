@@ -71,8 +71,6 @@ void getCardUID(SCARDCONTEXT smartCardContext, string selectedReaderName, SCARDH
 	    ioRequest.dwProtocol = uActiveProtocol;
 	    ioRequest.cbPciLength = 8;
 
-	uint64_t uActualResponseLength = cardDataSize;
-
     int32_t status = SCardTransmit(hCardHandle, &ioRequest,
 							    uid, sizeof(uid),
 							    NULL,cardData, 

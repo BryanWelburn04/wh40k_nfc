@@ -3,7 +3,10 @@
 #include <winscard.h>
 #include "main.hpp"
 #include "scardHandling.hpp"
+#include "scardReading.hpp"
+#include "scardWriting.hpp"
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -58,6 +61,8 @@ void readerStateInit(SCARD_READERSTATE &readerState, char *readerName) {
 void waitForCard(char* selectedReaderName, SCARDCONTEXT smartCardContext, SCARD_READERSTATE readerState0, SCARDHANDLE &hCardHandle, DWORD &uActiveProtocol) {
     
     bool readerConnectionStatus = false;
+    BYTE cardData[540];
+
 
     /*
     * setStateForGetStatusChange is called to initalize the states for the reader.
@@ -84,6 +89,27 @@ void waitForCard(char* selectedReaderName, SCARDCONTEXT smartCardContext, SCARD_
         readerConnectionStatus = connectToReader(selectedReaderName, smartCardContext, hCardHandle, uActiveProtocol);
         if(readerConnectionStatus){
             getCardUID(smartCardContext, selectedReaderName, hCardHandle, uActiveProtocol);
+
+// --------------------------- IN PROGRESS -------------------------------------------------------------------            
+            //ideally we don't want to plug the numbers directly into the function call
+            //but for testing purposes this works for now
+            unsigned char startPage = 0;
+            unsigned char endPage = 134;
+            readPages(startPage, endPage, hCardHandle, uActiveProtocol, cardData); //cardData declared at the top of this fucntion
+
+            //this is gross but works
+            cout << "Card Data:" << endl;
+            int byteNumber = 0;
+            int numberOfBytes = (endPage - startPage + 1) * 4;
+            for (int i = 0; i < numberOfBytes; i++) { 
+                printf("%02X ", cardData[i]);
+                if (byteNumber%4 == 3){
+                    cout << endl;
+                }
+                byteNumber++;
+            }
+// --------------------------- IN PROGRESS -------------------------------------------------------------------            
+       
         }
         readerState0.dwCurrentState = readerState0.dwEventState;
         cout << "Card read successfully" << endl;
