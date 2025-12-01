@@ -5,6 +5,8 @@
 #include <winscard.h>
 #include "scardHandling.hpp"
 
+#include <list>
+
 using namespace std;
 
 /* EXPLANATION FOR CLASS DATA STRUCTURE:
@@ -29,7 +31,11 @@ using namespace std;
  * 3) We should use JSON to store initilalized troop objects to the program so troops do not have to be initialized every session.
  * 
  * 4) Troop deletion could be tricky, if we create troops with a linear ID number, in the event we delete a troop it will leave an empty index slot.
- * This could lead to us running out of indexes after enough deletions. We must find a way to remedy this. */
+ * This could lead to us running out of indexes after enough deletions. We must find a way to remedy this. 
+ * One solution could be to use a hashmap 
+ * 
+ * 5) We can enfore member variable limits inside of these constrcutor and setter functions. This will allow us to make sure values dont overflow.
+ * Mainly im thinking about what happens if a troop dies 255 times, once more and it becomes 0, How should we handle this situation? */
 
 // START NAMING CONVENTION:
 // Functions that take BYTE type parameters will be named with _B at the end i.e exampleFunction_B(BYTE num_b);
@@ -79,11 +85,11 @@ class Troop {
         BYTE getGameID_B() { return (BYTE)gameID_; }
         BYTE getModelType_B() { return (BYTE)modelType_; }
         BYTE getTroopCount_B() { return (BYTE)troopCount_; }
-        BYTE* getTroopName_B() { // Unsure why but return type needs to be pointer cannot return a regular byte array by value
+        list<BYTE> getTroopName_B() { // Unsure why but return type needs to be pointer cannot return a regular byte array by value
             short nameLength = troopName_.length();
-            BYTE name_b[nameLength];
+            list<BYTE> name_b;
             for (int i = 0; i < nameLength; i++) {
-                name_b[i] = (BYTE)troopName_[i];
+                name_b.push_back((BYTE)troopName_[i]);
             }
             return name_b;
         }
@@ -125,4 +131,44 @@ class Troop {
             }
             setTroopName(name);
         }
+
+        list<BYTE> getTroopInfo_B() {
+            // Return by value
+            list<BYTE> info;
+            info.push_back((BYTE)maxHealth_);
+            info.push_back((BYTE)curHealth_);
+            info.push_back((BYTE)totalKills_);
+            info.push_back((BYTE)totalDeaths_);
+            return info;
+        }
+
+        list<BYTE> getTroopIdInfo_B() {
+            // Return by value
+            list<BYTE> info;
+            info.push_back((BYTE)gameID_);
+            info.push_back((BYTE)modelType_);
+            info.push_back((BYTE)troopCount_);
+            info.push_back(0x00);
+            return info;
+        }
 };
+
+int main() {
+
+    cout << "Begin Class Testing." << endl;
+    cout << endl;
+    cout << "Using troop constructor and display method." << endl;
+    Troop bryan(16, 16, 2, 3, "Bryan", 1, 13, 1);
+    bryan.display();
+    cout << endl << endl;
+
+    cout << "Testing getTroopName_B()" << endl;
+    cout << "Expecting: B r y a n" << endl;
+    list<BYTE> name_b = bryan.getTroopName_B();
+    cout << "Output: ";
+    for (BYTE b : name_b) {
+        cout << b << " ";
+    }
+    cout << endl << endl;
+    return 0;
+}
