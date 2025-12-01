@@ -9,7 +9,13 @@
 using namespace std;
 
 void readPages(unsigned char startPage, unsigned char endPage, SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYTE *cardData) {
-
+    // MM: We pass in a pointer to cardData as a parameter, this means we need to initialize it prior to using
+    //  it as a parameter. Why not initialize it here and return the reference to the caller?
+    // i.e. BYTE cardData[6]; *do reading and put it in cardData* ; return &cardData;
+    // However, I do like the fact that by passing a reference to cardData, we can instead return a success/failure code
+    // This may be a better choice because it can make our error handling easier perhaps.
+    // If SCardTransmit FAILS, it simply returns which will result in cardData being full of garbage which could be bad.
+    // ANYWAY DELETE THIS WHEN YOU SEE IT leave a choice so I know tho: (return error codes OR return reference)
     int numberOfPages = endPage - startPage + 1;
     BYTE curPage[6];
 
@@ -43,4 +49,9 @@ void readPages(unsigned char startPage, unsigned char endPage, SCARDHANDLE hCard
     }
 
     return;
+}
+
+bool readTroopInfo(SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYTE *troopInfo) {
+    // Reads troop information page i.e. page 5
+    int page = 5; // TROOPINFOPAGE ; global name for it later
 }
