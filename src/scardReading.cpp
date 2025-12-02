@@ -7,7 +7,8 @@
 
 using namespace std;
 
-void readPages(unsigned char startPage, unsigned char endPage, SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYTE *cardData) {
+bool readPages(unsigned char startPage, unsigned char endPage, SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYTE *cardData) {
+    
     int numberOfPages = endPage - startPage + 1;
     BYTE curPage[6];
 
@@ -30,7 +31,7 @@ void readPages(unsigned char startPage, unsigned char endPage, SCARDHANDLE hCard
 
         if (status != SCARD_S_SUCCESS){
             cout << "Failed to read card data" << endl;
-            return;
+            return false;
         } else {
             for(int j = 0; j < 4; j++){
                 cardData[i*4 + j] = curPage[j];
@@ -38,7 +39,7 @@ void readPages(unsigned char startPage, unsigned char endPage, SCARDHANDLE hCard
         }
     }
 
-    return;
+    return true;
 }
 
 bool readPage(short pageNum, SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYTE *infoContainer) {
@@ -69,4 +70,40 @@ bool readPage(short pageNum, SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYT
         }
     }
     return true;
+}
+
+bool readTroopInfo(SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYTE *infoContainer) {
+    // Read troop info only, hardcoded page number but future use of a global page number is preffered.
+    bool success_state = false;
+    success_state = readPage(5, hCardHandle, uActiveProtocol, infoContainer);
+
+    if (!success_state) {
+        cout << "Encountered error in readTroopInfo()." << endl;
+    }
+
+    return success_state;
+}
+
+bool readTroopIdInfo(SCARDHANDLE hCardHandle, DWORD uActiveProtocol,  BYTE *idContainer) {
+    // Read troop id info only, hardcoded page again. fix later.
+    bool success_state = false;
+    success_state = readPage(4, hCardHandle, uActiveProtocol, idContainer);
+
+    if (!success_state) {
+        cout << "Encountered error in readTroopIdInfo()." << endl;
+    }
+
+    return success_state;
+}
+
+bool readTroopName(SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYTE *nameContainer) {
+    // Read troop name info only. max name length is 52. hardcode for now.
+    bool success_state = false;
+    success_state = readPages(0x07, 0x14, hCardHandle, uActiveProtocol, nameContainer);
+
+    if (!success_state) {
+        cout << "Encountered error in readTroopName()." << endl;
+    }
+
+    return success_state;
 }
