@@ -7,6 +7,7 @@
 #include "scardWriting.hpp"
 #include <string>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -91,22 +92,84 @@ void waitForCard(char* selectedReaderName, SCARDCONTEXT smartCardContext, SCARD_
             getCardUID(smartCardContext, selectedReaderName, hCardHandle, uActiveProtocol);
 
 // --------------------------- IN PROGRESS -------------------------------------------------------------------            
-            //ideally we don't want to plug the numbers directly into the function call
-            //but for testing purposes this works for now
-            unsigned char startPage = 0;
-            unsigned char endPage = 134;
-            readPages(startPage, endPage, hCardHandle, uActiveProtocol, cardData); //cardData declared at the top of this fucntion
 
-            //this is gross but works
-            cout << "Card Data:" << endl;
-            int byteNumber = 0;
-            int numberOfBytes = (endPage - startPage + 1) * 4;
-            for (int i = 0; i < numberOfBytes; i++) { 
-                printf("%02X ", cardData[i]);
-                if (byteNumber%4 == 3){
-                    cout << endl;
+            cout << "Press 'r' for read card data. Press 'w' for write data to card." << endl;
+            char operation = getchar(); 
+            std::cin.ignore(1, '\n'); // to clear the newline character from the input buffer
+
+
+            if(operation == 'r'){
+                
+                /*
+                * takes page range from the terminal in the format:
+                * startPage-endPage
+                */
+                
+                cout << "Enter startPage and endPage. EX/ 11-25" << endl;
+
+                string pageRange;
+                getline(cin, pageRange);
+
+                int startInt, endInt;
+                stringstream ss(pageRange);
+                ss >> startInt;
+                ss.ignore(1, '-');
+                ss >> endInt;
+
+                unsigned char startPage = static_cast<unsigned char>(startInt);
+                unsigned char endPage = static_cast<unsigned char>(endInt);
+
+                cout << "Reading pages " << startInt << " to " << endInt << endl;
+
+                readPages(startPage, endPage, hCardHandle, uActiveProtocol, cardData); //cardData declared at the top of this function
+                displayMemoryContent(cardData, startPage, endPage);
+
+            }
+
+            if(operation == 'w'){
+                
+                /*
+                * takes start page and data from the terminal in the formaat:
+                * startPage-x,x,x,x ... (has to be in sets of 4,8,12 etc)
+                */
+
+                cout << "Enter data to write to card (must be in blocks of 4). EX/ startPage-3,F,62,C" << endl;
+                
+                size_t capacity = 4;
+                size_t length = 0;
+                BYTE* dataToWrite = (BYTE*)malloc(capacity); // I suck at cpp dynamic memory allocation so i resorted back to c
+
+                string inputData;
+                getline(cin, inputData);
+
+                stringstream ss(inputData);
+                
+                // gets start page number
+                int startInt;
+                ss >> startInt;
+                ss.ignore(1, '-');
+                unsigned char startPage = static_cast<unsigned char>(startInt);
+
+                // gets the data after the dash
+                int i = 0;
+                int curChar;
+                while(ss >> curChar){
+                    if(length >= capacity){
+                        capacity += 4;
+                        dataToWrite = (BYTE*)realloc(dataToWrite, sizeof(dataToWrite) + 4);
+                    }
+
+                    dataToWrite[i] = static_cast<BYTE>(curChar);
+                    length++;
+
+                    if(ss.peek() == ','){
+                        ss.ignore(1);
+                    }
+                    i++;
                 }
-                byteNumber++;
+
+                cout << "dataSize = " << capacity << endl;
+                writeDataToCard(startPage, dataToWrite, capacity, hCardHandle, uActiveProtocol); //dataToWrite declared at the top of this function
             }
 // --------------------------- IN PROGRESS -------------------------------------------------------------------            
        

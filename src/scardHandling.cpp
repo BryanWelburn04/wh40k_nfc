@@ -105,3 +105,22 @@ void getCardUID(SCARDCONTEXT smartCardContext, string selectedReaderName, SCARDH
     return;
     }
 }
+
+void displayMemoryContent(BYTE *cardData, unsigned char startPage, unsigned char endPage) {
+    //this is gross but works
+    cout << "Card Data:" << endl;
+    int byteNumber = 0;
+    int pageCounter = startPage;
+    int numberOfBytes = (endPage - startPage + 1) * 4;
+    for (int i = 0; i < numberOfBytes; i++) { 
+        if (byteNumber%4 == 0){
+            cout << endl;
+            cout << pageCounter << ": ";
+            pageCounter++;
+        }
+        printf("%02X ", cardData[i]);
+        
+        byteNumber++;
+    }
+    cout << endl;
+}

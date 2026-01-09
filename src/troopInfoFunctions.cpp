@@ -100,7 +100,7 @@ bool updateTroopGameInfo(Troop *troop, BYTE *infoInput) {
 // Updates Scard and troop struct with new name
 bool updateTroopName(Troop *troop, string newName) {
     bool success_state = false;
-    int nameLength = newName.length();
+    int nameLength = int(newName.length());
     if (nameLength >= 52) {
         cout << "Error: " << newName << " is too long. Need less than 52 characters." << endl;
         return success_state;

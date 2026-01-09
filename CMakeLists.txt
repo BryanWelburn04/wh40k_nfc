@@ -8,5 +8,6 @@ add_executable(wh40k_nfc
     src/scardHandling.cpp
     src/scardReading.cpp
     src/scardWriting.cpp
-)    
+    src/scardWriting.hpp
+    )    
 target_link_libraries(wh40k_nfc PRIVATE winscard)
