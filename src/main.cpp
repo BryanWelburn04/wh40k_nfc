@@ -169,7 +169,8 @@ void waitForCard(char* selectedReaderName, SCARDCONTEXT smartCardContext, SCARD_
                 }
 
                 cout << "dataSize = " << capacity << endl;
-                writeDataToCard(startPage, dataToWrite, capacity, hCardHandle, uActiveProtocol); //dataToWrite declared at the top of this function
+                writeDataToCard(startPage, dataToWrite, capacity, hCardHandle, uActiveProtocol);
+                free(dataToWrite);
             }
 // --------------------------- IN PROGRESS -------------------------------------------------------------------            
        
