@@ -106,7 +106,7 @@ bool updateTroopName(Troop *troop, string newName) {
         return success_state;
     }
 
-    BYTE name[nameLength];
+    BYTE name[52];
     for (int i = 0; i < nameLength; i++) {
         name[i] = (BYTE)newName[i];
     }
@@ -160,6 +160,7 @@ bool createSCardTroop(string name, short maxHP, short gameID, short modelType, s
     return success_state;
 }
 
+/*
 
 int main() {
     
@@ -216,3 +217,5 @@ int main() {
     myTroop.display();
     cout << endl;
 }
+
+*/
