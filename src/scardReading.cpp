@@ -4,6 +4,7 @@
 #include <iostream>
 #include <winscard.h>
 #include <vector>
+#include <QString>
 
 using namespace std;
 
@@ -21,7 +22,7 @@ bool readPages(unsigned char startPage, unsigned char endPage, SCARDHANDLE hCard
         //currently set to 4 so we can read it in chunks of 4 bytes instead of all 16 at once
         //runtime is horrible because of the number of sepreate calls to SCardTransmit
         //I'm sure there's a better way to do this
-        BYTE pages[] = {0xFF, 0xB0, 0x00, startPage+i, 0x04};
+        BYTE pages[] = {0xFF, 0xB0, 0x00, static_cast<BYTE>(startPage+i), 0x04};
         DWORD cardDataSize = sizeof(curPage);
 
         int32_t status = SCardTransmit(hCardHandle, &ioRequest,
@@ -72,6 +73,91 @@ bool readPage(short pageNum, SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYT
     return true;
 }
 
+void getCardUID(SCARDCONTEXT smartCardContext, const wchar_t* selectedReaderName, SCARDHANDLE &hCardHandle, DWORD &uActiveProtocol){
+    /* MM : Since this function is hardcoded to get card uid, it may be suitable to name it as such. My idea is that we can
+        have a function for each "command" that we can use. This would be "getCardUID" command function.
+            I imagine there is lots of commands but we may only want a handful of them so this could be suitable. */
+    
+    BYTE uid[] = { 0xFF, 0xCA, 0x00, 0x00, 0x00 }; // get uid command? found this online and it seems to work
+    BYTE cardData[540];
+    DWORD cardDataSize = sizeof(cardData);
+    
+    SCARD_IO_REQUEST ioRequest;
+	    ioRequest.dwProtocol = uActiveProtocol;
+	    ioRequest.cbPciLength = 8;
+
+    int32_t status = SCardTransmit(hCardHandle, &ioRequest,
+							    uid, sizeof(uid),
+							    NULL,cardData, 
+							    &cardDataSize);
+
+	if (status != SCARD_S_SUCCESS){
+        cout << "Failed to read card data" << endl;
+        return;
+    } else {
+        cout << "Card UID:" << endl;
+        for (int i = 0; i < static_cast<int>(cardDataSize-2); i++){
+            printf("%02X ", cardData[i]);
+        }
+        cout << "\nStatus Bytes:" << endl;
+
+
+        BYTE statusBytesindexs[2]; //this garbage is to make it work for cards with shorter uids. probably unnessecary but i didnt want to hard code it
+        int counter = 0;
+        for(int i = cardDataSize-2; i<static_cast<int>(cardDataSize); i++){
+            printf("%02X ", cardData[i]);
+            statusBytesindexs[counter] = i;
+            counter++;
+        }
+        cout << endl;
+
+        if(cardData[statusBytesindexs[0]] == 0x90 && cardData[statusBytesindexs[1]] == 0x00){ //0x90 0x00 means successful, anything else is error codes
+            cout << "Success" << endl;
+        } else {
+            cout << "Error" << endl;
+        }
+
+    return;
+    }
+}
+
+void displayMemoryContent(BYTE *cardData, unsigned char startPage, unsigned char endPage) {
+    //this is gross but works
+    cout << "Card Data:" << endl;
+    int byteNumber = 0;
+    int pageCounter = startPage;
+    int numberOfBytes = (endPage - startPage + 1) * 4;
+    for (int i = 0; i < numberOfBytes; i++) { 
+        if (byteNumber%4 == 0){
+            cout << endl;
+            cout << pageCounter << ": ";
+            pageCounter++;
+        }
+        printf("%02X ", cardData[i]);
+        
+        byteNumber++;
+    }
+    cout << endl;
+}
+
+
+QString getRawDataFromCard(BYTE *cardData, unsigned char startPage, unsigned char endPage) {
+    QString result;
+    int byteNumber = 0;
+    int pageCounter = startPage;
+    int numberOfBytes = (endPage - startPage + 1) * 4;
+    for (int i = 0; i < numberOfBytes; i++) { 
+        if (byteNumber%4 == 0){
+            result += "\n" + QString::number(pageCounter) + ": ";
+            pageCounter++;
+        }
+        result += QString("%1 ").arg(cardData[i], 2, 16, QChar('0')).toUpper();
+        byteNumber++;
+    }
+    return result;
+}
+
+
 bool readTroopInfo(SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYTE *infoContainer) {
     // Read troop info only, hardcoded page number but future use of a global page number is preffered.
     bool success_state = false;
@@ -99,11 +185,22 @@ bool readTroopIdInfo(SCARDHANDLE hCardHandle, DWORD uActiveProtocol,  BYTE *idCo
 bool readTroopName(SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYTE *nameContainer) {
     // Read troop name info only. max name length is 52. hardcode for now.
     bool success_state = false;
-    success_state = readPages(0x07, 0x14, hCardHandle, uActiveProtocol, nameContainer);
+    success_state = readPages(0x07, 0x13, hCardHandle, uActiveProtocol, nameContainer);
 
     if (!success_state) {
         cout << "Encountered error in readTroopName()." << endl;
+    } else {
+        cout << "Troop Name: ";
+        for (int i = 0; i < 52; i++) {
+            if (nameContainer[i] == 0x00) { // 0 in ascii is null terminator, so we can stop reading the name once we hit it
+                break;
+            }
+            printf("%c", (char)nameContainer[i]);
+        }
+        cout << endl;
     }
+
+    
 
     return success_state;
 }

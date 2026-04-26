@@ -4,6 +4,7 @@
 #include <iostream>
 #include <winscard.h>
 #include "scardHandling.hpp"
+#include "troopInfoFunctions.hpp"
 
 #include <list>
 

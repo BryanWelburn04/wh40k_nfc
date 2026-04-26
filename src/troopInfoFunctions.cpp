@@ -4,76 +4,115 @@
 #include <iostream>
 #include <winscard.h>
 #include "scardHandling.hpp"
+#include "troopInfoFunctions.hpp"
 
-using namespace std;
 
 // COMPILE WITH: g++ troopInfoFunctions.cpp -o troopInfoFunc
 // THEN RUN: ./troopInfoFunc
 
-struct Troop {
-    // Troop game info
-    short maxHealth;
-    short curHealth;
-    short totalKills;
-    short totalDeaths;
-    
-    // Troop ID info
-    string troopName;
-    short gameID;
-    short modelType;
-    short troopCount;
-
-    // This is the parameterized constructor
-    Troop(const string& name, short maxHP, short curHP,
-        short kills, short deaths, short ID, 
-        short type, short totalCount) : 
-            troopName(name), maxHealth(maxHP),curHealth(curHP), totalKills(kills),
-            totalDeaths(deaths), gameID(ID), modelType(type), troopCount(totalCount) {
-                cout << "Constructor called for Troop: " << troopName << ", gameID: " << gameID << endl;
-            }
-
-    void display() const {
-        cout << "Name: " << troopName << ", maxHealth: " << maxHealth << ", curHealth: " << curHealth << endl;
-        cout << "gameID: " << gameID << ", troopType: " << modelType << ", troopCount: " << troopCount << endl;
-        cout << "Kills: " << totalKills << ", Deaths: " << totalDeaths << endl;
-    }
-    
-    // Troop t1(name, maxHP, curHP, ... , troopCount); calls constructor
-    // t1.display() uses the built in display function
-};
 
 // This pulls troop info off the SCard and makes a struct for the software
 Troop initTroop(BYTE *nameInput, BYTE *infoInput) {
-    /* NOTE: may be best to take infoInput and IdInput. This way we can have two arrays of length 4 easy to read from SCard
-        Instead of an array of 8 bytes that is a little weird at this point. */
-    int nameLength = 52; //sizeof(*nameInput); maybe this works fine too?
-    string name;
-    // Copy nameInput from array of bytes into a single string and null terminate it
-    for (int i = 0; i < nameLength; i++) {
-        if (nameInput[i] == 0x00) {
-            break; // done reading
-        }
-        
-        char newChar = (char)nameInput[i];
-        name.push_back(newChar);
-    }
-    name.push_back('\0');
 
-    // dgi: [0], type; [1], count: [2], maxHP: [4], curHPL [5] , kills: [6], deaths [7];
-    // initialize troop such that curHP == maxHP
-    Troop newTroop(name, (short)infoInput[4], (short)infoInput[4], (short)infoInput[6], (short)infoInput[7],
-        (short)infoInput[0], (short)infoInput[1], (short)infoInput[2]);
+    int nameLength = 52;
+    std::string name;
+
+    for (int i = 0; i < nameLength; i++) {
+        if (nameInput[i] == 0x00) break;
+        name.push_back((char)nameInput[i]);
+    }
+
+    short totalKills      = (short)infoInput[0];
+    short totalDeaths     = (short)infoInput[1];
+    short primaryPoints   = (short)infoInput[2];
+    short secondaryPoints = (short)infoInput[3];
+
+    short maxHealth       = (short)infoInput[4];
+    short curHealth       = (short)infoInput[5];
+    short modelType       = (short)infoInput[6];
+    short troopCount      = (short)infoInput[7];
+
+    Troop newTroop(
+        name,
+        totalKills,
+        totalDeaths,
+        primaryPoints,
+        secondaryPoints,
+        maxHealth,
+        curHealth,
+        modelType,
+        troopCount
+    );
 
     return newTroop;
 }
 
+// update kills, deaths, primary, secondary
+// packet 1 will be recoded in history
+void updatePacket1(Troop *troop, BYTE *infoInput){
+    troop->totalKills = (short)infoInput[0];
+    troop->totalDeaths = (short)infoInput[1];
+    troop->primaryPoints = (short)infoInput[2];
+    troop->secondaryPoints = (short)infoInput[3];
+    return;
+}
+
+// update health, model type, troop count
+void updatePacket2(Troop *troop, BYTE *infoInput) {
+    troop->maxHealth = (short)infoInput[0];
+    troop->curHealth = (short)infoInput[1];
+    troop->modelType = (short)infoInput[2];
+    troop->troopCount = (short)infoInput[3];
+    return;
+}
+
+void updateTroopName(Troop *troop, string newName) {
+
+    int nameLength = int(newName.length());
+    if (nameLength >= 52) {
+        cout << "Error: " << newName << " is too long. Need less than 52 characters." << endl;
+        return;
+    }
+
+    BYTE name[52];
+    for (int i = 0; i < nameLength; i++) {
+        name[i] = (BYTE)newName[i];
+    }
+
+    troop->troopName = newName;
+
+    return;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =============== OLD FUNCTIONS FOR REFRENCE ===============
+
+/*
+
 // Updates SCard and troop struct with new info after taking damage or getting a kill or sum
 bool updateTroopGameInfo(Troop *troop, BYTE *infoInput) {
-    /* NOTE: Since we have to write 4 bytes at a time we mine as well make this a single function.
-        In my head I imagine we will have individual functions to update each specific byte in the input beforehand.
-        i.e. updateHealthByte(healthChangeValue, *infoInput);
-            updateKillByte(killChangeValue, *infoInput);
-            now call updateTroopGameInfo(*troop, *infoInput) after changing some stuff. If nothing changes then dont call. */
+    //  NOTE: Since we have to write 4 bytes at a time we mine as well make this a single function.
+    //     In my head I imagine we will have individual functions to update each specific byte in the input beforehand.
+    //     i.e. updateHealthByte(healthChangeValue, *infoInput);
+    //         updateKillByte(killChangeValue, *infoInput);
+    //         now call updateTroopGameInfo(*troop, *infoInput) after changing some stuff. If nothing changes then dont call. 
     bool success_state = false;
     BYTE curInfo[4] = {(BYTE)troop->maxHealth, (BYTE)troop->curHealth, (BYTE)troop->totalKills, (BYTE)troop->totalDeaths};
     for (int i = 0; i < 4; i++) {
@@ -160,7 +199,7 @@ bool createSCardTroop(string name, short maxHP, short gameID, short modelType, s
     return success_state;
 }
 
-/*
+
 
 int main() {
     
