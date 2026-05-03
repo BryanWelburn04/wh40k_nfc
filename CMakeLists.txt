@@ -8,6 +8,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Charts)
 
 add_executable(wh40k_nfc
     src/main.cpp
@@ -33,4 +34,5 @@ add_executable(wh40k_nfc
 target_link_libraries(wh40k_nfc PRIVATE
     winscard
     Qt6::Widgets
+    Qt6::Charts
 )

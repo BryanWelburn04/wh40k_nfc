@@ -32,11 +32,11 @@ MainWindow::MainWindow(const wchar_t* selectedReaderName, QWidget *parent) : QMa
 
     connect(thread, &QThread::started, worker, &CardWaitThread::process);
     connect(worker, &CardWaitThread::cardDetected,
-            this, [this](Troop troop, BYTE *cardData) {
+            this, [this](Troop troop, BYTE *cardData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol) {
 
         qDebug("Card detected!");
 
-        ModelInfoWindow *modelInfoWindow = new ModelInfoWindow(this->readerName, troop, cardData);
+        ModelInfoWindow *modelInfoWindow = new ModelInfoWindow(this->readerName, troop, cardData, hCardHandle, uActiveProtocol, this);
         modelInfoWindow->show();
     });
     //connect(worker, &CardWaitThread::cardDetected, thread, &QThread::quit);
@@ -51,6 +51,9 @@ MainWindow::MainWindow(const wchar_t* selectedReaderName, QWidget *parent) : QMa
 
 Troop MainWindow::getTroopInfoFromCard() {
     
+    // THIS FUNCTION IS NOT CURRENTLY BEING USED
+    // LOGIC IN CARDWAITTHERAD INSTEAD
+
     BYTE infoContainer[8];
     BYTE name[52];
 
@@ -65,7 +68,12 @@ Troop MainWindow::getTroopInfoFromCard() {
     readPages(7, 19, hCardHandle, uActiveProtocol, name);
     Troop troop = initTroop(name, infoContainer);
 
-    //troop->rawCardData = cardData;
+    printf("hCardHandle: %p\n", hCardHandle);
+    printf("uActiveProtocol: %d\n", uActiveProtocol);
+
+
+    this->hCardHandle = hCardHandle;
+    this->uActiveProtocol = uActiveProtocol;
 
     return troop;
 }

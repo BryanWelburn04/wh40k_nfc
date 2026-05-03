@@ -15,4 +15,6 @@ private slots:
 
 private:
     std::wstring readerName;
+    SCARDHANDLE hCardHandle;
+    DWORD uActiveProtocol;
 };

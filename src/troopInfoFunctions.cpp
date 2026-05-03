@@ -22,30 +22,93 @@ Troop initTroop(BYTE *nameInput, BYTE *infoInput) {
         name.push_back((char)nameInput[i]);
     }
 
-    short totalKills      = (short)infoInput[0];
-    short totalDeaths     = (short)infoInput[1];
-    short primaryPoints   = (short)infoInput[2];
-    short secondaryPoints = (short)infoInput[3];
+    short totalKills1      = (short)infoInput[0];
+    short totalKills2      = (short)infoInput[1];
+    short totalDeaths1     = (short)infoInput[2];
+    short totalDeaths2     = (short)infoInput[3];
+    short primaryPoints1   = (short)infoInput[4];
+    short primaryPoints2   = (short)infoInput[5];
+    short secondaryPoints1 = (short)infoInput[6];
+    short secondaryPoints2 = (short)infoInput[7];
+    short maxHealth        = (short)infoInput[8];
+    short curHealth        = (short)infoInput[9];
+    short modelType        = (short)infoInput[10];
+    short troopCount       = (short)infoInput[11];
+    short epicHeroKills    = (short)infoInput[12];
+    short characterKills   = (short)infoInput[13];
+    short vehicleKills     = (short)infoInput[14];
+    short monsterKills     = (short)infoInput[15];
+    short battleLineKills  = (short)infoInput[16];
+    short mountedKills     = (short)infoInput[17];
+    short transportKills   = (short)infoInput[18];
+    short otherKills       = (short)infoInput[19];
+    short pointCost1       = (short)infoInput[20];
+    short pointCost2       = (short)infoInput[21];
+    short PHDS1            = (short)infoInput[22];
+    short PHDS2            = (short)infoInput[23];
 
-    short maxHealth       = (short)infoInput[4];
-    short curHealth       = (short)infoInput[5];
-    short modelType       = (short)infoInput[6];
-    short troopCount      = (short)infoInput[7];
 
     Troop newTroop(
         name,
-        totalKills,
-        totalDeaths,
-        primaryPoints,
-        secondaryPoints,
+        totalKills1,
+        totalKills2,
+        totalDeaths1,
+        totalDeaths2,
+        primaryPoints1,
+        primaryPoints2,
+        secondaryPoints1,
+        secondaryPoints2,
         maxHealth,
         curHealth,
         modelType,
-        troopCount
+        troopCount,
+        epicHeroKills,
+        characterKills,
+        vehicleKills,
+        monsterKills,
+        battleLineKills,
+        mountedKills,
+        transportKills,
+        otherKills,
+        pointCost1,
+        pointCost2,
+        PHDS1,
+        PHDS2
     );
 
     return newTroop;
 }
+
+void updateStructInfo(Troop *troop, BYTE *infoInput){
+    troop->totalKills1      = (short)infoInput[0];
+    troop->totalKills2      = (short)infoInput[1];
+    troop->totalDeaths1     = (short)infoInput[2];
+    troop->totalDeaths2     = (short)infoInput[3];
+    troop->primaryPoints1   = (short)infoInput[4];
+    troop->primaryPoints2   = (short)infoInput[5];
+    troop->secondaryPoints1 = (short)infoInput[6];
+    troop->secondaryPoints2 = (short)infoInput[7];
+    troop->maxHealth        = (short)infoInput[8];
+    troop->curHealth        = (short)infoInput[9];
+    troop->modelType        = (short)infoInput[10];
+    troop->troopCount       = (short)infoInput[11];
+    troop->epicHeroKills    = (short)infoInput[12];
+    troop->characterKills   = (short)infoInput[13];
+    troop->vehicleKills     = (short)infoInput[14];
+    troop->monsterKills     = (short)infoInput[15];
+    troop->battleLineKills  = (short)infoInput[16];
+    troop->mountedKills     = (short)infoInput[17];
+    troop->transportKills   = (short)infoInput[18];
+    troop->otherKills       = (short)infoInput[19];
+    troop->pointCost1       = (short)infoInput[20];
+    troop->pointCost2       = (short)infoInput[21];
+    troop->PHDS1            = (short)infoInput[22];
+    troop->PHDS2            = (short)infoInput[23];
+    return;
+}
+
+
+/*
 
 // update kills, deaths, primary, secondary
 // packet 1 will be recoded in history
@@ -65,6 +128,8 @@ void updatePacket2(Troop *troop, BYTE *infoInput) {
     troop->troopCount = (short)infoInput[3];
     return;
 }
+
+*/
 
 void updateTroopName(Troop *troop, string newName) {
 

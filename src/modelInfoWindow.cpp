@@ -9,24 +9,34 @@
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QTextEdit>
+#include <QtCharts/QChartView>
+#include <QtCharts/QPolarChart>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QValueAxis>
+#include <QtCharts/QCategoryAxis>
 
+using namespace std;
 
 ModelInfoWindow::ModelInfoWindow(
     const std::wstring& selectedReaderName,
     const Troop& troop,
     BYTE *cardData,
+    SCARDHANDLE hCardHandle,
+    DWORD uActiveProtocol,
     QWidget *parent
 ) : QMainWindow(parent),
       readerName(selectedReaderName),
       troop(troop),
-      cardData(*cardData)
+      cardData(*cardData), //maybe wrong?
+      hCardHandle(hCardHandle),
+      uActiveProtocol(uActiveProtocol)
 {  
     setWindowTitle("Model Info");
-    resize(800, 600);
+    resize(1200, 600);
         
     QWidget *central = new QWidget(this);
 
-    // MAIN split layout (left | right)
+    // MAIN split layout (left | middle | right)
     QHBoxLayout *mainLayout = new QHBoxLayout(central);
 
 
@@ -41,27 +51,33 @@ ModelInfoWindow::ModelInfoWindow(
 
     // name
     QLabel *nameLabel = new QLabel("Model Name:", this);
-    QLineEdit *nameTextBox = new QLineEdit(this);
+    nameTextBox = new QLineEdit(this);
     leftLayout->addWidget(nameLabel);
     leftLayout->addWidget(nameTextBox);
 
+    // point cost
+    QLabel *pointCostLabel = new QLabel("Point Cost:", this);
+    pointCostTextBox = new QLineEdit(this);
+    leftLayout->addWidget(pointCostLabel);
+    leftLayout->addWidget(pointCostTextBox);
+
     // type
     QLabel *typeLabel = new QLabel("Model Type:", this);
-    QLineEdit *typeTextBox = new QLineEdit(this);
+    typeTextBox = new QLineEdit(this);
     leftLayout->addWidget(typeLabel);
     leftLayout->addWidget(typeTextBox);
 
     // number of models
     QLabel *numberOfModelsLabel = new QLabel("Number of Models in Unit:", this);
-    QLineEdit *numberOfModelsTextBox = new QLineEdit(this);
+    numberOfModelsTextBox = new QLineEdit(this);
     leftLayout->addWidget(numberOfModelsLabel);
     leftLayout->addWidget(numberOfModelsTextBox);
 
     // health (put side-by-side)
     QLabel *healthLabel = new QLabel("Current/Max Health:", this);
     QHBoxLayout *healthRow = new QHBoxLayout;
-    QLineEdit *currentHealthTextBox = new QLineEdit(this);
-    QLineEdit *maxHealthTextBox = new QLineEdit(this);
+    currentHealthTextBox = new QLineEdit(this);
+    maxHealthTextBox = new QLineEdit(this);
     healthRow->addWidget(currentHealthTextBox);
     healthRow->addWidget(maxHealthTextBox);
     leftLayout->addWidget(healthLabel);
@@ -71,7 +87,7 @@ ModelInfoWindow::ModelInfoWindow(
     QLabel *killsLabel = new QLabel("Current/Total Kills:", this);
     QHBoxLayout *killsRow = new QHBoxLayout;
     QLineEdit *currentKillsTextBox = new QLineEdit(this);
-    QLineEdit *totalKillsTextBox = new QLineEdit(this);
+    totalKillsTextBox = new QLineEdit(this);
     killsRow->addWidget(currentKillsTextBox);
     killsRow->addWidget(totalKillsTextBox);
     leftLayout->addWidget(killsLabel);
@@ -81,27 +97,17 @@ ModelInfoWindow::ModelInfoWindow(
     QLabel *deathsLabel = new QLabel("Current/Total Deaths:", this);
     QHBoxLayout *deathsRow = new QHBoxLayout;
     QLineEdit *currentDeathsTextBox = new QLineEdit(this);
-    QLineEdit *totalDeathsTextBox = new QLineEdit(this);
+    totalDeathsTextBox = new QLineEdit(this);
     deathsRow->addWidget(currentDeathsTextBox);
     deathsRow->addWidget(totalDeathsTextBox);
     leftLayout->addWidget(deathsLabel);
     leftLayout->addLayout(deathsRow);
 
-    // K/D ratio
-    QLabel *kdLabel = new QLabel("Current/Total K/D Ratio:", this);
-    QHBoxLayout *kdRow = new QHBoxLayout;
-    QLineEdit *currentKdTextBox = new QLineEdit(this);
-    QLineEdit *totalKdTextBox = new QLineEdit(this);
-    kdRow->addWidget(currentKdTextBox);
-    kdRow->addWidget(totalKdTextBox);
-    leftLayout->addWidget(kdLabel);
-    leftLayout->addLayout(kdRow);
-
     // primary points
     QLabel *primaryLabel = new QLabel("Current/Total Primary Points:", this);
     QHBoxLayout *primaryRow = new QHBoxLayout;
     QLineEdit *currentPrimaryTextBox = new QLineEdit(this);
-    QLineEdit *totalPrimaryTextBox = new QLineEdit(this);
+    totalPrimaryTextBox = new QLineEdit(this);
     primaryRow->addWidget(currentPrimaryTextBox);
     primaryRow->addWidget(totalPrimaryTextBox);
     leftLayout->addWidget(primaryLabel);
@@ -111,7 +117,7 @@ ModelInfoWindow::ModelInfoWindow(
     QLabel *secondaryLabel = new QLabel("Current/Total Secondary Points:", this);
     QHBoxLayout *secondaryRow = new QHBoxLayout;
     QLineEdit *currentSecondaryTextBox = new QLineEdit(this);
-    QLineEdit *totalSecondaryTextBox = new QLineEdit(this);
+    totalSecondaryTextBox = new QLineEdit(this);
     secondaryRow->addWidget(currentSecondaryTextBox);
     secondaryRow->addWidget(totalSecondaryTextBox);
     leftLayout->addWidget(secondaryLabel);  
@@ -124,7 +130,75 @@ ModelInfoWindow::ModelInfoWindow(
 
     leftLayout->addWidget(cancelButton, Qt::AlignBottom | Qt::AlignLeft);
 
+    // =================  MIDDLE =================
 
+    QVBoxLayout *middleLayout = new QVBoxLayout;
+
+    // K/D ratio
+    QLabel *kdLabel = new QLabel("Current/Total K/D Ratio:", this);
+    QHBoxLayout *kdRow = new QHBoxLayout;
+    QLineEdit *currentKdTextBox = new QLineEdit(this);
+    QLineEdit *totalKdTextBox = new QLineEdit(this);
+    kdRow->addWidget(currentKdTextBox);
+    kdRow->addWidget(totalKdTextBox);
+    middleLayout->addWidget(kdLabel);
+    middleLayout->addLayout(kdRow);
+
+    // Points/health deficit/surplus
+    QLabel *phdsLabel = new QLabel("PHDS:", this);
+    phdsTextBox = new QLineEdit(this);
+    middleLayout->addWidget(phdsLabel);
+    middleLayout->addWidget(phdsTextBox);
+
+    // Epic Hero Kills
+    QLabel *epicHeroKillsLabel = new QLabel("Epic Hero Kills:", this);
+    epicHeroKillsTextBox = new QLineEdit(this);
+    middleLayout->addWidget(epicHeroKillsLabel);
+    middleLayout->addWidget(epicHeroKillsTextBox);
+
+    // Character Kills
+    QLabel *characterKillsLabel = new QLabel("Character Kills:", this);
+    characterKillsTextBox = new QLineEdit(this);
+    middleLayout->addWidget(characterKillsLabel);
+    middleLayout->addWidget(characterKillsTextBox);
+
+    // Vehicle Kills (fixed spelling)
+    QLabel *vehicleKillsLabel = new QLabel("Vehicle Kills:", this);
+    vehicleKillsTextBox = new QLineEdit(this);
+    middleLayout->addWidget(vehicleKillsLabel);
+    middleLayout->addWidget(vehicleKillsTextBox);
+
+    // Monster Kills
+    QLabel *monsterKillsLabel = new QLabel("Monster Kills:", this);
+    monsterKillsTextBox = new QLineEdit(this);
+    middleLayout->addWidget(monsterKillsLabel);
+    middleLayout->addWidget(monsterKillsTextBox);
+
+    // Battleline Kills
+    QLabel *battleLineKillsLabel = new QLabel("Battleline Kills:", this);
+    battleLineKillsTextBox = new QLineEdit(this);
+    middleLayout->addWidget(battleLineKillsLabel);
+    middleLayout->addWidget(battleLineKillsTextBox);
+
+    // Mounted Kills
+    QLabel *mountedKillsLabel = new QLabel("Mounted Kills:", this);
+    mountedKillsTextBox = new QLineEdit(this);
+    middleLayout->addWidget(mountedKillsLabel);
+    middleLayout->addWidget(mountedKillsTextBox);
+
+    // Transport Kills
+    QLabel *transportKillsLabel = new QLabel("Transport Kills:", this);
+    transportKillsTextBox = new QLineEdit(this);
+    middleLayout->addWidget(transportKillsLabel);
+    middleLayout->addWidget(transportKillsTextBox);
+
+    // Other Kills
+    QLabel *otherKillsLabel = new QLabel("Other Kills:", this);
+    otherKillsTextBox = new QLineEdit(this);
+    middleLayout->addWidget(otherKillsLabel);
+    middleLayout->addWidget(otherKillsTextBox);
+
+    middleLayout->addStretch();  // keep everything at top
 
     // ================= RIGHT SIDE =================
     QVBoxLayout *rightLayout = new QVBoxLayout;
@@ -133,15 +207,11 @@ ModelInfoWindow::ModelInfoWindow(
     QHBoxLayout *topCenter = new QHBoxLayout;
 
     QVBoxLayout *rawDataLayout = new QVBoxLayout;
+
     QLabel *rawDataLabel = new QLabel("Raw Data:", this);
     QTextEdit *rawDataTextBox = new QTextEdit(this);
-
-    QPushButton *updateButton = new QPushButton("Update", this);
-
-
-    // make it wider
-    rawDataTextBox->setMinimumWidth(250);
-    rawDataTextBox->setMinimumHeight(500);
+    rawDataTextBox->setMinimumWidth(75);
+    rawDataTextBox->setMinimumHeight(150);
     rawDataTextBox->setReadOnly(true);
 
     rawDataTextBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -149,6 +219,10 @@ ModelInfoWindow::ModelInfoWindow(
     rawDataLayout->addWidget(rawDataLabel, 0, Qt::AlignHCenter);
     rawDataLayout->addWidget(rawDataTextBox, 0, Qt::AlignHCenter);
 
+    chartView = new QChartView(webGraphKills());
+    chartView->setMinimumSize(200, 200);
+
+    rightLayout->addWidget(chartView);
 
     topCenter->addStretch();
     topCenter->addLayout(rawDataLayout);
@@ -156,19 +230,23 @@ ModelInfoWindow::ModelInfoWindow(
 
     rightLayout->addLayout(topCenter);
 
-
     rightLayout->addStretch();  // keep it at top
 
+    QPushButton *updateButton = new QPushButton("Update", this);
+    connect(updateButton, &QPushButton::clicked, this, &ModelInfoWindow::updateInfo);
     rightLayout->addWidget(updateButton, Qt::AlignBottom | Qt::AlignRight);
 
 
     // ================= COMBINE =================
     mainLayout->addLayout(leftLayout);
+    mainLayout->addLayout(middleLayout);
     mainLayout->addLayout(rightLayout);
 
     // make it 50/50 split
-    mainLayout->setStretch(0, 1);
-    mainLayout->setStretch(1, 1);
+    mainLayout->setStretch(0, 1/3);
+    mainLayout->setStretch(1/3, 2/3);
+    mainLayout->setStretch(2/3, 1);
+
 
     setCentralWidget(central);
 
@@ -176,35 +254,217 @@ ModelInfoWindow::ModelInfoWindow(
     
     // ================= FILL DATA =================
 
+    //Double byte fields
+    int totalKills = (static_cast<unsigned int>(troop.totalKills1 << 8)) | static_cast<unsigned int>(troop.totalKills2);
+    int totalDeaths = (static_cast<unsigned int>(troop.totalDeaths1 << 8)) | static_cast<unsigned int>(troop.totalDeaths2);
+    int totalPrimaryPoints = (static_cast<unsigned int>(troop.primaryPoints1 << 8)) | static_cast<unsigned int>(troop.primaryPoints2);
+    int totalSecondaryPoints = (static_cast<unsigned int>(troop.secondaryPoints1 << 8)) | static_cast<unsigned int>(troop.secondaryPoints2);
+    int pointCost = (static_cast<unsigned int>(troop.pointCost1 << 8)) | static_cast<unsigned int>(troop.pointCost2);
+    int16_t PHDS = (int16_t)((uint16_t(troop.PHDS1) << 8) | uint16_t(troop.PHDS2));
+
+    //Current fields
     int currentKills = 0;
     int currentDeaths = 0;
     int currentPrimary = 0;
     int currentSecondary = 0;
     float currentKd = 0.0f;
-    float totalKd = (float)troop.totalKills / (troop.totalDeaths == 0 ? 1 : troop.totalDeaths);
+    float totalKd = (float)totalKills / (totalDeaths == 0 ? 1 : totalDeaths);
     QString cardDataFormatted = getRawDataFromCard(cardData, 0, 134);
 
     nameTextBox->setText(QString::fromStdString(troop.troopName));
 
     currentKillsTextBox->setText(QString::number(currentKills));
-    totalKillsTextBox->setText(QString::number(troop.totalKills));
+    totalKillsTextBox->setText(QString::number(totalKills));
     currentDeathsTextBox->setText(QString::number(currentDeaths));
-    totalDeathsTextBox->setText(QString::number(troop.totalDeaths));
+    totalDeathsTextBox->setText(QString::number(totalDeaths));
+
     currentPrimaryTextBox->setText(QString::number(currentPrimary));
-    totalPrimaryTextBox->setText(QString::number(troop.primaryPoints));
+    totalPrimaryTextBox->setText(QString::number(totalPrimaryPoints));
     currentSecondaryTextBox->setText(QString::number(currentSecondary));
-    totalSecondaryTextBox->setText(QString::number(troop.secondaryPoints));
+    totalSecondaryTextBox->setText(QString::number(totalSecondaryPoints));
 
     currentHealthTextBox->setText(QString::number(troop.curHealth));
     maxHealthTextBox->setText(QString::number(troop.maxHealth));
     typeTextBox->setText(QString::number(troop.modelType));
     numberOfModelsTextBox->setText(QString::number(troop.troopCount));
 
+    epicHeroKillsTextBox->setText(QString::number(troop.epicHeroKills));
+    characterKillsTextBox->setText(QString::number(troop.characterKills));
+    vehicleKillsTextBox->setText(QString::number(troop.vehicleKills));
+    monsterKillsTextBox->setText(QString::number(troop.monsterKills));
+
+    battleLineKillsTextBox->setText(QString::number(troop.battleLineKills));
+    mountedKillsTextBox->setText(QString::number(troop. mountedKills));
+    transportKillsTextBox->setText(QString::number(troop.transportKills));
+    otherKillsTextBox->setText(QString::number(troop.otherKills));
+
+    pointCostTextBox->setText(QString::number(pointCost));
+    phdsTextBox->setText(QString::number(PHDS));
     totalKdTextBox->setText(QString::number(totalKd, 'f', 2));
     currentKdTextBox->setText(QString::number(currentKd, 'f', 2));
 
     rawDataTextBox->setText(cardDataFormatted);
 
+    chartView->setChart(webGraphKills());
+
     // nameTextBox->setPlaceholderText("Type here...");"
 
+}
+
+bool ModelInfoWindow::updateInfo(){
+
+    size_t capacityName = 52;
+    BYTE name[capacityName];
+
+    QByteArray bytes = nameTextBox->text().toUtf8();
+
+    memset(name, 0, capacityName); // clear buffer (important)
+
+    int len = qMin(bytes.size(), static_cast<int>(capacityName-1)); // leave space for null terminator
+    memcpy(name, bytes.data(), len);
+
+    size_t capacity = 24;
+    BYTE dataPacket[capacity] = {
+        (BYTE)troop.totalKills1,
+        (BYTE)troop.totalKills2,
+        (BYTE)troop.totalDeaths1,
+        (BYTE)troop.totalDeaths1,
+        (BYTE)troop.primaryPoints1, 
+        (BYTE)troop.primaryPoints2,
+        (BYTE)troop.secondaryPoints1,
+        (BYTE)troop.secondaryPoints2,
+        (BYTE)troop.epicHeroKills,
+        (BYTE)troop.characterKills,
+        (BYTE)troop.vehicleKills,
+        (BYTE)troop.monsterKills,
+        (BYTE)troop.battleLineKills,
+        (BYTE)troop.mountedKills,
+        (BYTE)troop.transportKills,
+        (BYTE)troop.otherKills,
+        (BYTE)troop.pointCost1,
+        (BYTE)troop.pointCost2,
+        (BYTE)troop.PHDS1,
+        (BYTE)troop.PHDS2,
+    };
+
+    // unsigned 16-bit
+    writeUInt16BEUnsigned(dataPacket, 0,  totalKillsTextBox->text().toUInt());
+    writeUInt16BEUnsigned(dataPacket, 2,  totalDeathsTextBox->text().toUInt());
+    writeUInt16BEUnsigned(dataPacket, 4,  totalPrimaryTextBox->text().toUInt());
+    writeUInt16BEUnsigned(dataPacket, 6,  totalSecondaryTextBox->text().toUInt());
+
+    // single-byte values
+    dataPacket[8]  = maxHealthTextBox->text().toUInt();
+    dataPacket[9]  = currentHealthTextBox->text().toUInt();
+    dataPacket[10] = typeTextBox->text().toUInt();
+    dataPacket[11] = numberOfModelsTextBox->text().toUInt();
+
+    dataPacket[12] = epicHeroKillsTextBox->text().toUInt();
+    dataPacket[13] = characterKillsTextBox->text().toUInt();
+    dataPacket[14] = vehicleKillsTextBox->text().toUInt();
+    dataPacket[15] = monsterKillsTextBox->text().toUInt();
+
+    dataPacket[16] = battleLineKillsTextBox->text().toUInt();
+    dataPacket[17] = mountedKillsTextBox->text().toUInt();
+    dataPacket[18] = transportKillsTextBox->text().toUInt();
+    dataPacket[19] = otherKillsTextBox->text().toUInt();
+
+    // unsigned 16-bit
+    writeUInt16BEUnsigned(dataPacket, 20, pointCostTextBox->text().toUInt());
+
+    // signed 16-bit
+    writeInt16BESigned(dataPacket, 22, phdsTextBox->text().toInt());
+
+    updateStructInfo(&troop, dataPacket);
+    updateTroopName(&troop, nameTextBox->text().toStdString());
+
+    SCARDCONTEXT smartCardContext;
+    SCARD_READERSTATEW readerState0;
+
+    initializeReader(readerName.c_str(), smartCardContext, readerState0);
+
+    printf("hCardHandle2: %p\n", hCardHandle);
+    printf("uActiveProtocol2: %d\n", uActiveProtocol);
+
+    writeDataToCard(4, dataPacket, capacity, hCardHandle, uActiveProtocol);
+    writeDataToCard(10, name, capacityName, hCardHandle, uActiveProtocol);
+
+    chartView->setChart(webGraphKills());
+
+    return true;
+}
+
+void ModelInfoWindow::writeUInt16BEUnsigned(BYTE* data, int index, uint16_t value) {
+    data[index]     = (value >> 8) & 0xFF; 
+    data[index + 1] = value & 0xFF; 
+}
+
+void ModelInfoWindow::writeInt16BESigned(BYTE* data, int index, int16_t value) {
+    data[index]     = (value >> 8) & 0xFF;
+    data[index + 1] = value & 0xFF;
+}
+
+QPolarChart* ModelInfoWindow::webGraphKills(){
+
+    auto *series = new QLineSeries();
+
+    QList<int> values = {
+        epicHeroKillsTextBox->text().toInt(),
+        characterKillsTextBox->text().toInt(),
+        vehicleKillsTextBox->text().toInt(),
+        monsterKillsTextBox->text().toInt(),
+        battleLineKillsTextBox->text().toInt(),
+        mountedKillsTextBox->text().toInt(),
+        transportKillsTextBox->text().toInt(),
+        otherKillsTextBox->text().toInt()
+    };
+
+    int count = values.size();
+    qreal step = 360.0 / count;
+
+    // Add points
+    qreal offset = step / 2.0;
+
+    for (int i = 0; i < count; ++i) {
+        series->append(step * i, values[i]);
+    }
+
+    // close shape
+    series->append(360, values[0]);
+
+    QPolarChart *chart = new QPolarChart();
+    chart->addSeries(series);
+    chart->setTitle("Kill Distribution");
+
+    // Angular axis
+    QCategoryAxis *angularAxis = new QCategoryAxis();
+    angularAxis->setRange(0, 360);
+
+    QStringList labels = {
+        "Epic Hero", "Character", "Vehicle", "Monster",
+        "Battleline", "Mounted", "Transport", "Other"
+    };
+
+    for (int i = 0; i < labels.size(); ++i) {
+        angularAxis->append(labels[i], (360.0 / count) * (i) + offset);
+    }
+
+    chart->addAxis(angularAxis, QPolarChart::PolarOrientationAngular);
+    series->attachAxis(angularAxis);
+
+    // Radial axis
+    QValueAxis *radialAxis = new QValueAxis();
+    int maxVal = *std::max_element(values.begin(), values.end());
+    radialAxis->setRange(0, maxVal + 5);
+    radialAxis->setTickCount(9);
+
+    chart->addAxis(radialAxis, QPolarChart::PolarOrientationRadial);
+    series->attachAxis(radialAxis);
+
+    // auto *areaSeries = new QAreaSeries(series);
+    // areaSeries->setBrush(QColor(0, 120, 255, 100)); // fill
+    // areaSeries->setPen(QPen(QColor(0, 120, 255), 2)); // outline
+    // chart->addSeries(areaSeries);
+
+    return chart;
 }

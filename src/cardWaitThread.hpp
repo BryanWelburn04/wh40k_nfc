@@ -14,7 +14,7 @@ public slots:
     void process();
 
 signals:
-    void cardDetected(Troop troop, BYTE *cardData);
+    void cardDetected(Troop troop, BYTE *cardData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol);
 
 private:
     std::wstring readerName;
