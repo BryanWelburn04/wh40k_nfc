@@ -244,7 +244,7 @@ ModelInfoWindow::ModelInfoWindow(
     rightLayout->addWidget(linkTextBox);
 
     QPushButton *dataSheetButton = new QPushButton("DataSheet", this);
-    connect(dataSheetButton, &QPushButton::clicked, this, &ModelInfoWindow::updateInfo); //change function
+    connect(dataSheetButton, &QPushButton::clicked, this, &ModelInfoWindow::openLink); //change function
     rightLayout->addWidget(dataSheetButton, Qt::AlignBottom | Qt::AlignRight);
 
     QPushButton *updateHistoryButton = new QPushButton("Update History", this);
@@ -545,4 +545,8 @@ QPolarChart* ModelInfoWindow::webGraphKills(){
     // chart->addSeries(areaSeries);
 
     return chart;
+}
+
+void ModelInfoWindow::openLink(){
+    QDesktopServices::openUrl(QUrl(QString::fromStdString(troop.link)));
 }
