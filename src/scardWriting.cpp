@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <winscard.h>
+#include "scardReading.hpp"
 
 using namespace std;
 
@@ -122,9 +123,9 @@ bool writeNameToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHand
     return true;
 }
 
-//pages 23-59
+//pages 23-58
 bool writeLinkToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
-        if(sizeOfData > 148 || sizeOfData < 0){
+        if(sizeOfData > 144 || sizeOfData < 0){
         cout << "invalid data size for link. DataSize = " << sizeOfData << endl;
         return false;
     }
@@ -132,32 +133,101 @@ bool writeLinkToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHand
     return true;
 }
 
-//pages 60-69
+//pages 59-68
 bool writeGreatestAchievementToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
         if(sizeOfData > 40 || sizeOfData < 0){
         cout << "invalid data size for greatest achievement. DataSize = " << sizeOfData << endl;
         return false;
     }
-    writeDataToCard(60, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
+    writeDataToCard(59, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
     return true;
 }
 
-//pages 70-79
+//pages 69-78
 bool writeWorstAchievementToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
         if(sizeOfData > 40 || sizeOfData < 0){
         cout << "invalid data size for worst achievement. DataSize = " << sizeOfData << endl;
         return false;
     }
-    writeDataToCard(70, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
+    writeDataToCard(69, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
     return true;
 }
 
-//pages 80-129
-bool writeHistoryToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
-        if(sizeOfData > 4 || sizeOfData < 0){
-        cout << "invalid data size for history. DataSize = " << sizeOfData << endl;
-        return false;
+//pages 79-129
+bool writeHistoryToCard(int *totalStats, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
+
+    cout << "Attempting to write to history with totalStats: " << totalStats[0] << ", " << totalStats[1] << ", " << totalStats[2] << ", " << totalStats[3] << endl;
+
+    // if(sizeOfData > 4 || sizeOfData < 0){
+    //     cout << "invalid data size for history. DataSize = " << sizeOfData << endl;
+    //     return false;
+    // }
+
+    BYTE gamesPlayed[4];
+    readPage(79, hCardHandle, uActiveProtocol, gamesPlayed);
+    int totalGamesPlayed = (static_cast<unsigned int>(gamesPlayed[0] << 24)) | (static_cast<unsigned int>(gamesPlayed[1] << 16)) | (static_cast<unsigned int>(gamesPlayed[2] << 8)) | static_cast<unsigned int>(gamesPlayed[3]);
+
+    int currentGameStartPage = (totalGamesPlayed % 50) + 80; //this will write to pages 79-128 in a loop, so we can store the last 50 games played.
+    int previousGameStartPage = ((totalGamesPlayed - 1) % 50) + 80;
+
+    if (totalGamesPlayed == 0){
+
+        if(totalStats[0] < 0 || totalStats[0] > 255 || totalStats[1] < 0 || totalStats[1] > 255 || totalStats[2] < 0 || totalStats[2] > 255 || totalStats[3] < 0 || totalStats[3] > 255){
+            cout << "Current game stats are out of bounds for a single byte. Cannot write to card." << endl;
+            return false;
+        } else {
+
+            BYTE currentGameData[4] = {
+                static_cast<BYTE>(totalStats[0]),
+                static_cast<BYTE>(totalStats[1]),
+                static_cast<BYTE>(totalStats[2]),
+                static_cast<BYTE>(totalStats[3])
+            };
+            
+            writeDataToCard(currentGameStartPage, currentGameData, 4, hCardHandle, uActiveProtocol);
+            cout << "Wrote first game data to page " << currentGameStartPage << endl;
+        }
+
+
+    } else if (previousGameStartPage > 0){
+
+        BYTE previousGameData[4];
+        readPage(previousGameStartPage, hCardHandle, uActiveProtocol, previousGameData);
+
+        cout << "Previous game data read from page " << previousGameStartPage << ": " << (int)previousGameData[0] << ", " << (int)previousGameData[1] << ", " << (int)previousGameData[2] << ", " << (int)previousGameData[3] << endl;
+        cout << "Current game total stats: " << totalStats[0] << ", " << totalStats[1] << ", " << totalStats[2] << ", " << totalStats[3] << endl;
+
+        BYTE currentKills = totalStats[0] - previousGameData[0];
+        BYTE currentDeaths = totalStats[1] - previousGameData[1];
+        BYTE currentPrimaryPoints = totalStats[2] - previousGameData[2];
+        BYTE currentSecondaryPoints = totalStats[3] - previousGameData[3];
+
+        cout << "Calculated current game stats: " << (int)currentKills << ", " << (int)currentDeaths << ", " << (int)currentPrimaryPoints << ", " << (int)currentSecondaryPoints << endl;
+
+        if(currentKills < 0 || currentKills > 255 || currentDeaths < 0 || currentDeaths > 255 || currentPrimaryPoints < 0 || currentPrimaryPoints > 255 || currentSecondaryPoints < 0 || currentSecondaryPoints > 255){
+            cout << "Current game stats are out of bounds for a single byte. Cannot write to card." << endl;
+            return false;
+        } else {
+
+            BYTE currentGameData[4] = {
+                static_cast<BYTE>(currentKills),
+                static_cast<BYTE>(currentDeaths),
+                static_cast<BYTE>(currentPrimaryPoints),
+                static_cast<BYTE>(currentSecondaryPoints)
+            };
+
+            writeDataToCard(currentGameStartPage, currentGameData, 4, hCardHandle, uActiveProtocol);
+        }
     }
-    writeDataToCard(80, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
+
+    totalGamesPlayed++;
+
+    gamesPlayed[0] = (totalGamesPlayed) >> 24;
+    gamesPlayed[1] = (totalGamesPlayed) >> 16;
+    gamesPlayed[2] = (totalGamesPlayed) >> 8;
+    gamesPlayed[3] = (totalGamesPlayed) & 0xFF;
+
+    writeDataToCard(79, gamesPlayed, 4, hCardHandle, uActiveProtocol); //update total games played
+    
     return true;
 }

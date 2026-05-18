@@ -244,12 +244,16 @@ ModelInfoWindow::ModelInfoWindow(
     rightLayout->addWidget(linkTextBox);
 
     QPushButton *dataSheetButton = new QPushButton("DataSheet", this);
-    connect(dataSheetButton, &QPushButton::clicked, this, &ModelInfoWindow::openLink); //change function
+    connect(dataSheetButton, &QPushButton::clicked, this, &ModelInfoWindow::openLink);
     rightLayout->addWidget(dataSheetButton, Qt::AlignBottom | Qt::AlignRight);
 
     QPushButton *updateHistoryButton = new QPushButton("Update History", this);
-    connect(updateHistoryButton, &QPushButton::clicked, this, &ModelInfoWindow::updateInfo); //change function
+    connect(updateHistoryButton, &QPushButton::clicked, this, &ModelInfoWindow::writeBackToHistory);
     rightLayout->addWidget(updateHistoryButton, Qt::AlignBottom | Qt::AlignRight);
+
+    QPushButton *zeroHistoryButton = new QPushButton("Zero History", this);
+    connect(zeroHistoryButton, &QPushButton::clicked, this, &ModelInfoWindow::zeroHistory);
+    rightLayout->addWidget(zeroHistoryButton, Qt::AlignBottom | Qt::AlignRight);
 
     QLabel *rawDataLabel = new QLabel("Raw Data:", this);
     QTextEdit *rawDataTextBox = new QTextEdit(this);
@@ -293,8 +297,9 @@ ModelInfoWindow::ModelInfoWindow(
     setCentralWidget(central);
 
     
-    
+    // =============================================
     // ================= FILL DATA =================
+    // =============================================
 
     //Double byte fields
     int totalKills = (static_cast<unsigned int>(troop.totalKills1 << 8)) | static_cast<unsigned int>(troop.totalKills2);
@@ -549,4 +554,36 @@ QPolarChart* ModelInfoWindow::webGraphKills(){
 
 void ModelInfoWindow::openLink(){
     QDesktopServices::openUrl(QUrl(QString::fromStdString(troop.link)));
+}
+
+void ModelInfoWindow::writeBackToHistory(){
+    
+
+    int historyData[4];
+    historyData[0] = totalKillsTextBox->text().toInt();
+    historyData[1] = totalDeathsTextBox->text().toInt();
+    historyData[2] = totalPrimaryTextBox->text().toInt();
+    historyData[3] = totalSecondaryTextBox->text().toInt();
+
+
+    SCARDCONTEXT smartCardContext;
+    SCARD_READERSTATEW readerState0;
+    initializeReader(readerName.c_str(), smartCardContext, readerState0);
+
+    writeHistoryToCard(historyData, sizeof(historyData), hCardHandle, uActiveProtocol);
+
+
+}
+
+void ModelInfoWindow::zeroHistory(){
+    BYTE historyData[204];
+    for(int i = 0; i < 204; i++){
+        historyData[i] = 0;
+    }
+
+    SCARDCONTEXT smartCardContext;
+    SCARD_READERSTATEW readerState0;
+    initializeReader(readerName.c_str(), smartCardContext, readerState0);
+
+    writeDataToCard(79, historyData, sizeof(historyData), hCardHandle, uActiveProtocol);
 }

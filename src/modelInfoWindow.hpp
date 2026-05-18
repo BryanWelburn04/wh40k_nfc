@@ -28,6 +28,8 @@ private slots:
     void writeInt16BESigned(BYTE* data, int index, int16_t value);
     QPolarChart* webGraphKills();
     void openLink();
+    void writeBackToHistory();
+    void zeroHistory();
 
 private:
     std::wstring readerName;

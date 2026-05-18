@@ -11,7 +11,7 @@ bool writeNameToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHand
 bool writeLinkToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol);
 bool writeGreatestAchievementToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol);
 bool writeWorstAchievementToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol);
-bool writeHistoryToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol);
+bool writeHistoryToCard(int *totalStats, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol);
 
 
 

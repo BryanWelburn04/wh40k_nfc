@@ -29,9 +29,9 @@ void CardWaitThread::process()
         //MAKE FUNCTIONS FOR THESE IN SCARDREADING.CPP/HPP
         readPages(4, 9, hCardHandle, uActiveProtocol, infoContainer);
         readPages(10, 22, hCardHandle, uActiveProtocol, name);
-        readPages(23, 59, hCardHandle, uActiveProtocol, Link);
-        readPages(60, 69, hCardHandle, uActiveProtocol, ga);
-        readPages(70, 79, hCardHandle, uActiveProtocol, wa);
+        readPages(23, 58, hCardHandle, uActiveProtocol, Link);
+        readPages(59, 68, hCardHandle, uActiveProtocol, ga);
+        readPages(69, 78, hCardHandle, uActiveProtocol, wa);
 
         Troop troop = initTroop(name, infoContainer, ga, wa, Link);
 
