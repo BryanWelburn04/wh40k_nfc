@@ -30,6 +30,7 @@ private slots:
     void openLink();
     void writeBackToHistory();
     void zeroHistory();
+    QChart* lineGraphHistoryStats();
 
 private:
     std::wstring readerName;
@@ -59,5 +60,6 @@ private:
     QLineEdit *gaTextBox;
     QLineEdit *waTextBox;
 
-    QChartView *chartView;
+    QChartView *webChartView;
+    QChartView *lineChartView;
 };

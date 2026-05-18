@@ -4,6 +4,7 @@
 #include <iostream>
 #include <winscard.h>
 #include <vector>
+#include <array>
 #include <QString>
 
 using namespace std;
@@ -203,4 +204,30 @@ bool readTroopName(SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYTE *nameCon
     
 
     return success_state;
+}
+
+std::array<int, 4> getHistoricTotals(SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
+    
+    int totalKills = 0;
+    int totalDeaths = 0;
+    int totalPrimaryPoints = 0;
+    int totalSecondaryPoints = 0;
+
+    std::array<int, 4> totals = {0, 0, 0, 0};
+
+    for(int i = 0; i < 50; i++){
+        BYTE gameData[4];
+        readPage(80+i, hCardHandle, uActiveProtocol, gameData);
+        totalKills += static_cast<int>(gameData[0]);
+        totalDeaths += static_cast<int>(gameData[1]);
+        totalPrimaryPoints += static_cast<int>(gameData[2]);
+        totalSecondaryPoints += static_cast<int>(gameData[3]);
+    }
+
+    totals[0] = totalKills;
+    totals[1] = totalDeaths;
+    totals[2] = totalPrimaryPoints;
+    totals[3] = totalSecondaryPoints;
+
+    return totals;
 }

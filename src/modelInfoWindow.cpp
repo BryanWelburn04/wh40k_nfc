@@ -212,10 +212,15 @@ ModelInfoWindow::ModelInfoWindow(
 
     QVBoxLayout *middleRightLayout = new QVBoxLayout;
 
-    chartView = new QChartView(webGraphKills());
-    chartView->setMinimumSize(200, 200);
+    webChartView = new QChartView(webGraphKills());
+    webChartView->setMinimumSize(200, 200);
 
-    middleRightLayout->addWidget(chartView);
+    middleRightLayout->addWidget(webChartView);
+
+    lineChartView = new QChartView(lineGraphHistoryStats());
+    lineChartView->setMinimumSize(200, 200);
+
+    middleRightLayout->addWidget(lineChartView);
 
     
 
@@ -364,7 +369,8 @@ ModelInfoWindow::ModelInfoWindow(
 
     rawDataTextBox->setText(cardDataFormatted);
 
-    chartView->setChart(webGraphKills());
+    webChartView->setChart(webGraphKills());
+    lineChartView->setChart(lineGraphHistoryStats());
 
     // nameTextBox->setPlaceholderText("Type here...");"
 
@@ -472,7 +478,8 @@ bool ModelInfoWindow::updateInfo(){
     writeGreatestAchievementToCard(ga, sizeof(ga), hCardHandle, uActiveProtocol);
     writeWorstAchievementToCard(wa, sizeof(wa), hCardHandle, uActiveProtocol);
 
-    chartView->setChart(webGraphKills());
+    webChartView->setChart(webGraphKills());
+    lineChartView->setChart(lineGraphHistoryStats());
 
     return true;
 }
@@ -586,4 +593,112 @@ void ModelInfoWindow::zeroHistory(){
     initializeReader(readerName.c_str(), smartCardContext, readerState0);
 
     writeDataToCard(79, historyData, sizeof(historyData), hCardHandle, uActiveProtocol);
+}
+
+QChart* ModelInfoWindow::lineGraphHistoryStats(){
+
+    BYTE gamesPlayed[4];
+
+    readPage(79, hCardHandle, uActiveProtocol, gamesPlayed);
+
+    int totalGamesPlayed =
+        (static_cast<unsigned int>(gamesPlayed[0]) << 24) |
+        (static_cast<unsigned int>(gamesPlayed[1]) << 16) |
+        (static_cast<unsigned int>(gamesPlayed[2]) << 8)  |
+        static_cast<unsigned int>(gamesPlayed[3]);
+
+    int gamesToRead = qMin(totalGamesPlayed, 50);
+
+    int startIndex = 0;
+
+    if (totalGamesPlayed > 50) {
+        startIndex = totalGamesPlayed % 50;
+    }
+
+    QLineSeries *killsSeries = new QLineSeries();
+    QLineSeries *deathsSeries = new QLineSeries();
+    QLineSeries *primarySeries = new QLineSeries();
+    QLineSeries *secondarySeries = new QLineSeries();
+
+    int totalKills = 0;
+    int totalDeaths = 0;
+    int totalPrimary = 0;
+    int totalSecondary = 0;
+    int maxValue = 0;
+
+    for (int i = 0; i < gamesToRead; i++) {
+
+        int bufferIndex = (startIndex + i) % 50;
+        int pageToRead = 80 + bufferIndex;
+
+        BYTE gameData[4];
+        readPage(pageToRead, hCardHandle, uActiveProtocol, gameData);
+
+        int kills = gameData[0];
+        int deaths = gameData[1];
+        int primary = gameData[2];
+        int secondary = gameData[3];
+
+        totalKills += kills;
+        totalDeaths += deaths;
+        totalPrimary += primary;
+        totalSecondary += secondary;
+
+        killsSeries->append(i+1, kills);
+        deathsSeries->append(i+1, deaths);
+        primarySeries->append(i+1, primary);
+        secondarySeries->append(i+1, secondary);
+
+        maxValue = qMax(maxValue, kills);
+        maxValue = qMax(maxValue, deaths);
+        maxValue = qMax(maxValue, primary);
+        maxValue = qMax(maxValue, secondary);
+    }
+
+    double avgKills = gamesToRead > 0 ? static_cast<double>(totalKills) / gamesToRead : 0;
+    double avgDeaths = gamesToRead > 0 ? static_cast<double>(totalDeaths) / gamesToRead : 0;
+    double avgPrimary = gamesToRead > 0 ? static_cast<double>(totalPrimary) / gamesToRead : 0;
+    double avgSecondary = gamesToRead > 0 ? static_cast<double>(totalSecondary) / gamesToRead : 0;
+
+    killsSeries->setName(QString("Kills (Avg: %1)").arg(avgKills, 0, 'f', 1));
+    deathsSeries->setName(QString("Deaths (Avg: %1)").arg(avgDeaths, 0, 'f', 1));
+    primarySeries->setName(QString("Primary (Avg: %1)").arg(avgPrimary, 0, 'f', 1));
+    secondarySeries->setName(QString("Secondary (Avg: %1)").arg(avgSecondary, 0, 'f', 1));
+
+    QChart *chart = new QChart();
+
+    chart->addSeries(killsSeries);
+    chart->addSeries(deathsSeries);
+    chart->addSeries(primarySeries);
+    chart->addSeries(secondarySeries);
+
+    QValueAxis *axisX = new QValueAxis;
+    axisX->setRange(1, gamesToRead);
+    axisX->setLabelFormat("%d");
+    // axisX->setTickInterval(1);
+    axisX->setTickCount(gamesToRead);
+    axisX->setTitleText("Game");
+
+    QValueAxis *axisY = new QValueAxis;
+    axisY->setLabelFormat("%d");
+    axisY->setRange(0, maxValue);
+
+    chart->addAxis(axisX, Qt::AlignBottom);
+    chart->addAxis(axisY, Qt::AlignLeft);
+
+    killsSeries->attachAxis(axisX);
+    killsSeries->attachAxis(axisY);
+
+    deathsSeries->attachAxis(axisX);
+    deathsSeries->attachAxis(axisY);
+
+    primarySeries->attachAxis(axisX);
+    primarySeries->attachAxis(axisY);
+
+    secondarySeries->attachAxis(axisX);
+    secondarySeries->attachAxis(axisY);
+
+    chart->setTitle("Last 50 Games");
+
+    return chart;
 }

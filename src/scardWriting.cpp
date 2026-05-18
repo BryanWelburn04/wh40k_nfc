@@ -191,10 +191,13 @@ bool writeHistoryToCard(int *totalStats, size_t sizeOfData, SCARDHANDLE hCardHan
 
     } else if (previousGameStartPage > 0){
 
-        BYTE previousGameData[4];
-        readPage(previousGameStartPage, hCardHandle, uActiveProtocol, previousGameData);
+        // BYTE previousGameData[4];
+        // readPage(previousGameStartPage, hCardHandle, uActiveProtocol, previousGameData);
 
-        cout << "Previous game data read from page " << previousGameStartPage << ": " << (int)previousGameData[0] << ", " << (int)previousGameData[1] << ", " << (int)previousGameData[2] << ", " << (int)previousGameData[3] << endl;
+        // cout << "Previous game data read from page " << previousGameStartPage << ": " << (int)previousGameData[0] << ", " << (int)previousGameData[1] << ", " << (int)previousGameData[2] << ", " << (int)previousGameData[3] << endl;
+
+        std::array<int, 4> previousGameData = getHistoricTotals(hCardHandle, uActiveProtocol);
+
         cout << "Current game total stats: " << totalStats[0] << ", " << totalStats[1] << ", " << totalStats[2] << ", " << totalStats[3] << endl;
 
         BYTE currentKills = totalStats[0] - previousGameData[0];
