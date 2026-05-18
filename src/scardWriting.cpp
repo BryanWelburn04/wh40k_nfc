@@ -100,3 +100,64 @@ void resetPageData(unsigned char startPage, unsigned char endPage, SCARDHANDLE h
         } 
     }
 }
+
+
+//pages 4-9
+bool writeStatsToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
+    if(sizeOfData > 24 || sizeOfData < 0){
+        cout << "invalid data size for stats. DataSize = " << sizeOfData << endl;
+        return false;
+    }
+    writeDataToCard(4, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
+    return true;
+}
+
+//pages 10-22
+bool writeNameToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
+        if(sizeOfData > 52 || sizeOfData < 0){
+        cout << "invalid data size for name. DataSize = " << sizeOfData << endl;
+        return false;
+    }
+    writeDataToCard(10, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
+    return true;
+}
+
+//pages 23-59
+bool writeLinkToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
+        if(sizeOfData > 148 || sizeOfData < 0){
+        cout << "invalid data size for link. DataSize = " << sizeOfData << endl;
+        return false;
+    }
+    writeDataToCard(23, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
+    return true;
+}
+
+//pages 60-69
+bool writeGreatestAchievementToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
+        if(sizeOfData > 40 || sizeOfData < 0){
+        cout << "invalid data size for greatest achievement. DataSize = " << sizeOfData << endl;
+        return false;
+    }
+    writeDataToCard(60, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
+    return true;
+}
+
+//pages 70-79
+bool writeWorstAchievementToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
+        if(sizeOfData > 40 || sizeOfData < 0){
+        cout << "invalid data size for worst achievement. DataSize = " << sizeOfData << endl;
+        return false;
+    }
+    writeDataToCard(70, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
+    return true;
+}
+
+//pages 80-129
+bool writeHistoryToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
+        if(sizeOfData > 4 || sizeOfData < 0){
+        cout << "invalid data size for history. DataSize = " << sizeOfData << endl;
+        return false;
+    }
+    writeDataToCard(80, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
+    return true;
+}

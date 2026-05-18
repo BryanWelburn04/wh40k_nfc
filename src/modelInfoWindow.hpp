@@ -52,5 +52,9 @@ private:
     QLineEdit *transportKillsTextBox;
     QLineEdit *otherKillsTextBox;
     QLineEdit *phdsTextBox;
+    QLineEdit *linkTextBox;
+    QLineEdit *gaTextBox;
+    QLineEdit *waTextBox;
+
     QChartView *chartView;
 };

@@ -12,7 +12,7 @@
 
 
 // This pulls troop info off the SCard and makes a struct for the software
-Troop initTroop(BYTE *nameInput, BYTE *infoInput) {
+Troop initTroop(BYTE *nameInput, BYTE *infoInput, BYTE *gaInput, BYTE *waInput, BYTE *linkInput) {
 
     int nameLength = 52;
     std::string name;
@@ -73,7 +73,10 @@ Troop initTroop(BYTE *nameInput, BYTE *infoInput) {
         pointCost1,
         pointCost2,
         PHDS1,
-        PHDS2
+        PHDS2,
+        std::string((char *)gaInput),
+        std::string((char *)waInput),
+        std::string((char *)linkInput)
     );
 
     return newTroop;
@@ -148,6 +151,63 @@ void updateTroopName(Troop *troop, string newName) {
 
     return;
 }
+
+void updateTroopGA(Troop *troop, string greatestAchievement) {
+
+    int nameLength = int(greatestAchievement.length());
+    if (nameLength >= 40) {
+        cout << "Error: " << greatestAchievement << " is too long. Need less than 40 characters." << endl;
+        return;
+    }
+
+    BYTE name[40];
+    for (int i = 0; i < nameLength; i++) {
+        name[i] = (BYTE)greatestAchievement[i];
+    }
+
+    troop->greatestAchievement = greatestAchievement;
+
+    return;
+}
+
+void updateTroopWA(Troop *troop, string worstAchievement) {
+
+    int nameLength = int(worstAchievement.length());
+    if (nameLength >= 40) {
+        cout << "Error: " << worstAchievement << " is too long. Need less than 40 characters." << endl;
+        return;
+    }
+
+    BYTE name[40];
+    for (int i = 0; i < nameLength; i++) {
+        name[i] = (BYTE)worstAchievement[i];
+    }
+
+    troop->worstAchievement = worstAchievement;
+
+    return;
+}
+
+void updateTroopLink(Troop *troop, string link) {
+
+    int nameLength = int(link.length());
+    if (nameLength >= 148) {
+        cout << "Error: " << link << " is too long. Need less than 148 characters." << endl;
+        return;
+    }
+
+    BYTE name[148];
+    for (int i = 0; i < nameLength; i++) {
+        name[i] = (BYTE)link[i];
+    }
+
+    troop->worstAchievement = link;
+
+    return;
+}
+
+
+
 
 
 

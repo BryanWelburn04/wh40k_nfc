@@ -36,11 +36,14 @@ ModelInfoWindow::ModelInfoWindow(
         
     QWidget *central = new QWidget(this);
 
-    // MAIN split layout (left | middle | right)
+    // MAIN split layout (left | middleLeft | middleRight | right)
     QHBoxLayout *mainLayout = new QHBoxLayout(central);
 
 
-    // ================= LEFT SIDE =================
+    // ===============================================
+    // ================== LEFT SIDE ==================
+    // ===============================================
+
     QVBoxLayout *leftLayout = new QVBoxLayout;
 
     //card UID
@@ -130,9 +133,11 @@ ModelInfoWindow::ModelInfoWindow(
 
     leftLayout->addWidget(cancelButton, Qt::AlignBottom | Qt::AlignLeft);
 
-    // =================  MIDDLE =================
+    // ================================================
+    // =================  MIDDLE LEFT =================
+    // ================================================
 
-    QVBoxLayout *middleLayout = new QVBoxLayout;
+    QVBoxLayout *middleLeftLayout = new QVBoxLayout;
 
     // K/D ratio
     QLabel *kdLabel = new QLabel("Current/Total K/D Ratio:", this);
@@ -141,72 +146,110 @@ ModelInfoWindow::ModelInfoWindow(
     QLineEdit *totalKdTextBox = new QLineEdit(this);
     kdRow->addWidget(currentKdTextBox);
     kdRow->addWidget(totalKdTextBox);
-    middleLayout->addWidget(kdLabel);
-    middleLayout->addLayout(kdRow);
+    middleLeftLayout->addWidget(kdLabel);
+    middleLeftLayout->addLayout(kdRow);
 
     // Points/health deficit/surplus
     QLabel *phdsLabel = new QLabel("PHDS:", this);
     phdsTextBox = new QLineEdit(this);
-    middleLayout->addWidget(phdsLabel);
-    middleLayout->addWidget(phdsTextBox);
+    middleLeftLayout->addWidget(phdsLabel);
+    middleLeftLayout->addWidget(phdsTextBox);
 
     // Epic Hero Kills
     QLabel *epicHeroKillsLabel = new QLabel("Epic Hero Kills:", this);
     epicHeroKillsTextBox = new QLineEdit(this);
-    middleLayout->addWidget(epicHeroKillsLabel);
-    middleLayout->addWidget(epicHeroKillsTextBox);
+    middleLeftLayout->addWidget(epicHeroKillsLabel);
+    middleLeftLayout->addWidget(epicHeroKillsTextBox);
 
     // Character Kills
     QLabel *characterKillsLabel = new QLabel("Character Kills:", this);
     characterKillsTextBox = new QLineEdit(this);
-    middleLayout->addWidget(characterKillsLabel);
-    middleLayout->addWidget(characterKillsTextBox);
+    middleLeftLayout->addWidget(characterKillsLabel);
+    middleLeftLayout->addWidget(characterKillsTextBox);
 
     // Vehicle Kills (fixed spelling)
     QLabel *vehicleKillsLabel = new QLabel("Vehicle Kills:", this);
     vehicleKillsTextBox = new QLineEdit(this);
-    middleLayout->addWidget(vehicleKillsLabel);
-    middleLayout->addWidget(vehicleKillsTextBox);
+    middleLeftLayout->addWidget(vehicleKillsLabel);
+    middleLeftLayout->addWidget(vehicleKillsTextBox);
 
     // Monster Kills
     QLabel *monsterKillsLabel = new QLabel("Monster Kills:", this);
     monsterKillsTextBox = new QLineEdit(this);
-    middleLayout->addWidget(monsterKillsLabel);
-    middleLayout->addWidget(monsterKillsTextBox);
+    middleLeftLayout->addWidget(monsterKillsLabel);
+    middleLeftLayout->addWidget(monsterKillsTextBox);
 
     // Battleline Kills
     QLabel *battleLineKillsLabel = new QLabel("Battleline Kills:", this);
     battleLineKillsTextBox = new QLineEdit(this);
-    middleLayout->addWidget(battleLineKillsLabel);
-    middleLayout->addWidget(battleLineKillsTextBox);
+    middleLeftLayout->addWidget(battleLineKillsLabel);
+    middleLeftLayout->addWidget(battleLineKillsTextBox);
 
     // Mounted Kills
     QLabel *mountedKillsLabel = new QLabel("Mounted Kills:", this);
     mountedKillsTextBox = new QLineEdit(this);
-    middleLayout->addWidget(mountedKillsLabel);
-    middleLayout->addWidget(mountedKillsTextBox);
+    middleLeftLayout->addWidget(mountedKillsLabel);
+    middleLeftLayout->addWidget(mountedKillsTextBox);
 
     // Transport Kills
     QLabel *transportKillsLabel = new QLabel("Transport Kills:", this);
     transportKillsTextBox = new QLineEdit(this);
-    middleLayout->addWidget(transportKillsLabel);
-    middleLayout->addWidget(transportKillsTextBox);
+    middleLeftLayout->addWidget(transportKillsLabel);
+    middleLeftLayout->addWidget(transportKillsTextBox);
 
     // Other Kills
     QLabel *otherKillsLabel = new QLabel("Other Kills:", this);
     otherKillsTextBox = new QLineEdit(this);
-    middleLayout->addWidget(otherKillsLabel);
-    middleLayout->addWidget(otherKillsTextBox);
+    middleLeftLayout->addWidget(otherKillsLabel);
+    middleLeftLayout->addWidget(otherKillsTextBox);
 
-    middleLayout->addStretch();  // keep everything at top
+    middleLeftLayout->addStretch();  // keep everything at top
 
+
+    // ================================================
+    // ================= MIDDLE RIGHT =================
+    // ================================================
+
+    QVBoxLayout *middleRightLayout = new QVBoxLayout;
+
+    chartView = new QChartView(webGraphKills());
+    chartView->setMinimumSize(200, 200);
+
+    middleRightLayout->addWidget(chartView);
+
+    
+
+    // ==============================================
     // ================= RIGHT SIDE =================
+    // ==============================================
+
+     
     QVBoxLayout *rightLayout = new QVBoxLayout;
-
-    // top-centered raw data
     QHBoxLayout *topCenter = new QHBoxLayout;
-
     QVBoxLayout *rawDataLayout = new QVBoxLayout;
+
+    QLabel *gaLabel = new QLabel("Greatest Achievement:", this);
+    gaTextBox = new QLineEdit(this);
+    rightLayout->addWidget(gaLabel);
+    rightLayout->addWidget(gaTextBox);
+
+    QLabel *waLabel = new QLabel("Worst Achievement:", this);
+    waTextBox = new QLineEdit(this);
+    rightLayout->addWidget(waLabel);
+    rightLayout->addWidget(waTextBox);
+
+    QLabel *linkLabel = new QLabel("DataSheet Link:", this);
+    linkTextBox = new QLineEdit(this);
+    rightLayout->addWidget(linkLabel);
+    rightLayout->addWidget(linkTextBox);
+
+    QPushButton *dataSheetButton = new QPushButton("DataSheet", this);
+    connect(dataSheetButton, &QPushButton::clicked, this, &ModelInfoWindow::updateInfo); //change function
+    rightLayout->addWidget(dataSheetButton, Qt::AlignBottom | Qt::AlignRight);
+
+    QPushButton *updateHistoryButton = new QPushButton("Update History", this);
+    connect(updateHistoryButton, &QPushButton::clicked, this, &ModelInfoWindow::updateInfo); //change function
+    rightLayout->addWidget(updateHistoryButton, Qt::AlignBottom | Qt::AlignRight);
 
     QLabel *rawDataLabel = new QLabel("Raw Data:", this);
     QTextEdit *rawDataTextBox = new QTextEdit(this);
@@ -215,21 +258,14 @@ ModelInfoWindow::ModelInfoWindow(
     rawDataTextBox->setReadOnly(true);
 
     rawDataTextBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-
     rawDataLayout->addWidget(rawDataLabel, 0, Qt::AlignHCenter);
-    rawDataLayout->addWidget(rawDataTextBox, 0, Qt::AlignHCenter);
-
-    chartView = new QChartView(webGraphKills());
-    chartView->setMinimumSize(200, 200);
-
-    rightLayout->addWidget(chartView);
+    rawDataLayout->addWidget(rawDataTextBox);
 
     topCenter->addStretch();
     topCenter->addLayout(rawDataLayout);
     topCenter->addStretch();
 
     rightLayout->addLayout(topCenter);
-
     rightLayout->addStretch();  // keep it at top
 
     QPushButton *updateButton = new QPushButton("Update", this);
@@ -237,15 +273,21 @@ ModelInfoWindow::ModelInfoWindow(
     rightLayout->addWidget(updateButton, Qt::AlignBottom | Qt::AlignRight);
 
 
-    // ================= COMBINE =================
+
+    // ===============================================
+    // =================== COMBINE ===================
+    // ===============================================
+
     mainLayout->addLayout(leftLayout);
-    mainLayout->addLayout(middleLayout);
+    mainLayout->addLayout(middleLeftLayout);
+    mainLayout->addLayout(middleRightLayout);
     mainLayout->addLayout(rightLayout);
 
     // make it 50/50 split
-    mainLayout->setStretch(0, 1/3);
-    mainLayout->setStretch(1/3, 2/3);
-    mainLayout->setStretch(2/3, 1);
+    mainLayout->setStretch(0, 1/4);
+    mainLayout->setStretch(1/4, 2/4);
+    mainLayout->setStretch(2/4, 3/4);
+    mainLayout->setStretch(3/4, 1);
 
 
     setCentralWidget(central);
@@ -270,7 +312,15 @@ ModelInfoWindow::ModelInfoWindow(
     float currentKd = 0.0f;
     float totalKd = (float)totalKills / (totalDeaths == 0 ? 1 : totalDeaths);
     QString cardDataFormatted = getRawDataFromCard(cardData, 0, 134);
+    string uid = "125747885";
 
+    //
+    // SCARDCONTEXT smartCardContext;
+    // SCARD_READERSTATEW readerState0;
+    // initializeReader(readerName.c_str(), smartCardContext, readerState0);
+    // getCardUID(smartCardContext, this->readerName, this->hCardHandle, this->uActiveProtocol);
+
+    uidTextBox->setText(QString::fromStdString(uid));
     nameTextBox->setText(QString::fromStdString(troop.troopName));
 
     currentKillsTextBox->setText(QString::number(currentKills));
@@ -303,6 +353,10 @@ ModelInfoWindow::ModelInfoWindow(
     totalKdTextBox->setText(QString::number(totalKd, 'f', 2));
     currentKdTextBox->setText(QString::number(currentKd, 'f', 2));
 
+    gaTextBox->setText(QString::fromStdString(troop.greatestAchievement));
+    waTextBox->setText(QString::fromStdString(troop.worstAchievement));
+    linkTextBox->setText(QString::fromStdString(troop.link));
+
     rawDataTextBox->setText(cardDataFormatted);
 
     chartView->setChart(webGraphKills());
@@ -314,14 +368,36 @@ ModelInfoWindow::ModelInfoWindow(
 bool ModelInfoWindow::updateInfo(){
 
     size_t capacityName = 52;
+    size_t capacityLink = 148;
+    size_t capacityGA = 40;
+    size_t capacityWA = 40;
+    // size_t capacityHistory = 4;
+
     BYTE name[capacityName];
-
-    QByteArray bytes = nameTextBox->text().toUtf8();
-
+    BYTE link[capacityLink];
+    BYTE ga[capacityGA];
+    BYTE wa[capacityWA];
+    
+    QByteArray bytesName = nameTextBox->text().toUtf8();
     memset(name, 0, capacityName); // clear buffer (important)
+    int lenName = qMin(bytesName.size(), static_cast<int>(capacityName-1)); // leave space for null terminator
+    memcpy(name, bytesName.data(), lenName);
 
-    int len = qMin(bytes.size(), static_cast<int>(capacityName-1)); // leave space for null terminator
-    memcpy(name, bytes.data(), len);
+    QByteArray bytesLink = linkTextBox->text().toUtf8();
+    memset(link, 0, capacityLink); // clear buffer (important)
+    int lenLink = qMin(bytesLink.size(), static_cast<int>(capacityLink-1)); // leave space for null terminator
+    memcpy(link, bytesLink.data(), lenLink);
+
+    QByteArray bytesGA = gaTextBox->text().toUtf8();
+    memset(ga, 0, capacityGA); // clear buffer (important)
+    int lenGA = qMin(bytesGA.size(), static_cast<int>(capacityGA-1)); // leave space for null terminator
+    memcpy(ga, bytesGA.data(), lenGA);
+
+    QByteArray bytesWA = waTextBox->text().toUtf8();
+    memset(wa, 0, capacityWA); // clear buffer (important)
+    int lenWA = qMin(bytesWA.size(), static_cast<int>(capacityWA-1)); // leave space for null terminator
+    memcpy(wa, bytesWA.data(), lenWA);
+
 
     size_t capacity = 24;
     BYTE dataPacket[capacity] = {
@@ -377,17 +453,19 @@ bool ModelInfoWindow::updateInfo(){
 
     updateStructInfo(&troop, dataPacket);
     updateTroopName(&troop, nameTextBox->text().toStdString());
+    updateTroopGA(&troop, gaTextBox->text().toStdString());
+    updateTroopWA(&troop, waTextBox->text().toStdString());
+    updateTroopLink(&troop, linkTextBox->text().toStdString());
 
     SCARDCONTEXT smartCardContext;
     SCARD_READERSTATEW readerState0;
-
     initializeReader(readerName.c_str(), smartCardContext, readerState0);
 
-    printf("hCardHandle2: %p\n", hCardHandle);
-    printf("uActiveProtocol2: %d\n", uActiveProtocol);
-
-    writeDataToCard(4, dataPacket, capacity, hCardHandle, uActiveProtocol);
-    writeDataToCard(10, name, capacityName, hCardHandle, uActiveProtocol);
+    writeStatsToCard(dataPacket, sizeof(dataPacket), hCardHandle, uActiveProtocol);
+    writeNameToCard(name, sizeof(name), hCardHandle, uActiveProtocol);
+    writeLinkToCard(link, sizeof(link), hCardHandle, uActiveProtocol);
+    writeGreatestAchievementToCard(ga, sizeof(ga), hCardHandle, uActiveProtocol);
+    writeWorstAchievementToCard(wa, sizeof(wa), hCardHandle, uActiveProtocol);
 
     chartView->setChart(webGraphKills());
 

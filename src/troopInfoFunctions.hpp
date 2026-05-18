@@ -12,6 +12,9 @@ using namespace std;
 struct Troop {
 
     string troopName;
+    string greatestAchievement;
+    string worstAchievement;
+    string link;
 
     //page 4
     short totalKills1;
@@ -59,7 +62,10 @@ struct Troop {
         short maxHP, short curHP, short type, short totalCount,
         short epicHeroKills, short characterKills, short vehicleKills, short monsterKills,
         short battleLineKills, short mountedKills, short transportKills, short otherKills,
-        short pointCost1, short pointCost2, short PHDS1, short PHDS2
+        short pointCost1, short pointCost2, short PHDS1, short PHDS2,
+        const string& greatestAchievement,
+        const string& worstAchievement,
+        const string& link
     ) : 
         troopName(name),
         totalKills1(kills1), totalKills2(kills2), totalDeaths1(deaths1), totalDeaths2(deaths2),
@@ -67,7 +73,10 @@ struct Troop {
         maxHealth(maxHP), curHealth(curHP), modelType(type), troopCount(totalCount),
         epicHeroKills(epicHeroKills), characterKills(characterKills), vehicleKills(vehicleKills), monsterKills(monsterKills),
         battleLineKills(battleLineKills), mountedKills(mountedKills), transportKills(transportKills), otherKills(otherKills),
-        pointCost1(pointCost1), pointCost2(pointCost2), PHDS1(PHDS1), PHDS2(PHDS2)
+        pointCost1(pointCost1), pointCost2(pointCost2), PHDS1(PHDS1), PHDS2(PHDS2),
+        greatestAchievement(greatestAchievement),
+        worstAchievement(worstAchievement),
+        link(link)
         {
         
             cout << "Constructor called for Troop: " << troopName << endl;
@@ -86,8 +95,12 @@ struct Troop {
     // t1.display() uses the built in display function
 };
 
-Troop initTroop(BYTE *nameInput, BYTE *infoInput);
+Troop initTroop(BYTE *nameInput, BYTE *infoInput, BYTE *gaInput, BYTE *waInput, BYTE *linkInput);
 void updateStructInfo(Troop *troop, BYTE *infoInput);
 void updateTroopName(Troop *troop, string newName);
+void updateTroopGA(Troop *troop, string newName);
+void updateTroopWA(Troop *troop, string newName);
+void updateTroopLink(Troop *troop, string newName);
+
 
 #endif

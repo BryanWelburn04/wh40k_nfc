@@ -22,12 +22,22 @@ void CardWaitThread::process()
         BYTE infoContainer[24];
         BYTE name[52];
         BYTE cardData[512];
+        BYTE Link[148];
+        BYTE ga[40];
+        BYTE wa[40];
 
+        //MAKE FUNCTIONS FOR THESE IN SCARDREADING.CPP/HPP
         readPages(4, 9, hCardHandle, uActiveProtocol, infoContainer);
         readPages(10, 22, hCardHandle, uActiveProtocol, name);
-        Troop troop = initTroop(name, infoContainer);
+        readPages(23, 59, hCardHandle, uActiveProtocol, Link);
+        readPages(60, 69, hCardHandle, uActiveProtocol, ga);
+        readPages(70, 79, hCardHandle, uActiveProtocol, wa);
 
+        Troop troop = initTroop(name, infoContainer, ga, wa, Link);
+
+        //needs to be after initTroop, idk why but it breaks everything if its before
         readPages(0, 134, hCardHandle, uActiveProtocol, cardData);
+
 
         emit cardDetected(troop, cardData, hCardHandle, uActiveProtocol);
         waitForCardRemoval(smartCardContext, readerState0, hCardHandle);
