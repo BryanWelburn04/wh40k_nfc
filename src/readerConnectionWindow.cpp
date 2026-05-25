@@ -8,62 +8,114 @@
 #include "scardHandling.hpp"
 #include <QMessageBox>
 #include "mainWindow.hpp"
+#include <QComboBox>
+#include <QLabel>
 
 ReaderConnectionWindow::ReaderConnectionWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    setWindowTitle("Connect to Reader");
-    resize(300, 200);
+    setWindowTitle("Connect Readers");
+    resize(400, 250);
 
     QWidget *central = new QWidget(this);
+
     QVBoxLayout *layout = new QVBoxLayout(central);
 
-    readerListWidget = new QListWidget(this); 
+    QLabel *readerALabel = new QLabel("Reader A:", this);
+    QLabel *readerBLabel = new QLabel("Reader B:", this);
+
+    readerABox = new QComboBox(this);
+    readerBBox = new QComboBox(this);
 
     QList<QString> readerList = getAvailableReaders();
 
     for (const QString &reader : readerList) {
-        readerListWidget->addItem(reader);
+        readerABox->addItem(reader);
+        readerBBox->addItem(reader);
     }
 
     QPushButton *nextButton = new QPushButton("Next", this);
 
-    layout->addWidget(readerListWidget);
+    layout->addWidget(readerALabel);
+    layout->addWidget(readerABox);
+
+    layout->addWidget(readerBLabel);
+    layout->addWidget(readerBBox);
+
+    layout->addStretch();
+
     layout->addWidget(nextButton);
 
     setCentralWidget(central);
 
-    connect(nextButton, &QPushButton::clicked,
-            this, &ReaderConnectionWindow::initializeReader);
+    connect(nextButton, &QPushButton::clicked, this, &ReaderConnectionWindow::initializeReaders);
 }
 
 QList<QString> ReaderConnectionWindow::getAvailableReaders() {
+
     QList<QString> readers;
 
-    wchar_t* pReaderString = getReaderList();
+    wchar_t* pReaderString = scardHandling::getReaderList();
 
-    if (pReaderString) {
-        QString readerList = QString::fromWCharArray(pReaderString);
-        readers = readerList.split(QChar(u'\0'), Qt::SkipEmptyParts);
+    if (!pReaderString) {
+        return readers;
     }
+
+    const wchar_t* current = pReaderString;
+
+    while (*current != L'\0') {
+
+        QString reader = QString::fromWCharArray(current);
+
+        readers.append(reader);
+
+        current += wcslen(current) + 1;
+    }
+
     return readers;
 }
 
-void ReaderConnectionWindow::initializeReader() {
-    
-    QListWidgetItem *item = readerListWidget->currentItem();
+void ReaderConnectionWindow::initializeReaders()
+{
+    QString readerA =
+        readerABox->currentText();
 
-    if (!item){
-        QMessageBox::warning(this, "No Reader Selected", "Please select a reader from the list before proceeding.");
+    QString readerB =
+        readerBBox->currentText();
+
+    if (readerA.isEmpty() || readerB.isEmpty()) {
+
+        QMessageBox::warning(
+            this,
+            "Reader Selection",
+            "Please select both readers."
+        );
+
         return;
     }
 
-    QString selectedReader = item->text();
+    if (readerA == readerB) {
 
-    MainWindow *mainWindow = new MainWindow(selectedReader.toStdWString().c_str());
+        QMessageBox::warning(
+            this,
+            "Reader Selection",
+            "Please select two different readers."
+        );
+
+        return;
+    }
+
+    NFCReader *nfcReaderA =
+new NFCReader(readerABox->currentText().toStdWString());
+    nfcReaderA->initializeReader();
+
+    NFCReader *nfcReaderB =
+    new NFCReader(readerBBox->currentText().toStdWString());
+    nfcReaderB->initializeReader();
+
+    MainWindow *mainWindow = new MainWindow(nfcReaderA, nfcReaderB, this);
+
     mainWindow->show();
-    this->close();
 
-    return;
+    close();
 }
- 

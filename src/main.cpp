@@ -20,11 +20,6 @@ int main(int argc, char *argv[]) {
 
     ReaderConnectionWindow *readerWindow = new ReaderConnectionWindow();
     readerWindow->show();
-
-    //MainWindow *window = new MainWindow();
-    //window->show();
-
+    qApp->setQuitOnLastWindowClosed(false);
     return app.exec();
-
-    return 0;   
 }

@@ -18,18 +18,14 @@
 using namespace std;
 
 ModelInfoWindow::ModelInfoWindow(
-    const std::wstring& selectedReaderName,
+    NFCReader* reader,
     const Troop& troop,
     BYTE *cardData,
-    SCARDHANDLE hCardHandle,
-    DWORD uActiveProtocol,
     QWidget *parent
 ) : QMainWindow(parent),
-      readerName(selectedReaderName),
       troop(troop),
       cardData(*cardData), //maybe wrong?
-      hCardHandle(hCardHandle),
-      uActiveProtocol(uActiveProtocol)
+      reader(reader)
 {  
     setWindowTitle("Model Info");
     resize(1200, 600);
@@ -321,7 +317,7 @@ ModelInfoWindow::ModelInfoWindow(
     int currentSecondary = 0;
     float currentKd = 0.0f;
     float totalKd = (float)totalKills / (totalDeaths == 0 ? 1 : totalDeaths);
-    QString cardDataFormatted = getRawDataFromCard(cardData, 0, 134);
+    QString cardDataFormatted = reader->getRawDataFromCard(cardData, 0, 134);
     string uid = "125747885";
 
     //
@@ -468,15 +464,16 @@ bool ModelInfoWindow::updateInfo(){
     updateTroopWA(&troop, waTextBox->text().toStdString());
     updateTroopLink(&troop, linkTextBox->text().toStdString());
 
-    SCARDCONTEXT smartCardContext;
-    SCARD_READERSTATEW readerState0;
-    initializeReader(readerName.c_str(), smartCardContext, readerState0);
+    // SCARDCONTEXT smartCardContext;
+    // SCARD_READERSTATEW readerState0;
 
-    writeStatsToCard(dataPacket, sizeof(dataPacket), hCardHandle, uActiveProtocol);
-    writeNameToCard(name, sizeof(name), hCardHandle, uActiveProtocol);
-    writeLinkToCard(link, sizeof(link), hCardHandle, uActiveProtocol);
-    writeGreatestAchievementToCard(ga, sizeof(ga), hCardHandle, uActiveProtocol);
-    writeWorstAchievementToCard(wa, sizeof(wa), hCardHandle, uActiveProtocol);
+    //reader->initializeReader(readerName.c_str(), smartCardContext, readerState0);
+
+    reader->writeStatsToCard(dataPacket, sizeof(dataPacket));
+    reader->writeNameToCard(name, sizeof(name));
+    reader->writeLinkToCard(link, sizeof(link));
+    reader->writeGreatestAchievementToCard(ga, sizeof(ga));
+    reader->writeWorstAchievementToCard(wa, sizeof(wa));
 
     webChartView->setChart(webGraphKills());
     lineChartView->setChart(lineGraphHistoryStats());
@@ -573,11 +570,9 @@ void ModelInfoWindow::writeBackToHistory(){
     historyData[3] = totalSecondaryTextBox->text().toInt();
 
 
-    SCARDCONTEXT smartCardContext;
-    SCARD_READERSTATEW readerState0;
-    initializeReader(readerName.c_str(), smartCardContext, readerState0);
+    //reader->initializeReader();
 
-    writeHistoryToCard(historyData, sizeof(historyData), hCardHandle, uActiveProtocol);
+    reader->writeHistoryToCard(historyData, sizeof(historyData));
 
 
 }
@@ -588,18 +583,16 @@ void ModelInfoWindow::zeroHistory(){
         historyData[i] = 0;
     }
 
-    SCARDCONTEXT smartCardContext;
-    SCARD_READERSTATEW readerState0;
-    initializeReader(readerName.c_str(), smartCardContext, readerState0);
+    //reader->initializeReader();
 
-    writeDataToCard(79, historyData, sizeof(historyData), hCardHandle, uActiveProtocol);
+    reader->writeDataToCard(79, historyData, sizeof(historyData));
 }
 
 QChart* ModelInfoWindow::lineGraphHistoryStats(){
 
     BYTE gamesPlayed[4];
 
-    readPage(79, hCardHandle, uActiveProtocol, gamesPlayed);
+    reader->readPage(79, gamesPlayed);
 
     int totalGamesPlayed =
         (static_cast<unsigned int>(gamesPlayed[0]) << 24) |
@@ -632,7 +625,7 @@ QChart* ModelInfoWindow::lineGraphHistoryStats(){
         int pageToRead = 80 + bufferIndex;
 
         BYTE gameData[4];
-        readPage(pageToRead, hCardHandle, uActiveProtocol, gameData);
+        reader->readPage(pageToRead, gameData);
 
         int kills = gameData[0];
         int deaths = gameData[1];

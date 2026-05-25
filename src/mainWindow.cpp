@@ -9,7 +9,85 @@
 #include "modelInfoWindow.hpp"
 #include "troopInfoFunctions.hpp"
 
-MainWindow::MainWindow(const wchar_t* selectedReaderName, QWidget *parent) : QMainWindow(parent) {
+MainWindow::MainWindow(NFCReader* readerA, NFCReader* readerB, QWidget *parent)
+    : QMainWindow(parent),
+    readerA(readerA),
+    readerB(readerB)
+    {
+    
+    
+    setWindowTitle("wh40k NFC");
+    resize(800, 600);
+
+    QLabel *readerALabel = new QLabel(QStringLiteral("Reader A: ") + QString::fromWCharArray(readerA->getName().c_str()), this);
+    readerALabel->setGeometry(10, 10, 400, 30);
+
+    QLabel *readerBLabel = new QLabel(QStringLiteral("Reader B: ") + QString::fromWCharArray(readerB->getName().c_str()), this);
+    readerBLabel->setGeometry(10, 50, 400, 30);
+
+    QLabel *statusALabel = new QLabel("Reader A Awaiting Card...", this);
+    statusALabel->setGeometry(10, 90, 400, 30);
+
+    QLabel *statusBLabel = new QLabel("Reader B Awaiting Card...", this);
+    statusBLabel->setGeometry(10, 130, 400, 30);
+
+    // ===============================================
+    // =============== Reader A Thread ===============
+    // ===============================================
+
+    QThread *threadA = new QThread;
+    CardWaitThread *workerA = new CardWaitThread(readerA);
+    
+    workerA->moveToThread(threadA);
+
+    connect(threadA, &QThread::started, workerA, &CardWaitThread::process);
+
+    connect(workerA, &CardWaitThread::cardDetected, this,
+        [this](Troop troop, BYTE *cardData){
+            
+            qDebug("Card detected in Reader A!");
+
+            ModelInfoWindow *modelInfoWindow = new ModelInfoWindow(this->readerA, troop, cardData, this);
+            modelInfoWindow->show();
+        }
+    );
+
+    connect(threadA, &QThread::finished, workerA, &QObject::deleteLater);
+
+    // ===============================================
+    // =============== Reader B Thread ===============
+    // ===============================================
+
+    QThread *threadB = new QThread;
+    CardWaitThread *workerB = new CardWaitThread(readerB);
+
+    workerB->moveToThread(threadB);
+
+    connect(threadB, &QThread::started, workerB, &CardWaitThread::process);
+
+    connect(workerB, &CardWaitThread::cardDetected, this,
+        [this](Troop troop, BYTE *cardData){
+
+            qDebug("Card detected in Reader B!");
+
+            ModelInfoWindow *modelInfoWindow = new ModelInfoWindow(this->readerB, troop, cardData, this);
+            modelInfoWindow->show();
+        }
+    );
+
+    connect(threadB, &QThread::finished, workerB, &QObject::deleteLater);
+
+    // ===============================================
+    // ================ Start Threads ================
+    // ===============================================
+
+    threadA->start();
+    threadB->start();
+
+}
+ 
+ /*
+ 
     setWindowTitle("wh40k NFC");
     resize(800, 600);
 
@@ -84,3 +162,4 @@ Troop MainWindow::getTroopInfoFromCard() {
     return troop;
 }
  
+*/

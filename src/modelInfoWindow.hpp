@@ -4,6 +4,7 @@
 #include <QLineEdit>
 #include "troopInfoFunctions.hpp"
 #include <QtCharts>
+#include "NFCReader.hpp"
 
 
 class ModelInfoWindow : public QMainWindow
@@ -11,16 +12,12 @@ class ModelInfoWindow : public QMainWindow
     Q_OBJECT
 
 public:
-ModelInfoWindow(const std::wstring& readerName,
+ModelInfoWindow(NFCReader* reader,
                 const Troop& troop,
                 BYTE *cardData,
-                SCARDHANDLE hCardHandle,
-                DWORD uActiveProtocol,
                 QWidget *parent = nullptr);
 Troop troop;
 BYTE cardData;
-SCARDHANDLE hCardHandle;
-DWORD uActiveProtocol;
                 
 private slots:
     bool updateInfo();
@@ -33,7 +30,9 @@ private slots:
     QChart* lineGraphHistoryStats();
 
 private:
-    std::wstring readerName;
+
+    NFCReader* reader;
+
     unsigned char startPage = 0;
     unsigned char endPage = 134;
 

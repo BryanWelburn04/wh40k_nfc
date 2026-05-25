@@ -2,19 +2,18 @@
 
 #include <QMainWindow>
 #include "troopInfoFunctions.hpp"
+#include "NFCReader.hpp"
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(const wchar_t* selectedReaderName, QWidget *parent = nullptr);
+    MainWindow(NFCReader* readerA, NFCReader* readerB, QWidget *parent = nullptr);
 
 private slots:
-    Troop getTroopInfoFromCard();
 
 private:
-    std::wstring readerName;
-    SCARDHANDLE hCardHandle;
-    DWORD uActiveProtocol;
+    NFCReader* readerA;
+    NFCReader* readerB;
 };

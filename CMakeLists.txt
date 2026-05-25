@@ -28,6 +28,8 @@ add_executable(wh40k_nfc
     src/cardWaitThread.cpp
     src/modelInfoWindow.hpp
     src/modelInfoWindow.cpp
+    src/NFCReader.hpp
+    src/NFCReader.cpp
     # troopInfoFunctions_class_version.cpp
 )
 

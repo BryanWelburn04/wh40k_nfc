@@ -2,6 +2,7 @@
 
 #include <QMainWindow>
 #include <QListWidget>
+#include <QComboBox>
 
 class ReaderConnectionWindow : public QMainWindow
 {
@@ -12,8 +13,10 @@ public:
 
 private slots:
     QList<QString> getAvailableReaders();
-    void initializeReader();
+    void initializeReaders();
 
 private:
     QListWidget *readerListWidget;
+    QComboBox *readerABox;
+    QComboBox *readerBBox;
 };
