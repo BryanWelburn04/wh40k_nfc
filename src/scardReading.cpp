@@ -76,7 +76,20 @@ namespace scardReading {
         return true;
     }
 
-    void getCardUID(SCARDCONTEXT smartCardContext, const wchar_t* selectedReaderName, SCARDHANDLE &hCardHandle, DWORD &uActiveProtocol){
+    QString byteArrayToHexString(BYTE *data, DWORD length) {
+        QString result;
+        char buf[3];
+        for (DWORD i = 0; i < length; i++) {
+            snprintf(buf, sizeof(buf), "%02X", data[i]);
+            result += buf;
+            if (i + 1 < length) {
+                result += " ";
+            }
+        }
+        return result;
+    }
+
+    QString getCardUID(SCARDCONTEXT smartCardContext, const wchar_t* selectedReaderName, SCARDHANDLE &hCardHandle, DWORD &uActiveProtocol){
         /* MM : Since this function is hardcoded to get card uid, it may be suitable to name it as such. My idea is that we can
             have a function for each "command" that we can use. This would be "getCardUID" command function.
                 I imagine there is lots of commands but we may only want a handful of them so this could be suitable. */
@@ -96,7 +109,7 @@ namespace scardReading {
 
         if (status != SCARD_S_SUCCESS){
             cout << "Failed to read card data" << endl;
-            return;
+            return "";
         } else {
             cout << "Card UID:" << endl;
             for (int i = 0; i < static_cast<int>(cardDataSize-2); i++){
@@ -120,7 +133,7 @@ namespace scardReading {
                 cout << "Error" << endl;
             }
 
-        return;
+            return byteArrayToHexString(cardData, cardDataSize);
         }
     }
 

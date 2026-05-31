@@ -46,6 +46,10 @@ QString NFCReader::getRawDataFromCard(BYTE *cardData, unsigned char startPage, u
     return scardReading::getRawDataFromCard(cardData, startPage, endPage);
 }
 
+QString NFCReader::getCardUID() {
+    return scardReading::getCardUID(smartCardContext, readerName.c_str(), hCardHandle, activeProtocol);
+}
+
 
 /* =========================================== */
 /* ========= SCARD WRITING FUNCTIONS ========= */

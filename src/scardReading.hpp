@@ -10,7 +10,8 @@ namespace scardReading {
 
     bool readPages(unsigned char start, unsigned char end, SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYTE *cardData);
     bool readPage(short pageNum, SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYTE *infoContainer);
-    void getCardUID(SCARDCONTEXT smartCardContext, const wchar_t* selectedReaderName, SCARDHANDLE &hCardHandle, DWORD &uActiveProtocol);
+    QString getCardUID(SCARDCONTEXT smartCardContext, const wchar_t* selectedReaderName, SCARDHANDLE &hCardHandle, DWORD &uActiveProtocol);
+    QString byteArrayToHexString(BYTE *data, DWORD length);
     void displayMemoryContent(BYTE *cardData, unsigned char startPage, unsigned char endPage);
     QString getRawDataFromCard(BYTE *cardData, unsigned char startPage, unsigned char endPage);
     bool readTroopInfo(SCARDHANDLE hCardHandle, DWORD uActiveProtocol, BYTE *infoContainer);

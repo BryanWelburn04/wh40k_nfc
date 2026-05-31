@@ -318,7 +318,7 @@ ModelInfoWindow::ModelInfoWindow(
     float currentKd = 0.0f;
     float totalKd = (float)totalKills / (totalDeaths == 0 ? 1 : totalDeaths);
     QString cardDataFormatted = reader->getRawDataFromCard(cardData, 0, 134);
-    string uid = "125747885";
+    QString uid = reader->getCardUID();
 
     //
     // SCARDCONTEXT smartCardContext;
@@ -326,7 +326,7 @@ ModelInfoWindow::ModelInfoWindow(
     // initializeReader(readerName.c_str(), smartCardContext, readerState0);
     // getCardUID(smartCardContext, this->readerName, this->hCardHandle, this->uActiveProtocol);
 
-    uidTextBox->setText(QString::fromStdString(uid));
+    uidTextBox->setText(uid);
     nameTextBox->setText(QString::fromStdString(troop.troopName));
 
     currentKillsTextBox->setText(QString::number(currentKills));

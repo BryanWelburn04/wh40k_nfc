@@ -17,6 +17,7 @@ public:
     bool readPage(unsigned char pageNum, BYTE *infoContainer);
     bool readPages(unsigned char start, unsigned char end, BYTE *cardData);
     QString getRawDataFromCard(BYTE *cardData, unsigned char startPage, unsigned char endPage);
+    QString getCardUID();
 
     void writeDataToCard(unsigned char startPage, BYTE *dataForCard, size_t sizeOfData);
     void resetPageData(unsigned char startPage, unsigned char endPage);
