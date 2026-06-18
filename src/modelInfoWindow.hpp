@@ -18,9 +18,13 @@ ModelInfoWindow(NFCReader* reader,
                 QWidget *parent = nullptr);
 Troop troop;
 BYTE cardData;
-                
+ModelInfoWindow* otherWindow = nullptr;
+bool updateInfo();
+
+QLineEdit *currentHealthTextBox;
+ 
+
 private slots:
-    bool updateInfo();
     void writeUInt16BEUnsigned(BYTE* data, int index, uint16_t value);
     void writeInt16BESigned(BYTE* data, int index, int16_t value);
     QPolarChart* webGraphKills();
@@ -42,7 +46,6 @@ private:
     QLineEdit *totalPrimaryTextBox;
     QLineEdit *totalSecondaryTextBox;
     QLineEdit *maxHealthTextBox;
-    QLineEdit *currentHealthTextBox;
     QLineEdit *typeTextBox;
     QLineEdit *numberOfModelsTextBox;
     QLineEdit *pointCostTextBox;

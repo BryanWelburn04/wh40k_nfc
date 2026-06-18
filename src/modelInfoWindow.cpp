@@ -308,8 +308,17 @@ ModelInfoWindow::ModelInfoWindow(
     int totalPrimaryPoints = (static_cast<unsigned int>(troop.primaryPoints1 << 8)) | static_cast<unsigned int>(troop.primaryPoints2);
     int totalSecondaryPoints = (static_cast<unsigned int>(troop.secondaryPoints1 << 8)) | static_cast<unsigned int>(troop.secondaryPoints2);
     int pointCost = (static_cast<unsigned int>(troop.pointCost1 << 8)) | static_cast<unsigned int>(troop.pointCost2);
-    int16_t PHDS = (int16_t)((uint16_t(troop.PHDS1) << 8) | uint16_t(troop.PHDS2));
+    int epicHeroKills = (static_cast<unsigned int>(troop.epicHeroKills1 << 8)) | static_cast<unsigned int>(troop.epicHeroKills2);
+    int characterKills = (static_cast<unsigned int>(troop.characterKills1 << 8)) | static_cast<unsigned int>(troop.characterKills2);
+    int vehicleKills = (static_cast<unsigned int>(troop.vehicleKills1 << 8)) | static_cast<unsigned int>(troop.vehicleKills2);
+    int monsterKills = (static_cast<unsigned int>(troop.monsterKills1 << 8)) | static_cast<unsigned int>(troop.monsterKills2);
+    int battleLineKills = (static_cast<unsigned int>(troop.battleLineKills1 << 8)) | static_cast<unsigned int>(troop.battleLineKills2);
+    int mountedKills = (static_cast<unsigned int>(troop.mountedKills1 << 8)) | static_cast<unsigned int>(troop.mountedKills2);
+    int transportKills = (static_cast<unsigned int>(troop.transportKills1 << 8)) | static_cast<unsigned int>(troop.transportKills2);
+    int otherKills = (static_cast<unsigned int>(troop.otherKills1 << 8)) | static_cast<unsigned int>(troop.otherKills2);
 
+    int16_t PHDS = (int16_t)((uint16_t(troop.PHDS1) << 8) | uint16_t(troop.PHDS2));
+        
     //Current fields
     int currentKills = 0;
     int currentDeaths = 0;
@@ -344,15 +353,15 @@ ModelInfoWindow::ModelInfoWindow(
     typeTextBox->setText(QString::number(troop.modelType));
     numberOfModelsTextBox->setText(QString::number(troop.troopCount));
 
-    epicHeroKillsTextBox->setText(QString::number(troop.epicHeroKills));
-    characterKillsTextBox->setText(QString::number(troop.characterKills));
-    vehicleKillsTextBox->setText(QString::number(troop.vehicleKills));
-    monsterKillsTextBox->setText(QString::number(troop.monsterKills));
+    epicHeroKillsTextBox->setText(QString::number(epicHeroKills));
+    characterKillsTextBox->setText(QString::number(characterKills));
+    vehicleKillsTextBox->setText(QString::number(vehicleKills));
+    monsterKillsTextBox->setText(QString::number(monsterKills));
 
-    battleLineKillsTextBox->setText(QString::number(troop.battleLineKills));
-    mountedKillsTextBox->setText(QString::number(troop. mountedKills));
-    transportKillsTextBox->setText(QString::number(troop.transportKills));
-    otherKillsTextBox->setText(QString::number(troop.otherKills));
+    battleLineKillsTextBox->setText(QString::number(battleLineKills));
+    mountedKillsTextBox->setText(QString::number(mountedKills));
+    transportKillsTextBox->setText(QString::number(transportKills));
+    otherKillsTextBox->setText(QString::number(otherKills));
 
     pointCostTextBox->setText(QString::number(pointCost));
     phdsTextBox->setText(QString::number(PHDS));
@@ -406,26 +415,53 @@ bool ModelInfoWindow::updateInfo(){
     memcpy(wa, bytesWA.data(), lenWA);
 
 
-    size_t capacity = 24;
+    size_t capacity = 32;
     BYTE dataPacket[capacity] = {
         (BYTE)troop.totalKills1,
         (BYTE)troop.totalKills2,
+
         (BYTE)troop.totalDeaths1,
-        (BYTE)troop.totalDeaths1,
+        (BYTE)troop.totalDeaths2,
+
         (BYTE)troop.primaryPoints1, 
         (BYTE)troop.primaryPoints2,
+
         (BYTE)troop.secondaryPoints1,
         (BYTE)troop.secondaryPoints2,
-        (BYTE)troop.epicHeroKills,
-        (BYTE)troop.characterKills,
-        (BYTE)troop.vehicleKills,
-        (BYTE)troop.monsterKills,
-        (BYTE)troop.battleLineKills,
-        (BYTE)troop.mountedKills,
-        (BYTE)troop.transportKills,
-        (BYTE)troop.otherKills,
+
+        (BYTE)troop.maxHealth,
+        (BYTE)troop.curHealth,
+
+        (BYTE)troop.modelType,
+        (BYTE)troop.troopCount,
+
+        (BYTE)troop.epicHeroKills1,
+        (BYTE)troop.epicHeroKills2,
+
+        (BYTE)troop.characterKills1,
+        (BYTE)troop.characterKills2,
+
+        (BYTE)troop.vehicleKills1,
+        (BYTE)troop.vehicleKills2,
+
+        (BYTE)troop.monsterKills1,
+        (BYTE)troop.monsterKills2,
+
+        (BYTE)troop.battleLineKills1,
+        (BYTE)troop.battleLineKills2,
+
+        (BYTE)troop.mountedKills1,
+        (BYTE)troop.mountedKills2,
+
+        (BYTE)troop.transportKills1,
+        (BYTE)troop.transportKills2,
+
+        (BYTE)troop.otherKills1,
+        (BYTE)troop.otherKills2,
+
         (BYTE)troop.pointCost1,
         (BYTE)troop.pointCost2,
+
         (BYTE)troop.PHDS1,
         (BYTE)troop.PHDS2,
     };
@@ -442,32 +478,36 @@ bool ModelInfoWindow::updateInfo(){
     dataPacket[10] = typeTextBox->text().toUInt();
     dataPacket[11] = numberOfModelsTextBox->text().toUInt();
 
-    dataPacket[12] = epicHeroKillsTextBox->text().toUInt();
-    dataPacket[13] = characterKillsTextBox->text().toUInt();
-    dataPacket[14] = vehicleKillsTextBox->text().toUInt();
-    dataPacket[15] = monsterKillsTextBox->text().toUInt();
+    // dataPacket[12] = epicHeroKillsTextBox->text().toUInt();
+    writeUInt16BEUnsigned(dataPacket, 12, epicHeroKillsTextBox->text().toUInt());
+    writeUInt16BEUnsigned(dataPacket, 14, characterKillsTextBox->text().toUInt());
+    writeUInt16BEUnsigned(dataPacket, 16, vehicleKillsTextBox->text().toUInt());
+    writeUInt16BEUnsigned(dataPacket, 18, monsterKillsTextBox->text().toUInt());
+    writeUInt16BEUnsigned(dataPacket, 20, battleLineKillsTextBox->text().toUInt());
+    writeUInt16BEUnsigned(dataPacket, 22, mountedKillsTextBox->text().toUInt());
+    writeUInt16BEUnsigned(dataPacket, 24, transportKillsTextBox->text().toUInt());
+    writeUInt16BEUnsigned(dataPacket, 26, otherKillsTextBox->text().toUInt());
 
-    dataPacket[16] = battleLineKillsTextBox->text().toUInt();
-    dataPacket[17] = mountedKillsTextBox->text().toUInt();
-    dataPacket[18] = transportKillsTextBox->text().toUInt();
-    dataPacket[19] = otherKillsTextBox->text().toUInt();
+    // dataPacket[13] = characterKillsTextBox->text().toUInt();
+    // dataPacket[14] = vehicleKillsTextBox->text().toUInt();
+    // dataPacket[15] = monsterKillsTextBox->text().toUInt();
+
+    // dataPacket[16] = battleLineKillsTextBox->text().toUInt();
+    // dataPacket[17] = mountedKillsTextBox->text().toUInt();
+    // dataPacket[18] = transportKillsTextBox->text().toUInt();
+    // dataPacket[19] = otherKillsTextBox->text().toUInt();
 
     // unsigned 16-bit
-    writeUInt16BEUnsigned(dataPacket, 20, pointCostTextBox->text().toUInt());
+    writeUInt16BEUnsigned(dataPacket, 28, pointCostTextBox->text().toUInt());
 
     // signed 16-bit
-    writeInt16BESigned(dataPacket, 22, phdsTextBox->text().toInt());
+    writeInt16BESigned(dataPacket, 30, phdsTextBox->text().toInt());
 
     updateStructInfo(&troop, dataPacket);
     updateTroopName(&troop, nameTextBox->text().toStdString());
     updateTroopGA(&troop, gaTextBox->text().toStdString());
     updateTroopWA(&troop, waTextBox->text().toStdString());
     updateTroopLink(&troop, linkTextBox->text().toStdString());
-
-    // SCARDCONTEXT smartCardContext;
-    // SCARD_READERSTATEW readerState0;
-
-    //reader->initializeReader(readerName.c_str(), smartCardContext, readerState0);
 
     reader->writeStatsToCard(dataPacket, sizeof(dataPacket));
     reader->writeNameToCard(name, sizeof(name));

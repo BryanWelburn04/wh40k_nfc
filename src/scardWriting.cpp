@@ -4,6 +4,7 @@
 #include <iostream>
 #include <winscard.h>
 #include "scardReading.hpp"
+#include "constants.hpp"
 
 using namespace std;
 
@@ -105,33 +106,33 @@ namespace scardWriting {
     }
 
 
-    //pages 4-9
+    //pages 4-12
     bool writeStatsToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
-        if(sizeOfData > 24 || sizeOfData < 0){
+        if(sizeOfData > 32 || sizeOfData < 0){
             cout << "invalid data size for stats. DataSize = " << sizeOfData << endl;
             return false;
         }
-        writeDataToCard(4, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
+        writeDataToCard(STATS_START_PAGE, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
         return true;
     }
 
-    //pages 10-22
+    //pages 13-25
     bool writeNameToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
             if(sizeOfData > 52 || sizeOfData < 0){
             cout << "invalid data size for name. DataSize = " << sizeOfData << endl;
             return false;
         }
-        writeDataToCard(10, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
+        writeDataToCard(NAME_START_PAGE, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
         return true;
     }
 
-    //pages 23-58
+    //pages 26-58
     bool writeLinkToCard(BYTE *dataForCard, size_t sizeOfData, SCARDHANDLE hCardHandle, DWORD uActiveProtocol){
-            if(sizeOfData > 144 || sizeOfData < 0){
+            if(sizeOfData > 132 || sizeOfData < 0){
             cout << "invalid data size for link. DataSize = " << sizeOfData << endl;
             return false;
         }
-        writeDataToCard(23, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
+        writeDataToCard(LINK_START_PAGE, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
         return true;
     }
 
@@ -141,7 +142,7 @@ namespace scardWriting {
             cout << "invalid data size for greatest achievement. DataSize = " << sizeOfData << endl;
             return false;
         }
-        writeDataToCard(59, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
+        writeDataToCard(GA_START_PAGE, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
         return true;
     }
 
@@ -151,7 +152,7 @@ namespace scardWriting {
             cout << "invalid data size for worst achievement. DataSize = " << sizeOfData << endl;
             return false;
         }
-        writeDataToCard(69, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
+        writeDataToCard(WA_START_PAGE, dataForCard, sizeOfData, hCardHandle, uActiveProtocol);
         return true;
     }
 
@@ -166,7 +167,7 @@ namespace scardWriting {
         // }
 
         BYTE gamesPlayed[4];
-        scardReading::readPage(79, hCardHandle, uActiveProtocol, gamesPlayed);
+        scardReading::readPage(HISTORY_START_PAGE, hCardHandle, uActiveProtocol, gamesPlayed);
         int totalGamesPlayed = (static_cast<unsigned int>(gamesPlayed[0] << 24)) | (static_cast<unsigned int>(gamesPlayed[1] << 16)) | (static_cast<unsigned int>(gamesPlayed[2] << 8)) | static_cast<unsigned int>(gamesPlayed[3]);
 
         int currentGameStartPage = (totalGamesPlayed % 50) + 80; //this will write to pages 79-128 in a loop, so we can store the last 50 games played.
@@ -232,7 +233,7 @@ namespace scardWriting {
         gamesPlayed[2] = (totalGamesPlayed) >> 8;
         gamesPlayed[3] = (totalGamesPlayed) & 0xFF;
 
-        writeDataToCard(79, gamesPlayed, 4, hCardHandle, uActiveProtocol); //update total games played
+        writeDataToCard(HISTORY_START_PAGE, gamesPlayed, 4, hCardHandle, uActiveProtocol); //update total games played
         
         return true;
     }

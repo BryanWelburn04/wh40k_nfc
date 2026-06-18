@@ -105,12 +105,10 @@ void ReaderConnectionWindow::initializeReaders()
         return;
     }
 
-    NFCReader *nfcReaderA =
-new NFCReader(readerABox->currentText().toStdWString());
+    NFCReader *nfcReaderA = new NFCReader(readerABox->currentText().toStdWString());
     nfcReaderA->initializeReader();
 
-    NFCReader *nfcReaderB =
-    new NFCReader(readerBBox->currentText().toStdWString());
+    NFCReader *nfcReaderB = new NFCReader(readerBBox->currentText().toStdWString());
     nfcReaderB->initializeReader();
 
     MainWindow *mainWindow = new MainWindow(nfcReaderA, nfcReaderB, this);

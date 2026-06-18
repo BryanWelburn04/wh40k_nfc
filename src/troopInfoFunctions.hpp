@@ -35,22 +35,47 @@ struct Troop {
     short troopCount;
 
     //page 7
-    short epicHeroKills;
-    short characterKills;
-    short vehicleKills;
-    short monsterKills;
+    short epicHeroKills1;
+    short epicHeroKills2;
+
+    short characterKills1;
+    short characterKills2;
 
     //page 8
-    short battleLineKills;
-    short mountedKills;
-    short transportKills;
-    short otherKills;
+    short vehicleKills1;
+    short vehicleKills2;
+
+    short monsterKills1;
+    short monsterKills2;
 
     //page 9
+    short battleLineKills1;
+    short battleLineKills2;
+
+    short mountedKills1;
+    short mountedKills2;
+
+    //page 10
+    short transportKills1;
+    short transportKills2;
+
+    short otherKills1;
+    short otherKills2;
+
+
+    //page 11
     short pointCost1;
     short pointCost2;
     short PHDS1;
     short PHDS2;
+
+    //page 12
+    short PHDS3;
+    short PHDS4;
+    short PHDS5;
+    short PHDS6;
+
+
 
 
 
@@ -60,8 +85,10 @@ struct Troop {
         short kills1, short kills2, short deaths1, short deaths2,
         short primaryPts1, short primaryPts2, short secondaryPts1, short secondaryPts2,
         short maxHP, short curHP, short type, short totalCount,
-        short epicHeroKills, short characterKills, short vehicleKills, short monsterKills,
-        short battleLineKills, short mountedKills, short transportKills, short otherKills,
+        short epicHeroKills1, short epicHeroKills2, short characterKills1, short characterKills2,
+        short vehicleKills1, short vehicleKills2, short monsterKills1, short monsterKills2,
+        short battleLineKills1, short battleLineKills2, short mountedKills1, short mountedKills2,
+        short transportKills1, short transportKills2, short otherKills1, short otherKills2,
         short pointCost1, short pointCost2, short PHDS1, short PHDS2,
         const string& greatestAchievement,
         const string& worstAchievement,
@@ -71,8 +98,10 @@ struct Troop {
         totalKills1(kills1), totalKills2(kills2), totalDeaths1(deaths1), totalDeaths2(deaths2),
         primaryPoints1(primaryPts1), primaryPoints2(primaryPts2), secondaryPoints1(secondaryPts1), secondaryPoints2(secondaryPts2),
         maxHealth(maxHP), curHealth(curHP), modelType(type), troopCount(totalCount),
-        epicHeroKills(epicHeroKills), characterKills(characterKills), vehicleKills(vehicleKills), monsterKills(monsterKills),
-        battleLineKills(battleLineKills), mountedKills(mountedKills), transportKills(transportKills), otherKills(otherKills),
+        epicHeroKills1(epicHeroKills1), epicHeroKills2(epicHeroKills2), characterKills1(characterKills1), characterKills2(characterKills2),
+        vehicleKills1(vehicleKills1), vehicleKills2(vehicleKills2), monsterKills1(monsterKills1), monsterKills2(monsterKills2),
+        battleLineKills1(battleLineKills1), battleLineKills2(battleLineKills2), mountedKills1(mountedKills1), mountedKills2(mountedKills2),
+        transportKills1(transportKills1), transportKills2(transportKills2), otherKills1(otherKills1), otherKills2(otherKills2),
         pointCost1(pointCost1), pointCost2(pointCost2), PHDS1(PHDS1), PHDS2(PHDS2),
         greatestAchievement(greatestAchievement),
         worstAchievement(worstAchievement),

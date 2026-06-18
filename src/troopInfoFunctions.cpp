@@ -34,18 +34,27 @@ Troop initTroop(BYTE *nameInput, BYTE *infoInput, BYTE *gaInput, BYTE *waInput, 
     short curHealth        = (short)infoInput[9];
     short modelType        = (short)infoInput[10];
     short troopCount       = (short)infoInput[11];
-    short epicHeroKills    = (short)infoInput[12];
-    short characterKills   = (short)infoInput[13];
-    short vehicleKills     = (short)infoInput[14];
-    short monsterKills     = (short)infoInput[15];
-    short battleLineKills  = (short)infoInput[16];
-    short mountedKills     = (short)infoInput[17];
-    short transportKills   = (short)infoInput[18];
-    short otherKills       = (short)infoInput[19];
-    short pointCost1       = (short)infoInput[20];
-    short pointCost2       = (short)infoInput[21];
-    short PHDS1            = (short)infoInput[22];
-    short PHDS2            = (short)infoInput[23];
+    short epicHeroKills1    = (short)infoInput[12];
+    short epicHeroKills2    = (short)infoInput[13];
+    short characterKills1   = (short)infoInput[14];
+    short characterKills2   = (short)infoInput[15];
+    short vehicleKills1     = (short)infoInput[16];
+    short vehicleKills2     = (short)infoInput[17];
+    short monsterKills1     = (short)infoInput[18];
+    short monsterKills2     = (short)infoInput[19];
+    short battleLineKills1  = (short)infoInput[20];
+    short battleLineKills2  = (short)infoInput[21];
+    short mountedKills1     = (short)infoInput[22];
+    short mountedKills2     = (short)infoInput[23];
+    short transportKills1   = (short)infoInput[24];
+    short transportKills2   = (short)infoInput[25];
+    short otherKills1       = (short)infoInput[26];
+    short otherKills2       = (short)infoInput[27];
+    short pointCost1       = (short)infoInput[28];
+    short pointCost2       = (short)infoInput[29];
+    short PHDS1            = (short)infoInput[30];
+    short PHDS2            = (short)infoInput[31];
+
 
 
     Troop newTroop(
@@ -62,14 +71,22 @@ Troop initTroop(BYTE *nameInput, BYTE *infoInput, BYTE *gaInput, BYTE *waInput, 
         curHealth,
         modelType,
         troopCount,
-        epicHeroKills,
-        characterKills,
-        vehicleKills,
-        monsterKills,
-        battleLineKills,
-        mountedKills,
-        transportKills,
-        otherKills,
+        epicHeroKills1,
+        epicHeroKills2,
+        characterKills1,
+        characterKills2,
+        vehicleKills1,
+        vehicleKills2,
+        monsterKills1,
+        monsterKills2,
+        battleLineKills1,
+        battleLineKills2,
+        mountedKills1,
+        mountedKills2,
+        transportKills1,
+        transportKills2,
+        otherKills1,
+        otherKills2,
         pointCost1,
         pointCost2,
         PHDS1,
@@ -95,18 +112,26 @@ void updateStructInfo(Troop *troop, BYTE *infoInput){
     troop->curHealth        = (short)infoInput[9];
     troop->modelType        = (short)infoInput[10];
     troop->troopCount       = (short)infoInput[11];
-    troop->epicHeroKills    = (short)infoInput[12];
-    troop->characterKills   = (short)infoInput[13];
-    troop->vehicleKills     = (short)infoInput[14];
-    troop->monsterKills     = (short)infoInput[15];
-    troop->battleLineKills  = (short)infoInput[16];
-    troop->mountedKills     = (short)infoInput[17];
-    troop->transportKills   = (short)infoInput[18];
-    troop->otherKills       = (short)infoInput[19];
-    troop->pointCost1       = (short)infoInput[20];
-    troop->pointCost2       = (short)infoInput[21];
-    troop->PHDS1            = (short)infoInput[22];
-    troop->PHDS2            = (short)infoInput[23];
+    troop->epicHeroKills1    = (short)infoInput[12];
+    troop->epicHeroKills2    = (short)infoInput[13];
+    troop->characterKills1   = (short)infoInput[14];
+    troop->characterKills2   = (short)infoInput[15];
+    troop->vehicleKills1     = (short)infoInput[16];
+    troop->vehicleKills2     = (short)infoInput[17];
+    troop->monsterKills1     = (short)infoInput[18];
+    troop->monsterKills2     = (short)infoInput[19];
+    troop->battleLineKills1  = (short)infoInput[20];
+    troop->battleLineKills2  = (short)infoInput[21];
+    troop->mountedKills1     = (short)infoInput[22];
+    troop->mountedKills2     = (short)infoInput[23];
+    troop->transportKills1   = (short)infoInput[24];
+    troop->transportKills2   = (short)infoInput[25];
+    troop->otherKills1       = (short)infoInput[26];
+    troop->otherKills2       = (short)infoInput[27];
+    troop->pointCost1       = (short)infoInput[28];
+    troop->pointCost2       = (short)infoInput[29];
+    troop->PHDS1            = (short)infoInput[30];
+    troop->PHDS2            = (short)infoInput[31];
     return;
 }
 

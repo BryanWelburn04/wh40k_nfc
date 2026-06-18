@@ -31,7 +31,8 @@ add_executable(wh40k_nfc
     src/NFCReader.hpp
     src/NFCReader.cpp
     src/dataTransferAlgorithms.hpp
-    src/dataTransferAlgorithms.hpp
+    #src/dataTransferAlgorithms.cpp
+    src/constants.hpp
     # troopInfoFunctions_class_version.cpp
 )
 

@@ -8,6 +8,7 @@
 #include "cardWaitThread.hpp"
 #include "modelInfoWindow.hpp"
 #include "troopInfoFunctions.hpp"
+#include "dataTransferAlgorithms.hpp"
 
 MainWindow::MainWindow(NFCReader* readerA, NFCReader* readerB, QWidget *parent)
     : QMainWindow(parent),
@@ -31,6 +32,11 @@ MainWindow::MainWindow(NFCReader* readerA, NFCReader* readerB, QWidget *parent)
     QLabel *statusBLabel = new QLabel("Reader B Awaiting Card...", this);
     statusBLabel->setGeometry(10, 130, 400, 30);
 
+    QPushButton *exchangeCardData = new QPushButton("Exchange Card Data", this);
+    connect(exchangeCardData, &QPushButton::clicked, this, &MainWindow::exchangeCardData);
+    exchangeCardData->setGeometry(10, 170, 150, 30);
+
+
     // ===============================================
     // =============== Reader A Thread ===============
     // ===============================================
@@ -47,12 +53,18 @@ MainWindow::MainWindow(NFCReader* readerA, NFCReader* readerB, QWidget *parent)
             
             qDebug("Card detected in Reader A!");
 
-            ModelInfoWindow *modelInfoWindow = new ModelInfoWindow(this->readerA, troop, cardData, this);
-            modelInfoWindow->show();
+            modelInfoWindowA = new ModelInfoWindow(this->readerA, troop, cardData, this);
+            modelInfoWindowA->show();
+
+            if (modelInfoWindowB) {
+                modelInfoWindowA->otherWindow = modelInfoWindowB;
+                modelInfoWindowB->otherWindow = modelInfoWindowA;
+            }
         }
     );
 
     connect(threadA, &QThread::finished, workerA, &QObject::deleteLater);
+
 
     // ===============================================
     // =============== Reader B Thread ===============
@@ -70,8 +82,13 @@ MainWindow::MainWindow(NFCReader* readerA, NFCReader* readerB, QWidget *parent)
 
             qDebug("Card detected in Reader B!");
 
-            ModelInfoWindow *modelInfoWindow = new ModelInfoWindow(this->readerB, troop, cardData, this);
-            modelInfoWindow->show();
+            modelInfoWindowB = new ModelInfoWindow(this->readerB, troop, cardData, this);
+            modelInfoWindowB->show();
+
+            if (modelInfoWindowA) {
+                modelInfoWindowA->otherWindow = modelInfoWindowB;
+                modelInfoWindowB->otherWindow = modelInfoWindowA;
+            }
         }
     );
 
@@ -86,6 +103,28 @@ MainWindow::MainWindow(NFCReader* readerA, NFCReader* readerB, QWidget *parent)
 
 }
  
+
+void MainWindow::exchangeCardData() {
+
+    if (!modelInfoWindowA || !modelInfoWindowB){
+        QMessageBox::warning(this, "Error", "Both readers must have a card detected to exchange data.");
+        return;
+    }
+
+    // dataTransferAlgorithms::swapTroopData(
+    //     modelInfoWindowA->troop,
+    //     modelInfoWindowA->currentHealthTextBox->text().toInt(),
+    //     modelInfoWindowB->troop,
+    //     modelInfoWindowB->currentHealthTextBox->text().toInt()
+    // );
+
+    modelInfoWindowA->updateInfo();
+    modelInfoWindowB->updateInfo();
+
+}
+
+
+
  /*
  
     setWindowTitle("wh40k NFC");
